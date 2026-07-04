@@ -2,7 +2,10 @@
 
 import { useState } from "react";
 
-const API_URL = process.env.NEXT_PUBLIC_API_URL ?? "http://localhost:8000";
+import { apiUrlSetupHint, getApiUrl, isMisconfiguredApiUrl } from "@/lib/apiUrl";
+
+const API_URL = getApiUrl();
+const API_MISCONFIGURED = isMisconfiguredApiUrl(API_URL);
 
 export default function CopilotTestPage() {
   const [prompt, setPrompt] = useState(
@@ -14,6 +17,10 @@ export default function CopilotTestPage() {
   const [error, setError] = useState("");
 
   const handleTest = async () => {
+    if (API_MISCONFIGURED) {
+      setError(apiUrlSetupHint());
+      return;
+    }
     setLoading(true);
     setError("");
     setResponse("");
@@ -51,6 +58,11 @@ export default function CopilotTestPage() {
       <p className="mt-2 text-sm text-zinc-400">
         Netlify → Railway → OpenRouter. API: {API_URL}
       </p>
+      {API_MISCONFIGURED && (
+        <p className="mt-3 rounded-lg border border-amber-800/50 bg-amber-950/30 p-3 text-sm text-amber-200">
+          {apiUrlSetupHint()}
+        </p>
+      )}
 
       <textarea
         value={prompt}
