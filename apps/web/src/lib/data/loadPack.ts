@@ -1,3 +1,4 @@
+import { existsSync } from "fs";
 import { readFile } from "fs/promises";
 import path from "path";
 
@@ -22,10 +23,15 @@ export interface LoadedPack {
 
 function dataRoot(): string {
   const candidates = [
-    path.join(process.cwd(), "..", "..", "data"),
     path.join(process.cwd(), "data"),
+    path.join(process.cwd(), "..", "..", "data"),
     process.env.YUGAM_DATA_ROOT,
   ].filter((p): p is string => Boolean(p));
+  for (const dir of candidates) {
+    if (existsSync(path.join(dir, PACK_PATHS.medtech))) {
+      return dir;
+    }
+  }
   return candidates[0]!;
 }
 

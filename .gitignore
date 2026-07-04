@@ -11,6 +11,7 @@ apps/web/.env.local
 node_modules/
 apps/web/.next/
 apps/web/out/
+apps/web/data/
 
 # Python
 backend/.venv/

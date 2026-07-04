@@ -26,9 +26,14 @@ export default function DashboardPage() {
 
   useEffect(() => {
     fetch("/api/data/auto")
-      .then((r) => r.json())
+      .then((r) => (r.ok ? r.json() : Promise.reject()))
       .then(setData)
-      .catch(() => setError("Failed to load bundled industry data"));
+      .catch(() =>
+        fetch("/bundled-stats.json")
+          .then((r) => r.json())
+          .then(setData)
+          .catch(() => setError("Failed to load industry data")),
+      );
   }, []);
 
   return (

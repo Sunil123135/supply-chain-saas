@@ -1,6 +1,33 @@
 import Link from "next/link";
 import { ApiStatus } from "@/components/ApiStatus";
 
+const FEATURES = [
+  {
+    title: "Control Tower",
+    href: "/dashboard",
+    phase: "P1 — partial",
+    desc: "MedTech + India CPG KPIs, near-expiry alerts from bundled data.",
+  },
+  {
+    title: "Pain Map",
+    href: "/features",
+    phase: "Live",
+    desc: "Which of 50 market pains Yugam addresses today vs roadmap.",
+  },
+  {
+    title: "Copilot",
+    href: "/copilot",
+    phase: "P0 — needs backend",
+    desc: "Ask supply chain questions in plain English (Railway + OpenRouter).",
+  },
+  {
+    title: "Import",
+    href: "/import",
+    phase: "P1",
+    desc: "Optional: replace demo data with SAP/Excel extracts.",
+  },
+];
+
 const MODULES = [
   { id: "M1", name: "Demand Forecasting", phase: "P3" },
   { id: "M2", name: "Inventory Optimization", phase: "P4" },
@@ -27,6 +54,26 @@ export default function HomePage() {
           Copilot via OpenRouter. Industry data auto-loaded — no CSV upload needed.
         </p>
       </div>
+
+      <section className="mb-8 rounded-xl border border-[var(--border)] bg-[var(--muted)] p-6">
+        <h2 className="text-lg font-semibold text-emerald-400">Try these features</h2>
+        <div className="mt-4 grid gap-3 sm:grid-cols-2">
+          {FEATURES.map((f) => (
+            <Link
+              key={f.href}
+              href={f.href}
+              className="block rounded-lg border border-emerald-900/40 bg-emerald-950/20 px-4 py-4 transition hover:border-emerald-600 hover:bg-emerald-950/40"
+            >
+              <div className="flex items-center justify-between gap-2">
+                <p className="font-semibold text-zinc-100">{f.title}</p>
+                <span className="text-xs text-emerald-400">{f.phase}</span>
+              </div>
+              <p className="mt-2 text-sm text-zinc-400">{f.desc}</p>
+              <p className="mt-3 text-xs font-medium text-emerald-400">Open →</p>
+            </Link>
+          ))}
+        </div>
+      </section>
 
       <section className="mb-8 rounded-xl border border-[var(--border)] bg-[var(--muted)] p-6">
         <h2 className="text-lg font-semibold text-emerald-400">P0 status</h2>
