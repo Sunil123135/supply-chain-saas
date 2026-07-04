@@ -1,0 +1,7 @@
+node_id,node_type,city,pincode,data_provenance
+PLT-HAR,plant,Haridwar,249403,synthetic
+CFA-WEST,cfa,Mumbai,400079,synthetic
+CFA-NORTH,cfa,Delhi,110020,synthetic
+CFA-SOUTH,cfa,Bengaluru,560100,synthetic
+DC-MUM,dc,Bhiwandi,421302,synthetic
+DC-DEL,dc,Gurgaon,122001,synthetic

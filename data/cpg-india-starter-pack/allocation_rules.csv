@@ -1,0 +1,5 @@
+rule_id,customer_tier,sku_abc_class,max_shortage_pct,notes,data_provenance
+RULE-01,A,A,0,MT/QC priority on A SKUs,synthetic
+RULE-02,A,B,5,Super stockist min fill,synthetic
+RULE-03,B,A,12,GT distributor shortage cap,synthetic
+RULE-04,C,C,35,Wholesaler deprioritized,synthetic

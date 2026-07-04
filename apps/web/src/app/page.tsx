@@ -7,7 +7,7 @@ const MODULES = [
   { id: "M3", name: "Auto-Replenishment", phase: "P4" },
   { id: "M4", name: "Dispatch & Freight", phase: "P5" },
   { id: "M5", name: "Copilot", phase: "P0" },
-  { id: "M6", name: "Control Tower", phase: "P7" },
+  { id: "M6", name: "Control Tower", phase: "P1" },
   { id: "M7", name: "Knowledge Base", phase: "P6" },
   { id: "M8", name: "Billing", phase: "P8" },
   { id: "M9", name: "Admin", phase: "P1" },
@@ -38,6 +38,12 @@ export default function HomePage() {
             Copilot test:{" "}
             <Link href="/copilot" className="text-emerald-400 hover:underline">
               /copilot
+            </Link>
+          </li>
+          <li>
+            P1 import wizard:{" "}
+            <Link href="/import" className="text-emerald-400 hover:underline">
+              /import
             </Link>
           </li>
           <li>

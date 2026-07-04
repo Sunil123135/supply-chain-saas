@@ -1,0 +1,6 @@
+node_id,node_type,city,pincode,data_provenance
+PLT-PUNE,plant,Pune,411057,synthetic
+DC-MUM,dc,Mumbai,400079,synthetic
+WH-DEL,warehouse,Delhi,110020,synthetic
+WH-BLR,warehouse,Bengaluru,560100,synthetic
+SVC-CHN,service_center,Chennai,600032,synthetic

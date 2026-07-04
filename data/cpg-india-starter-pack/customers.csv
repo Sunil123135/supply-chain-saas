@@ -1,0 +1,8 @@
+customer_id,tier,name,city,data_provenance
+DIST-001,A,West Super Stockist Mumbai,Mumbai,synthetic
+DIST-002,A,North CFA Delhi Hub,Delhi,synthetic
+DIST-003,B,South Regional Distributor,Bengaluru,synthetic
+DIST-004,B,Pune GT Distributor,Pune,synthetic
+DIST-005,C,Tier-3 Wholesaler UP,Lucknow,synthetic
+MT-006,A,Modern Trade National,Mumbai,synthetic
+QC-007,A,Quick Commerce Dark Store,Delhi,synthetic

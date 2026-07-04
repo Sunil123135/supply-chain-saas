@@ -1,0 +1,5 @@
+rule_id,customer_tier,sku_abc_class,max_shortage_pct,notes,data_provenance
+RULE-01,A,A,0,Fulfill A customers fully for A SKUs,synthetic
+RULE-02,A,B,10,Max 10% shortage for tier A on B SKUs,synthetic
+RULE-03,B,A,15,Tier B may short 15% on A SKUs in constraint,synthetic
+RULE-04,C,C,40,Tier C deprioritized for C SKUs,synthetic

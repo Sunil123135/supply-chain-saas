@@ -1,0 +1,7 @@
+customer_id,tier,name,city,data_provenance
+HOSP-001,A,Metro General Hospital,Mumbai,synthetic
+HOSP-002,A,Apollo Care Institute,Delhi,synthetic
+ASC-003,B,Sunrise Ambulatory Surgery,Pune,synthetic
+HOSP-004,B,Lakeview Medical Center,Bengaluru,synthetic
+HOSP-005,C,District Health Network,Chennai,synthetic
+DEAL-006,B,MedSupply Distributors,Hyderabad,synthetic

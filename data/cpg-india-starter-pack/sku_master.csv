@@ -1,0 +1,125 @@
+sku_id,sku_name,category,subcategory,uom,unit_cost_inr,weight_kg,volume_m3,lead_time_days,moq,abc_class,lot_tracked,shelf_life_days,data_provenance
+YGC-PER-0001,Yugam Beauty Bar soap 1,personal_care,soap,CASE,55.35,0.242,0.0006,3,48,C,true,730,synthetic
+YGC-PER-0002,Yugam Germ Shield Soap soap 2,personal_care,soap,CASE,99.42,0.173,0.0004,10,144,B,true,730,synthetic
+YGC-PER-0003,Yugam Beauty Bar soap 3,personal_care,soap,CASE,83.35,0.099,0.0003,10,24,C,true,730,synthetic
+YGC-PER-0004,Yugam Germ Shield Soap soap 4,personal_care,soap,CASE,89.54,0.116,0.0002,7,96,C,true,730,synthetic
+YGC-PER-0005,Yugam Beauty Bar soap 5,personal_care,soap,CASE,93.7,0.095,0.0002,7,96,A,true,730,synthetic
+YGC-PER-0006,Yugam Germ Shield Soap soap 6,personal_care,soap,CASE,27.35,0.201,0.0003,10,24,B,true,730,synthetic
+YGC-PER-0007,Yugam Germ Shield Soap soap 7,personal_care,soap,CASE,107.39,0.152,0.0004,14,96,B,true,730,synthetic
+YGC-PER-0008,Yugam Germ Shield Soap soap 8,personal_care,soap,CASE,105.23,0.176,0.0005,14,144,C,true,730,synthetic
+YGC-PER-0009,Yugam Anti-Dandruff shampoo 1,personal_care,shampoo,CASE,286.77,0.436,0.0013,14,24,C,true,730,synthetic
+YGC-PER-0010,Yugam Herbal Care shampoo 2,personal_care,shampoo,CASE,206.91,0.319,0.0005,3,96,C,true,730,synthetic
+YGC-PER-0011,Yugam Herbal Care shampoo 3,personal_care,shampoo,CASE,231.14,0.384,0.0006,14,96,C,true,730,synthetic
+YGC-PER-0012,Yugam Herbal Care shampoo 4,personal_care,shampoo,CASE,196.93,0.253,0.0004,3,48,C,true,730,synthetic
+YGC-PER-0013,Yugam Herbal Care shampoo 5,personal_care,shampoo,CASE,296.96,0.474,0.0008,5,72,C,true,730,synthetic
+YGC-PER-0014,Yugam Herbal Care shampoo 6,personal_care,shampoo,CASE,218.04,0.439,0.0011,14,24,C,true,730,synthetic
+YGC-PER-0015,Yugam Herbal Care shampoo 7,personal_care,shampoo,CASE,203.57,0.434,0.0008,14,72,B,true,730,synthetic
+YGC-PER-0016,Yugam Anti-Dandruff shampoo 8,personal_care,shampoo,CASE,341.16,0.445,0.0009,3,72,C,true,730,synthetic
+YGC-PER-0017,Yugam Winter Care skin_cream 1,personal_care,skin_cream,CASE,81.27,0.162,0.0003,10,24,A,true,540,synthetic
+YGC-PER-0018,Yugam Winter Care skin_cream 2,personal_care,skin_cream,CASE,187.74,0.19,0.0002,5,48,A,true,540,synthetic
+YGC-PER-0019,Yugam Moisturising Lotion skin_cream 3,personal_care,skin_cream,CASE,225.41,0.193,0.0005,7,48,A,true,540,synthetic
+YGC-PER-0020,Yugam Winter Care skin_cream 4,personal_care,skin_cream,CASE,211.75,0.191,0.0004,10,144,A,true,540,synthetic
+YGC-PER-0021,Yugam Winter Care skin_cream 5,personal_care,skin_cream,CASE,78.58,0.15,0.0004,14,72,B,true,540,synthetic
+YGC-PER-0022,Yugam Winter Care skin_cream 6,personal_care,skin_cream,CASE,237.76,0.128,0.0002,3,24,B,true,540,synthetic
+YGC-HOM-0023,Yugam Matic Liquid detergent 1,home_care,detergent,CASE,108.5,1.194,0.002,3,24,B,true,1095,synthetic
+YGC-HOM-0024,Yugam Power Wash Powder detergent 2,home_care,detergent,CASE,335.81,1.4,0.004,10,96,B,true,1095,synthetic
+YGC-HOM-0025,Yugam Matic Liquid detergent 3,home_care,detergent,CASE,145.4,1.539,0.0029,7,96,B,true,1095,synthetic
+YGC-HOM-0026,Yugam Matic Liquid detergent 4,home_care,detergent,CASE,287.05,0.568,0.0013,5,24,B,true,1095,synthetic
+YGC-HOM-0027,Yugam Matic Liquid detergent 5,home_care,detergent,CASE,252.66,2.009,0.0028,3,48,B,true,1095,synthetic
+YGC-HOM-0028,Yugam Matic Liquid detergent 6,home_care,detergent,CASE,372.75,1.534,0.0045,5,48,B,true,1095,synthetic
+YGC-HOM-0029,Yugam Power Wash Powder detergent 7,home_care,detergent,CASE,281.88,2.236,0.0039,5,72,A,true,1095,synthetic
+YGC-HOM-0030,Yugam Power Wash Powder detergent 8,home_care,detergent,CASE,269.14,2.06,0.0038,10,48,B,true,1095,synthetic
+YGC-HOM-0031,Yugam Power Wash Powder detergent 9,home_care,detergent,CASE,250.05,1.555,0.0032,7,24,C,true,1095,synthetic
+YGC-HOM-0032,Yugam Matic Liquid detergent 10,home_care,detergent,CASE,91.77,0.686,0.0013,7,96,B,true,1095,synthetic
+YGC-HOM-0033,Yugam Lemon Fresh Gel dishwash 1,home_care,dishwash,CASE,174.76,0.546,0.0007,14,144,C,true,730,synthetic
+YGC-HOM-0034,Yugam Lemon Fresh Gel dishwash 2,home_care,dishwash,CASE,59.81,0.801,0.0017,14,48,B,true,730,synthetic
+YGC-HOM-0035,Yugam Bar Pack dishwash 3,home_care,dishwash,CASE,135.49,0.393,0.001,3,96,A,true,730,synthetic
+YGC-HOM-0036,Yugam Lemon Fresh Gel dishwash 4,home_care,dishwash,CASE,147.48,0.806,0.0011,3,144,B,true,730,synthetic
+YGC-HOM-0037,Yugam Lemon Fresh Gel dishwash 5,home_care,dishwash,CASE,84.29,0.52,0.0008,3,24,B,true,730,synthetic
+YGC-HOM-0038,Yugam Bar Pack dishwash 6,home_care,dishwash,CASE,100.96,0.311,0.0004,3,72,A,true,730,synthetic
+YGC-HOM-0039,Yugam Kitchen Spray surface_cleaner 1,home_care,surface_cleaner,CASE,106.97,0.765,0.0017,14,24,C,true,730,synthetic
+YGC-HOM-0040,Yugam Kitchen Spray surface_cleaner 2,home_care,surface_cleaner,CASE,155.28,0.875,0.0016,3,72,C,true,730,synthetic
+YGC-HOM-0041,Yugam Kitchen Spray surface_cleaner 3,home_care,surface_cleaner,CASE,119.19,1.158,0.002,10,24,B,true,730,synthetic
+YGC-HOM-0042,Yugam Kitchen Spray surface_cleaner 4,home_care,surface_cleaner,CASE,102.78,1.167,0.003,3,72,C,true,730,synthetic
+YGC-HOM-0043,Yugam Kitchen Spray surface_cleaner 5,home_care,surface_cleaner,CASE,151.63,0.416,0.0012,5,144,A,true,730,synthetic
+YGC-HOM-0044,Yugam Floor Cleaner surface_cleaner 6,home_care,surface_cleaner,CASE,81.75,0.498,0.0005,14,72,B,true,730,synthetic
+YGC-FOO-0045,Yugam Digestive biscuit 1,foods,biscuit,CASE,34.65,0.177,0.0002,10,96,B,true,180,synthetic
+YGC-FOO-0046,Yugam Cream Cookie biscuit 2,foods,biscuit,CASE,58.07,0.282,0.0004,3,144,C,true,180,synthetic
+YGC-FOO-0047,Yugam Cream Cookie biscuit 3,foods,biscuit,CASE,72.79,0.286,0.0004,3,72,B,true,180,synthetic
+YGC-FOO-0048,Yugam Cream Cookie biscuit 4,foods,biscuit,CASE,32.15,0.144,0.0004,14,24,C,true,180,synthetic
+YGC-FOO-0049,Yugam Digestive biscuit 5,foods,biscuit,CASE,17.47,0.31,0.0008,7,72,B,true,180,synthetic
+YGC-FOO-0050,Yugam Digestive biscuit 6,foods,biscuit,CASE,35.64,0.247,0.0003,5,96,A,true,180,synthetic
+YGC-FOO-0051,Yugam Marie biscuit 7,foods,biscuit,CASE,59.14,0.309,0.0009,10,72,C,true,180,synthetic
+YGC-FOO-0052,Yugam Marie biscuit 8,foods,biscuit,CASE,51.5,0.133,0.0004,7,72,B,true,180,synthetic
+YGC-FOO-0053,Yugam Cream Cookie biscuit 9,foods,biscuit,CASE,50.67,0.192,0.0005,14,72,A,true,180,synthetic
+YGC-FOO-0054,Yugam Digestive biscuit 10,foods,biscuit,CASE,41.68,0.195,0.0002,7,144,C,true,180,synthetic
+YGC-FOO-0055,Yugam Marie biscuit 11,foods,biscuit,CASE,56.54,0.075,0.0001,7,48,C,true,180,synthetic
+YGC-FOO-0056,Yugam Marie biscuit 12,foods,biscuit,CASE,79.92,0.056,0.0001,14,72,B,true,180,synthetic
+YGC-FOO-0057,Yugam Potato Crisps snacks 1,foods,snacks,CASE,30.27,0.194,0.0004,5,144,A,true,120,synthetic
+YGC-FOO-0058,Yugam Namkeen Mix snacks 2,foods,snacks,CASE,47.16,0.087,0.0001,3,144,C,true,120,synthetic
+YGC-FOO-0059,Yugam Namkeen Mix snacks 3,foods,snacks,CASE,19.79,0.08,0.0002,7,48,C,true,120,synthetic
+YGC-FOO-0060,Yugam Namkeen Mix snacks 4,foods,snacks,CASE,58.85,0.137,0.0004,10,96,B,true,120,synthetic
+YGC-FOO-0061,Yugam Namkeen Mix snacks 5,foods,snacks,CASE,46.66,0.035,0.0001,5,48,A,true,120,synthetic
+YGC-FOO-0062,Yugam Namkeen Mix snacks 6,foods,snacks,CASE,36.72,0.18,0.0004,3,72,A,true,120,synthetic
+YGC-FOO-0063,Yugam Potato Crisps snacks 7,foods,snacks,CASE,22.38,0.056,0.0001,5,24,C,true,120,synthetic
+YGC-FOO-0064,Yugam Potato Crisps snacks 8,foods,snacks,CASE,17.15,0.172,0.0002,7,144,B,true,120,synthetic
+YGC-FOO-0065,Yugam Namkeen Mix snacks 9,foods,snacks,CASE,28.69,0.185,0.0002,14,48,C,true,120,synthetic
+YGC-FOO-0066,Yugam Potato Crisps snacks 10,foods,snacks,CASE,56.05,0.089,0.0001,3,96,C,true,120,synthetic
+YGC-FOO-0067,Yugam Cup Noodles noodles 1,foods,noodles,CASE,46.37,0.118,0.0002,14,144,B,true,270,synthetic
+YGC-FOO-0068,Yugam Cup Noodles noodles 2,foods,noodles,CASE,34.11,0.11,0.0003,5,72,C,true,270,synthetic
+YGC-FOO-0069,Yugam Cup Noodles noodles 3,foods,noodles,CASE,34.34,0.217,0.0004,5,96,C,true,270,synthetic
+YGC-FOO-0070,Yugam Masala Instant noodles 4,foods,noodles,CASE,35.1,0.136,0.0002,7,96,B,true,270,synthetic
+YGC-FOO-0071,Yugam Cup Noodles noodles 5,foods,noodles,CASE,28.2,0.245,0.0005,3,72,B,true,270,synthetic
+YGC-FOO-0072,Yugam Cup Noodles noodles 6,foods,noodles,CASE,42.16,0.148,0.0003,7,96,B,true,270,synthetic
+YGC-BEV-0073,Yugam Lime Sparkling soft_drink 1,beverages,soft_drink,CASE,84.06,1.347,0.0039,14,144,A,true,180,synthetic
+YGC-BEV-0074,Yugam Lime Sparkling soft_drink 2,beverages,soft_drink,CASE,67.13,0.56,0.001,5,24,B,true,180,synthetic
+YGC-BEV-0075,Yugam Lime Sparkling soft_drink 3,beverages,soft_drink,CASE,33.49,1.079,0.0024,10,96,B,true,180,synthetic
+YGC-BEV-0076,Yugam Cola PET soft_drink 4,beverages,soft_drink,CASE,74.22,1.136,0.0026,7,72,A,true,180,synthetic
+YGC-BEV-0077,Yugam Cola PET soft_drink 5,beverages,soft_drink,CASE,76.4,1.015,0.0023,7,24,B,true,180,synthetic
+YGC-BEV-0078,Yugam Cola PET soft_drink 6,beverages,soft_drink,CASE,60.03,0.511,0.0006,7,48,C,true,180,synthetic
+YGC-BEV-0079,Yugam Cola PET soft_drink 7,beverages,soft_drink,CASE,64.4,0.671,0.0011,14,96,C,true,180,synthetic
+YGC-BEV-0080,Yugam Cola PET soft_drink 8,beverages,soft_drink,CASE,32.02,0.771,0.0014,5,144,C,true,180,synthetic
+YGC-BEV-0081,Yugam Mango Drink juice 1,beverages,juice,CASE,148.72,0.937,0.0022,7,72,B,true,120,synthetic
+YGC-BEV-0082,Yugam Mixed Fruit juice 2,beverages,juice,CASE,68.09,0.918,0.0025,3,96,A,true,120,synthetic
+YGC-BEV-0083,Yugam Mixed Fruit juice 3,beverages,juice,CASE,128.98,0.478,0.0012,5,72,B,true,120,synthetic
+YGC-BEV-0084,Yugam Mixed Fruit juice 4,beverages,juice,CASE,73.45,0.707,0.0019,3,144,C,true,120,synthetic
+YGC-BEV-0085,Yugam Mixed Fruit juice 5,beverages,juice,CASE,147.91,0.731,0.002,14,144,B,true,120,synthetic
+YGC-BEV-0086,Yugam Mixed Fruit juice 6,beverages,juice,CASE,112.66,0.552,0.0006,14,48,C,true,120,synthetic
+YGC-BEV-0087,Yugam Instant Coffee tea_coffee 1,beverages,tea_coffee,CASE,391.13,0.47,0.0014,3,96,A,true,365,synthetic
+YGC-BEV-0088,Yugam Instant Coffee tea_coffee 2,beverages,tea_coffee,CASE,338.45,0.311,0.0006,7,96,A,true,365,synthetic
+YGC-BEV-0089,Yugam Instant Coffee tea_coffee 3,beverages,tea_coffee,CASE,276.41,0.36,0.0007,14,48,A,true,365,synthetic
+YGC-BEV-0090,Yugam Leaf Tea tea_coffee 4,beverages,tea_coffee,CASE,433.36,0.153,0.0004,14,24,C,true,365,synthetic
+YGC-BEV-0091,Yugam Leaf Tea tea_coffee 5,beverages,tea_coffee,CASE,240.56,0.22,0.0006,5,72,C,true,365,synthetic
+YGC-BEV-0092,Yugam Instant Coffee tea_coffee 6,beverages,tea_coffee,CASE,175.04,0.167,0.0004,5,48,B,true,365,synthetic
+YGC-BEV-0093,Yugam Instant Coffee tea_coffee 7,beverages,tea_coffee,CASE,512.32,0.483,0.0008,14,72,C,true,365,synthetic
+YGC-BEV-0094,Yugam Leaf Tea tea_coffee 8,beverages,tea_coffee,CASE,320.23,0.399,0.0005,7,48,C,true,365,synthetic
+YGC-STA-0095,Yugam Whole Wheat Atta atta_rice 1,staples,atta_rice,CASE,144.17,1.233,0.0021,7,72,C,true,270,synthetic
+YGC-STA-0096,Yugam Whole Wheat Atta atta_rice 2,staples,atta_rice,CASE,150.65,4.476,0.0053,10,48,C,true,270,synthetic
+YGC-STA-0097,Yugam Whole Wheat Atta atta_rice 3,staples,atta_rice,CASE,98.22,3.646,0.0073,7,48,B,true,270,synthetic
+YGC-STA-0098,Yugam Basmati Rice atta_rice 4,staples,atta_rice,CASE,194.22,2.838,0.0049,5,72,B,true,270,synthetic
+YGC-STA-0099,Yugam Basmati Rice atta_rice 5,staples,atta_rice,CASE,237.02,3.236,0.0064,5,48,A,true,270,synthetic
+YGC-STA-0100,Yugam Whole Wheat Atta atta_rice 6,staples,atta_rice,CASE,120.79,3.716,0.0088,3,48,A,true,270,synthetic
+YGC-STA-0101,Yugam Basmati Rice atta_rice 7,staples,atta_rice,CASE,87.86,4.792,0.0142,3,144,C,true,270,synthetic
+YGC-STA-0102,Yugam Basmati Rice atta_rice 8,staples,atta_rice,CASE,107.42,2.461,0.0025,14,96,C,true,270,synthetic
+YGC-STA-0103,Yugam Blended Oil cooking_oil 1,staples,cooking_oil,CASE,281.1,1.19,0.0031,14,48,C,true,365,synthetic
+YGC-STA-0104,Yugam Blended Oil cooking_oil 2,staples,cooking_oil,CASE,244.54,2.229,0.0024,14,72,C,true,365,synthetic
+YGC-STA-0105,Yugam Sunflower Oil cooking_oil 3,staples,cooking_oil,CASE,272.13,1.626,0.0043,14,144,C,true,365,synthetic
+YGC-STA-0106,Yugam Blended Oil cooking_oil 4,staples,cooking_oil,CASE,217.93,1.069,0.0012,14,96,B,true,365,synthetic
+YGC-STA-0107,Yugam Blended Oil cooking_oil 5,staples,cooking_oil,CASE,383.71,2.58,0.0075,14,96,B,true,365,synthetic
+YGC-STA-0108,Yugam Sunflower Oil cooking_oil 6,staples,cooking_oil,CASE,416.4,1.182,0.0014,3,48,B,true,365,synthetic
+YGC-HEA-0109,Yugam Honey Herbal ayurveda 1,health,ayurveda,CASE,84.38,0.114,0.0003,14,144,A,true,540,synthetic
+YGC-HEA-0110,Yugam Honey Herbal ayurveda 2,health,ayurveda,CASE,252.14,0.192,0.0004,7,96,C,true,540,synthetic
+YGC-HEA-0111,Yugam Honey Herbal ayurveda 3,health,ayurveda,CASE,137.22,0.358,0.0006,3,96,A,true,540,synthetic
+YGC-HEA-0112,Yugam Chyawanprash ayurveda 4,health,ayurveda,CASE,185.25,0.331,0.0007,14,96,B,true,540,synthetic
+YGC-HEA-0113,Yugam Chyawanprash ayurveda 5,health,ayurveda,CASE,199.75,0.166,0.0004,14,96,C,true,540,synthetic
+YGC-HEA-0114,Yugam Honey Herbal ayurveda 6,health,ayurveda,CASE,137.85,0.256,0.0004,10,144,A,true,540,synthetic
+YGC-ORA-0115,Yugam Cavity Guard toothpaste 1,oral_care,toothpaste,CASE,173.68,0.095,0.0002,5,144,A,true,730,synthetic
+YGC-ORA-0116,Yugam Cavity Guard toothpaste 2,oral_care,toothpaste,CASE,106.73,0.177,0.0005,10,96,C,true,730,synthetic
+YGC-ORA-0117,Yugam Cavity Guard toothpaste 3,oral_care,toothpaste,CASE,71.55,0.112,0.0003,14,72,C,true,730,synthetic
+YGC-ORA-0118,Yugam Cavity Guard toothpaste 4,oral_care,toothpaste,CASE,79.47,0.192,0.0002,14,24,C,true,730,synthetic
+YGC-ORA-0119,Yugam Cavity Guard toothpaste 5,oral_care,toothpaste,CASE,93.02,0.186,0.0005,10,144,B,true,730,synthetic
+YGC-ORA-0120,Yugam Cavity Guard toothpaste 6,oral_care,toothpaste,CASE,174.19,0.188,0.0006,10,24,B,true,730,synthetic
+YGC-BAB-0121,Yugam Baby Diaper Pack diaper_wipes 1,baby_care,diaper_wipes,CASE,443.34,0.367,0.0004,14,24,B,true,730,synthetic
+YGC-BAB-0122,Yugam Wipes Tub diaper_wipes 2,baby_care,diaper_wipes,CASE,182.09,0.62,0.0013,14,144,B,true,730,synthetic
+YGC-BAB-0123,Yugam Baby Diaper Pack diaper_wipes 3,baby_care,diaper_wipes,CASE,372.87,0.232,0.0004,14,96,B,true,730,synthetic
+YGC-BAB-0124,Yugam Baby Diaper Pack diaper_wipes 4,baby_care,diaper_wipes,CASE,164.15,0.448,0.0009,10,144,A,true,730,synthetic

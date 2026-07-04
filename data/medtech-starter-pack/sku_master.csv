@@ -1,0 +1,134 @@
+sku_id,sku_name,category,subcategory,uom,unit_cost_inr,weight_kg,volume_m3,lead_time_days,moq,abc_class,lot_tracked,shelf_life_days,data_provenance
+YGM-CAP-0001,Yugam Haptic Controller Unit Surgical Robot v1,capital_equipment,surgical_robot,EA,989262.82,380.219,0.6596,60,1,A,true,,synthetic
+YGM-CAP-0002,Yugam Haptic Controller Unit Surgical Robot v2,capital_equipment,surgical_robot,EA,1517267.09,188.045,0.3114,180,1,A,true,,synthetic
+YGM-CAP-0003,Yugam Articulated Arm Platform Surgical Robot v3,capital_equipment,surgical_robot,EA,1563655.38,255.111,0.9204,120,1,A,true,,synthetic
+YGM-CAP-0004,Yugam Articulated Arm Platform Surgical Robot v4,capital_equipment,surgical_robot,EA,1166033.4,386.143,0.5045,120,1,A,true,,synthetic
+YGM-CAP-0005,Yugam Ultrasound Cart Imaging System v1,capital_equipment,imaging_system,EA,611616.69,265.208,0.6307,120,1,A,true,,synthetic
+YGM-CAP-0006,Yugam Ultrasound Cart Imaging System v2,capital_equipment,imaging_system,EA,894815.8,551.597,1.507,120,1,A,true,,synthetic
+YGM-CAP-0007,Yugam Mobile C-Arm Imaging System v3,capital_equipment,imaging_system,EA,1084254.18,553.269,1.1842,90,1,A,true,,synthetic
+YGM-CAP-0008,Yugam Vital Signs Module Patient Monitor v1,capital_equipment,patient_monitor,EA,39868.95,19.393,0.0602,90,1,A,true,,synthetic
+YGM-CAP-0009,Yugam Bedside Monitor Patient Monitor v2,capital_equipment,patient_monitor,EA,47358.21,12.589,0.0475,60,1,A,true,,synthetic
+YGM-CAP-0010,Yugam Bedside Monitor Patient Monitor v3,capital_equipment,patient_monitor,EA,72526.18,21.686,0.0478,120,1,A,true,,synthetic
+YGM-CAP-0011,Yugam Bedside Monitor Patient Monitor v4,capital_equipment,patient_monitor,EA,60880.71,14.726,0.0551,90,1,A,true,,synthetic
+YGM-CAP-0012,Yugam Telemetry Hub Patient Monitor v5,capital_equipment,patient_monitor,EA,54295.77,12.467,0.0343,90,1,A,true,,synthetic
+YGM-CAP-0013,Yugam POC Diagnostic Hub Lab Analyzer v1,capital_equipment,lab_analyzer,EA,282860.23,173.136,0.6204,180,1,A,true,,synthetic
+YGM-CAP-0014,Yugam POC Diagnostic Hub Lab Analyzer v2,capital_equipment,lab_analyzer,EA,140964.14,131.978,0.5264,60,1,A,true,,synthetic
+YGM-CAP-0015,Yugam POC Diagnostic Hub Lab Analyzer v3,capital_equipment,lab_analyzer,EA,357838.2,164.988,0.4308,60,1,A,true,,synthetic
+YGM-CAP-0016,Yugam Hematology System Lab Analyzer v4,capital_equipment,lab_analyzer,EA,263472.53,139.91,0.5403,60,1,A,true,,synthetic
+YGM-IMP-0017,Yugam Patella Button Knee System v1,implant,knee_system,EA,16058.01,1.778,0.005,21,1,C,true,,synthetic
+YGM-IMP-0018,Yugam Patella Button Knee System v2,implant,knee_system,EA,33744.49,2.345,0.0088,60,2,A,true,,synthetic
+YGM-IMP-0019,Yugam Tibial Insert Knee System v3,implant,knee_system,EA,31725.49,2.163,0.0042,7,1,C,true,,synthetic
+YGM-IMP-0020,Yugam Femoral Component Knee System v4,implant,knee_system,EA,10312.64,1.472,0.0018,21,1,C,true,,synthetic
+YGM-IMP-0021,Yugam Patella Button Knee System v5,implant,knee_system,EA,12458.43,1.555,0.0044,28,5,C,true,,synthetic
+YGM-IMP-0022,Yugam Patella Button Knee System v6,implant,knee_system,EA,13431.08,1.123,0.0045,60,2,C,true,,synthetic
+YGM-IMP-0023,Yugam Tibial Insert Knee System v7,implant,knee_system,EA,11267.11,0.949,0.0019,28,5,B,true,,synthetic
+YGM-IMP-0024,Yugam Femoral Component Knee System v8,implant,knee_system,EA,27111.71,0.618,0.0007,7,25,B,true,,synthetic
+YGM-IMP-0025,Yugam Ceramic Head Hip System v1,implant,hip_system,EA,17616.15,2.206,0.0036,21,10,C,true,,synthetic
+YGM-IMP-0026,Yugam Ceramic Head Hip System v2,implant,hip_system,EA,28438.77,1.183,0.0029,90,1,A,true,,synthetic
+YGM-IMP-0027,Yugam Ceramic Head Hip System v3,implant,hip_system,EA,23793.64,1.617,0.0039,7,10,C,true,,synthetic
+YGM-IMP-0028,Yugam Ceramic Head Hip System v4,implant,hip_system,EA,13149.37,1.566,0.0032,14,1,A,true,,synthetic
+YGM-IMP-0029,Yugam Ceramic Head Hip System v5,implant,hip_system,EA,24355.63,1.613,0.003,28,25,C,true,,synthetic
+YGM-IMP-0030,Yugam Femoral Stem Hip System v6,implant,hip_system,EA,35856.71,2.654,0.0034,7,1,C,true,,synthetic
+YGM-IMP-0031,Yugam Pedicle Screw Spine Implant v1,implant,spine_implant,EA,7574.62,0.977,0.0016,90,1,A,true,,synthetic
+YGM-IMP-0032,Yugam Pedicle Screw Spine Implant v2,implant,spine_implant,EA,27640.07,0.624,0.0021,120,1,B,true,,synthetic
+YGM-IMP-0033,Yugam Rod Connector Spine Implant v3,implant,spine_implant,EA,27887.86,1.089,0.0034,21,1,B,true,,synthetic
+YGM-IMP-0034,Yugam Pedicle Screw Spine Implant v4,implant,spine_implant,EA,17689.92,1.068,0.0035,7,1,C,true,,synthetic
+YGM-IMP-0035,Yugam Rod Connector Spine Implant v5,implant,spine_implant,EA,26024.98,1.05,0.0012,14,25,A,true,,synthetic
+YGM-IMP-0036,Yugam Rod Connector Spine Implant v6,implant,spine_implant,EA,5165.04,1.579,0.0035,28,5,C,true,,synthetic
+YGM-IMP-0037,Yugam Rod Connector Spine Implant v7,implant,spine_implant,EA,5508.59,1.252,0.0034,60,1,B,true,,synthetic
+YGM-IMP-0038,Yugam Rod Connector Spine Implant v8,implant,spine_implant,EA,11197.5,0.625,0.0009,45,2,B,true,,synthetic
+YGM-IMP-0039,Yugam Pedicle Screw Spine Implant v9,implant,spine_implant,EA,3728.23,1.194,0.0032,14,1,B,true,,synthetic
+YGM-IMP-0040,Yugam Rod Connector Spine Implant v10,implant,spine_implant,EA,9997.41,1.693,0.0062,28,1,B,true,,synthetic
+YGM-IMP-0041,Yugam Intramedullary Nail Trauma Plate v1,implant,trauma_plate,EA,12838.68,0.663,0.0019,7,10,C,true,,synthetic
+YGM-IMP-0042,Yugam Intramedullary Nail Trauma Plate v2,implant,trauma_plate,EA,14112.83,0.183,0.0007,45,1,C,true,,synthetic
+YGM-IMP-0043,Yugam Cannulated Screw Trauma Plate v3,implant,trauma_plate,EA,9191.91,0.318,0.0009,60,1,C,true,,synthetic
+YGM-IMP-0044,Yugam Intramedullary Nail Trauma Plate v4,implant,trauma_plate,EA,8570.32,0.301,0.0011,7,1,C,true,,synthetic
+YGM-IMP-0045,Yugam Intramedullary Nail Trauma Plate v5,implant,trauma_plate,EA,2573.13,0.367,0.0005,45,1,C,true,,synthetic
+YGM-IMP-0046,Yugam Cannulated Screw Trauma Plate v6,implant,trauma_plate,EA,11173.68,0.549,0.0007,21,5,A,true,,synthetic
+YGM-IMP-0047,Yugam Intramedullary Nail Trauma Plate v7,implant,trauma_plate,EA,9572.62,0.218,0.0003,45,1,C,true,,synthetic
+YGM-IMP-0048,Yugam Locking Plate Trauma Plate v8,implant,trauma_plate,EA,13686.02,0.268,0.0005,14,1,C,true,,synthetic
+YGM-IMP-0049,Yugam Guidewire Cardiovascular v1,implant,cardiovascular,EA,43953.48,0.312,0.0012,28,25,A,true,730,synthetic
+YGM-IMP-0050,Yugam Drug-Eluting Stent Cardiovascular v2,implant,cardiovascular,EA,40256.65,0.059,0.0002,60,25,C,true,730,synthetic
+YGM-IMP-0051,Yugam EP Ablation Catheter Cardiovascular v3,implant,cardiovascular,EA,39562.56,0.334,0.0006,14,2,C,true,730,synthetic
+YGM-IMP-0052,Yugam Guidewire Cardiovascular v4,implant,cardiovascular,EA,13897.35,0.336,0.0008,45,25,C,true,730,synthetic
+YGM-IMP-0053,Yugam Drug-Eluting Stent Cardiovascular v5,implant,cardiovascular,EA,13916.94,0.281,0.0006,45,25,A,true,730,synthetic
+YGM-IMP-0054,Yugam Guidewire Cardiovascular v6,implant,cardiovascular,EA,19045.85,0.228,0.0007,60,1,A,true,730,synthetic
+YGM-DIS-0055,Yugam Retractor Set Surgical Instrument v1,disposable,surgical_instrument,EA,280.0,0.482,0.0009,14,5,B,true,1095,synthetic
+YGM-DIS-0056,Yugam Bone Saw Blade Surgical Instrument v2,disposable,surgical_instrument,EA,960.8,0.229,0.0009,14,2,C,true,1095,synthetic
+YGM-DIS-0057,Yugam Laparoscopic Grasper Surgical Instrument v3,disposable,surgical_instrument,EA,365.29,0.36,0.0004,28,1,B,true,1095,synthetic
+YGM-DIS-0058,Yugam Bone Saw Blade Surgical Instrument v4,disposable,surgical_instrument,EA,1111.26,0.319,0.001,14,10,C,true,1095,synthetic
+YGM-DIS-0059,Yugam Bone Saw Blade Surgical Instrument v5,disposable,surgical_instrument,EA,426.4,0.216,0.0005,45,5,A,true,1095,synthetic
+YGM-DIS-0060,Yugam Retractor Set Surgical Instrument v6,disposable,surgical_instrument,EA,824.72,0.202,0.0007,21,5,C,true,1095,synthetic
+YGM-DIS-0061,Yugam Retractor Set Surgical Instrument v7,disposable,surgical_instrument,EA,693.69,0.02,0.0,90,25,C,true,1095,synthetic
+YGM-DIS-0062,Yugam Bone Saw Blade Surgical Instrument v8,disposable,surgical_instrument,EA,440.92,0.232,0.0007,120,25,C,true,1095,synthetic
+YGM-DIS-0063,Yugam Bone Saw Blade Surgical Instrument v9,disposable,surgical_instrument,EA,270.05,0.061,0.0002,60,1,C,true,1095,synthetic
+YGM-DIS-0064,Yugam Laparoscopic Grasper Surgical Instrument v10,disposable,surgical_instrument,EA,833.53,0.128,0.0002,7,1,B,true,1095,synthetic
+YGM-DIS-0065,Yugam Retractor Set Surgical Instrument v11,disposable,surgical_instrument,EA,764.63,0.389,0.0009,28,10,C,true,1095,synthetic
+YGM-DIS-0066,Yugam Retractor Set Surgical Instrument v12,disposable,surgical_instrument,EA,527.61,0.091,0.0003,14,25,B,true,1095,synthetic
+YGM-DIS-0067,Yugam Orthopedic Drape Pack Surgical Drape Kit v1,disposable,surgical_drape_kit,EA,149.64,0.587,0.0014,28,25,A,true,730,synthetic
+YGM-DIS-0068,Yugam Orthopedic Drape Pack Surgical Drape Kit v2,disposable,surgical_drape_kit,EA,149.22,0.567,0.0022,60,25,C,true,730,synthetic
+YGM-DIS-0069,Yugam Cardiac Procedure Kit Surgical Drape Kit v3,disposable,surgical_drape_kit,EA,153.74,0.484,0.0018,120,2,B,true,730,synthetic
+YGM-DIS-0070,Yugam Orthopedic Drape Pack Surgical Drape Kit v4,disposable,surgical_drape_kit,EA,155.18,0.294,0.001,120,10,B,true,730,synthetic
+YGM-DIS-0071,Yugam Cardiac Procedure Kit Surgical Drape Kit v5,disposable,surgical_drape_kit,EA,37.01,0.3,0.0005,60,5,A,true,730,synthetic
+YGM-DIS-0072,Yugam Orthopedic Drape Pack Surgical Drape Kit v6,disposable,surgical_drape_kit,EA,60.85,0.586,0.0018,14,2,B,true,730,synthetic
+YGM-DIS-0073,Yugam Extension Line Infusion Set v1,disposable,infusion_set,EA,48.26,0.081,0.0002,7,25,C,true,730,synthetic
+YGM-DIS-0074,Yugam Extension Line Infusion Set v2,disposable,infusion_set,EA,53.16,0.191,0.0004,90,25,C,true,730,synthetic
+YGM-DIS-0075,Yugam Extension Line Infusion Set v3,disposable,infusion_set,EA,58.06,0.16,0.0005,28,2,B,true,730,synthetic
+YGM-DIS-0076,Yugam Extension Line Infusion Set v4,disposable,infusion_set,EA,53.85,0.108,0.0003,90,10,A,true,730,synthetic
+YGM-DIS-0077,Yugam Extension Line Infusion Set v5,disposable,infusion_set,EA,88.56,0.197,0.0005,90,5,C,true,730,synthetic
+YGM-DIS-0078,Yugam IV Administration Set Infusion Set v6,disposable,infusion_set,EA,21.72,0.114,0.0004,21,1,B,true,730,synthetic
+YGM-DIS-0079,Yugam Extension Line Infusion Set v7,disposable,infusion_set,EA,31.93,0.099,0.0003,90,1,C,true,730,synthetic
+YGM-DIS-0080,Yugam Extension Line Infusion Set v8,disposable,infusion_set,EA,35.18,0.062,0.0001,7,1,B,true,730,synthetic
+YGM-DIS-0081,Yugam Suture Pack Wound Closure v1,disposable,wound_closure,EA,282.18,0.101,0.0003,28,1,C,true,1095,synthetic
+YGM-DIS-0082,Yugam Suture Pack Wound Closure v2,disposable,wound_closure,EA,113.95,0.076,0.0001,28,2,C,true,1095,synthetic
+YGM-DIS-0083,Yugam Skin Staple Cartridge Wound Closure v3,disposable,wound_closure,EA,92.01,0.095,0.0003,14,25,C,true,1095,synthetic
+YGM-DIS-0084,Yugam Skin Staple Cartridge Wound Closure v4,disposable,wound_closure,EA,73.51,0.014,0.0,90,2,C,true,1095,synthetic
+YGM-DIS-0085,Yugam Suture Pack Wound Closure v5,disposable,wound_closure,EA,63.56,0.107,0.0003,14,10,C,true,1095,synthetic
+YGM-DIS-0086,Yugam Suture Pack Wound Closure v6,disposable,wound_closure,EA,286.83,0.089,0.0001,90,10,B,true,1095,synthetic
+YGM-SPA-0087,Yugam Control PCB Robot Component v1,spare_part,robot_component,EA,30020.59,0.645,0.0015,120,1,B,true,,synthetic
+YGM-SPA-0088,Yugam Motor Drive Assembly Robot Component v2,spare_part,robot_component,EA,29512.37,10.03,0.0313,90,1,C,true,,synthetic
+YGM-SPA-0089,Yugam Control PCB Robot Component v3,spare_part,robot_component,EA,13978.5,9.794,0.0256,120,2,B,true,,synthetic
+YGM-SPA-0090,Yugam Control PCB Robot Component v4,spare_part,robot_component,EA,27680.17,4.207,0.0073,14,1,C,true,,synthetic
+YGM-SPA-0091,Yugam Optical Tracker Robot Component v5,spare_part,robot_component,EA,34395.24,7.053,0.0212,60,1,B,true,,synthetic
+YGM-SPA-0092,Yugam Motor Drive Assembly Robot Component v6,spare_part,robot_component,EA,10228.19,2.939,0.01,60,1,C,true,,synthetic
+YGM-SPA-0093,Yugam Control PCB Robot Component v7,spare_part,robot_component,EA,39904.56,6.892,0.0176,28,1,B,true,,synthetic
+YGM-SPA-0094,Yugam Motor Drive Assembly Robot Component v8,spare_part,robot_component,EA,23264.56,9.219,0.0283,120,2,C,true,,synthetic
+YGM-SPA-0095,Yugam Optical Tracker Robot Component v9,spare_part,robot_component,EA,15005.01,5.151,0.0089,60,2,C,true,,synthetic
+YGM-SPA-0096,Yugam Motor Drive Assembly Robot Component v10,spare_part,robot_component,EA,20583.91,9.078,0.0181,120,1,B,true,,synthetic
+YGM-SPA-0097,Yugam Force Torque Sensor Sensor Module v1,spare_part,sensor_module,EA,1729.05,0.466,0.0006,21,1,B,true,,synthetic
+YGM-SPA-0098,Yugam Encoders Pack Sensor Module v2,spare_part,sensor_module,EA,2929.05,1.22,0.004,45,1,C,true,,synthetic
+YGM-SPA-0099,Yugam Encoders Pack Sensor Module v3,spare_part,sensor_module,EA,2551.62,0.441,0.0005,21,1,A,true,,synthetic
+YGM-SPA-0100,Yugam Force Torque Sensor Sensor Module v4,spare_part,sensor_module,EA,5060.86,1.425,0.002,120,1,C,true,,synthetic
+YGM-SPA-0101,Yugam Camera Module Sensor Module v5,spare_part,sensor_module,EA,2989.41,1.01,0.002,7,1,C,true,,synthetic
+YGM-SPA-0102,Yugam Encoders Pack Sensor Module v6,spare_part,sensor_module,EA,1678.47,0.224,0.0006,7,1,A,true,,synthetic
+YGM-SPA-0103,Yugam Camera Module Sensor Module v7,spare_part,sensor_module,EA,8108.27,0.262,0.0005,90,5,C,true,,synthetic
+YGM-SPA-0104,Yugam Camera Module Sensor Module v8,spare_part,sensor_module,EA,2537.79,1.093,0.0026,120,1,C,true,,synthetic
+YGM-SPA-0105,Yugam Calibration Kit Service Kit v1,spare_part,service_kit,EA,2179.59,3.181,0.009,14,25,B,true,365,synthetic
+YGM-SPA-0106,Yugam Preventive Maintenance Kit Service Kit v2,spare_part,service_kit,EA,1955.55,0.59,0.001,14,1,A,true,365,synthetic
+YGM-SPA-0107,Yugam Calibration Kit Service Kit v3,spare_part,service_kit,EA,4291.54,2.456,0.0027,45,10,B,true,365,synthetic
+YGM-SPA-0108,Yugam Calibration Kit Service Kit v4,spare_part,service_kit,EA,891.49,1.32,0.0024,28,2,A,true,365,synthetic
+YGM-SPA-0109,Yugam Preventive Maintenance Kit Service Kit v5,spare_part,service_kit,EA,4061.99,4.56,0.0159,14,1,A,true,365,synthetic
+YGM-SPA-0110,Yugam Calibration Kit Service Kit v6,spare_part,service_kit,EA,3772.74,4.156,0.0156,120,1,B,true,365,synthetic
+YGM-CON-0111,Yugam Circular Stapler Cartridge Surgical Staple v1,consumable,surgical_staple,EA,665.79,0.095,0.0002,120,2,A,true,1095,synthetic
+YGM-CON-0112,Yugam Linear Stapler Reload Surgical Staple v2,consumable,surgical_staple,EA,813.75,0.079,0.0002,7,1,B,true,1095,synthetic
+YGM-CON-0113,Yugam Linear Stapler Reload Surgical Staple v3,consumable,surgical_staple,EA,899.67,0.074,0.0001,7,25,C,true,1095,synthetic
+YGM-CON-0114,Yugam Circular Stapler Cartridge Surgical Staple v4,consumable,surgical_staple,EA,524.79,0.055,0.0001,90,10,C,true,1095,synthetic
+YGM-CON-0115,Yugam Linear Stapler Reload Surgical Staple v5,consumable,surgical_staple,EA,486.61,0.053,0.0001,14,25,A,true,1095,synthetic
+YGM-CON-0116,Yugam Circular Stapler Cartridge Surgical Staple v6,consumable,surgical_staple,EA,661.07,0.043,0.0002,7,2,A,true,1095,synthetic
+YGM-CON-0117,Yugam Ultrasonic Handpiece Energy Device Tip v1,consumable,energy_device_tip,EA,943.53,0.293,0.0006,7,10,C,true,730,synthetic
+YGM-CON-0118,Yugam Ultrasonic Handpiece Energy Device Tip v2,consumable,energy_device_tip,EA,1150.47,0.097,0.0002,120,10,B,true,730,synthetic
+YGM-CON-0119,Yugam Electrosurgical Tip Energy Device Tip v3,consumable,energy_device_tip,EA,668.18,0.187,0.0007,120,10,B,true,730,synthetic
+YGM-CON-0120,Yugam Electrosurgical Tip Energy Device Tip v4,consumable,energy_device_tip,EA,2438.24,0.202,0.0003,21,1,C,true,730,synthetic
+YGM-CON-0121,Yugam Ultrasonic Handpiece Energy Device Tip v5,consumable,energy_device_tip,EA,414.38,0.298,0.0011,120,1,C,true,730,synthetic
+YGM-DIA-0122,Yugam Assay Reagent Kit Ivd Reagent v1,diagnostic,ivd_reagent,EA,254.37,1.103,0.0028,45,2,C,true,180,synthetic
+YGM-DIA-0123,Yugam Wash Buffer Ivd Reagent v2,diagnostic,ivd_reagent,EA,155.06,0.872,0.0019,21,25,A,true,180,synthetic
+YGM-DIA-0124,Yugam Wash Buffer Ivd Reagent v3,diagnostic,ivd_reagent,EA,192.55,1.203,0.0022,7,1,C,true,180,synthetic
+YGM-DIA-0125,Yugam Wash Buffer Ivd Reagent v4,diagnostic,ivd_reagent,EA,397.45,0.725,0.0018,60,5,C,true,180,synthetic
+YGM-DIA-0126,Yugam Wash Buffer Ivd Reagent v5,diagnostic,ivd_reagent,EA,237.58,0.55,0.0009,28,5,B,true,180,synthetic
+YGM-DIA-0127,Yugam Wash Buffer Ivd Reagent v6,diagnostic,ivd_reagent,EA,77.02,1.143,0.0036,90,2,C,true,180,synthetic
+YGM-DIA-0128,Yugam Assay Reagent Kit Ivd Reagent v7,diagnostic,ivd_reagent,EA,253.18,0.152,0.0004,60,25,A,true,180,synthetic
+YGM-DIA-0129,Yugam Wash Buffer Ivd Reagent v8,diagnostic,ivd_reagent,EA,98.89,1.375,0.0014,21,2,C,true,180,synthetic
+YGM-DIA-0130,Yugam Level 1 Control Calibrator Control v1,diagnostic,calibrator_control,EA,128.16,0.402,0.0007,90,10,A,true,90,synthetic
+YGM-DIA-0131,Yugam Level 2 Control Calibrator Control v2,diagnostic,calibrator_control,EA,524.69,0.437,0.0009,60,10,C,true,90,synthetic
+YGM-DIA-0132,Yugam Level 2 Control Calibrator Control v3,diagnostic,calibrator_control,EA,534.92,0.066,0.0001,45,1,C,true,90,synthetic
+YGM-DIA-0133,Yugam Level 2 Control Calibrator Control v4,diagnostic,calibrator_control,EA,588.95,0.392,0.0012,14,2,A,true,90,synthetic

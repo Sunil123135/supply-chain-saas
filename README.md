@@ -16,6 +16,7 @@ Supply chain SaaS for mid-market **MedTech + CPG** — planning, logistics, Copi
 ## Quick links (after deploy)
 
 - `/` — landing + backend status
+- `/import` — P1 data import wizard (MedTech + India CPG starter packs)
 - `/copilot` — P0 Copilot test (Checkpoint 5)
 - `/api/health` — web health
 - Backend `/health`, `/docs`, `POST /api/copilot`
@@ -36,8 +37,11 @@ supply-chain-saas/
 ├── apps/web/          Next.js → Netlify
 ├── backend/           FastAPI → Railway
 ├── netlify.toml
+├── data/              MedTech + India CPG starter packs
+├── scripts/           Synthetic data generators
 ├── docs/
 │   ├── P0_SETUP.md
+│   ├── OPTIMIZATION_SCOPE.md
 │   └── COPILOT_SEED_QA.md
 └── .env.example
 ```
@@ -46,10 +50,10 @@ supply-chain-saas/
 
 | Phase | Focus |
 |-------|--------|
-| **P0** | Netlify + Railway + Copilot ← current |
-| P1 | Auth, orgs, RLS |
-| P2 | Data import |
-| P3–P7 | M1–M7 modules |
+| **P0** | Netlify + Railway + Copilot |
+| **P1** | Import wizard + starter data + control tower (in progress) |
+| P2 | VRP, DC rationalization MIP, Supabase persist |
+| P3–P7 | M1–M7 modules + advanced optimizers |
 | P8 | Razorpay |
 
 ## Repository
