@@ -1,0 +1,1079 @@
+{
+  "generated": "2026-07-03 10:36 UTC",
+  "modules": {
+    "M1": [
+      {
+        "id": "M1-CANON-1",
+        "type": "canonical",
+        "question": "What is our MAPE by SKU and planner for the last 8 weeks?",
+        "expected_copilot_behavior": "Pull forecast vs actuals from M1, group by SKU and planner, return MAPE/WAPE with trend vs prior period. Flag SKUs above target.",
+        "tags": [
+          "M1",
+          "Demand Forecasting",
+          "canonical"
+        ]
+      },
+      {
+        "id": "M1-CANON-2",
+        "type": "canonical",
+        "question": "Which SKUs have intermittent demand and need Croston/TSB instead of Prophet?",
+        "expected_copilot_behavior": "Scan demand history for zero-inflation and ADI/CV\u00b2; list candidates with recommended model and confidence.",
+        "tags": [
+          "M1",
+          "Demand Forecasting",
+          "canonical"
+        ]
+      },
+      {
+        "id": "M1-CANON-3",
+        "type": "canonical",
+        "question": "Show me forecast silos \u2014 where do sales, finance, and supply chain numbers disagree?",
+        "expected_copilot_behavior": "Compare consensus forecast versions by source; highlight largest gaps by revenue impact.",
+        "tags": [
+          "M1",
+          "Demand Forecasting",
+          "canonical"
+        ]
+      },
+      {
+        "id": "M1-T1-1",
+        "nexova_pain_id": 6,
+        "nexova_pain_label": "Forecast lives in silos \u2014 sales, finance, and SC each have their own number",
+        "tier1_cluster_snippet": "But the real challenge is deciding where to cut.",
+        "rice_score": 2.5767,
+        "frequency": 3,
+        "video_count": 2,
+        "question": "How does Nexova Demand Forecasting address: Forecast lives in silos \u2014 sales, finance, and SC each have their own number?",
+        "expected_copilot_behavior": "Tier-1 market signal (RICE 2.6, 3 mentions / 2 videos). Maps to Nexova pain #6. Use tools: get_forecast_accuracy, run_demand_forecast, list_sku_forecasts. Monitor KPIs: ** S&OP, forecast accuracy. Evidence: But the real challenge is deciding where to cut.",
+        "tags": [
+          "M1",
+          "Demand Forecasting",
+          "pain-6"
+        ],
+        "type": "tier1_cluster"
+      },
+      {
+        "id": "M1-T1-2",
+        "nexova_pain_id": 1,
+        "nexova_pain_label": "Forecast accuracy is poor; Excel forecasts miss demand shifts",
+        "tier1_cluster_snippet": "For many warehouse fulfillment leaders, the challenge is no fulfillment leaders, the challenge is no fulfillment leaders, the challenge is no longer optimizing for a steady state.",
+        "rice_score": 2.1438,
+        "frequency": 3,
+        "video_count": 2,
+        "question": "How does Nexova Demand Forecasting address: Forecast accuracy is poor; Excel forecasts miss demand shifts?",
+        "expected_copilot_behavior": "Tier-1 market signal (RICE 2.1, 3 mentions / 2 videos). Maps to Nexova pain #1. Use tools: get_forecast_accuracy, run_demand_forecast, list_sku_forecasts. Monitor KPIs: ** service level, forecast accuracy. Evidence: For many warehouse fulfillment leaders, the challenge is no fulfillment leaders, the challenge is no fulfillment leaders, the challenge is no longer optimizing\u2026",
+        "tags": [
+          "M1",
+          "Demand Forecasting",
+          "pain-1"
+        ],
+        "type": "tier1_cluster"
+      },
+      {
+        "id": "M1-T1-3",
+        "nexova_pain_id": 47,
+        "nexova_pain_label": "Master data errors (lead times, MOQs, weights) poison every plan",
+        "tier1_cluster_snippet": "A lot AI is a bigger challenge, right?",
+        "rice_score": 1.7668,
+        "frequency": 4,
+        "video_count": 2,
+        "question": "How does Nexova Demand Forecasting address: Master data errors (lead times, MOQs, weights) poison every plan?",
+        "expected_copilot_behavior": "Tier-1 market signal (RICE 1.8, 4 mentions / 2 videos). Maps to Nexova pain #47. Use tools: get_forecast_accuracy, run_demand_forecast, list_sku_forecasts. Monitor KPIs: ** service level, lead time. Evidence: A lot AI is a bigger challenge, right?",
+        "tags": [
+          "M1",
+          "Demand Forecasting",
+          "pain-47"
+        ],
+        "type": "tier1_cluster"
+      },
+      {
+        "id": "M1-T1-4",
+        "nexova_pain_id": 6,
+        "nexova_pain_label": "Forecast lives in silos \u2014 sales, finance, and SC each have their own number",
+        "tier1_cluster_snippet": "For problems on the division of labor.",
+        "rice_score": 0.6972,
+        "frequency": 1,
+        "video_count": 1,
+        "question": "How does Nexova Demand Forecasting address: Forecast lives in silos \u2014 sales, finance, and SC each have their own number?",
+        "expected_copilot_behavior": "Tier-1 market signal (RICE 0.7, 1 mentions / 1 videos). Maps to Nexova pain #6. Use tools: get_forecast_accuracy, run_demand_forecast, list_sku_forecasts. Monitor KPIs: ** S&OP, lead time. Evidence: For problems on the division of labor.",
+        "tags": [
+          "M1",
+          "Demand Forecasting",
+          "pain-6"
+        ],
+        "type": "tier1_cluster"
+      },
+      {
+        "id": "M1-T1-5",
+        "nexova_pain_id": 1,
+        "nexova_pain_label": "Forecast accuracy is poor; Excel forecasts miss demand shifts",
+        "tier1_cluster_snippet": "If a shipment is delayed, it ETA.",
+        "rice_score": 0.6255,
+        "frequency": 1,
+        "video_count": 1,
+        "question": "How does Nexova Demand Forecasting address: Forecast accuracy is poor; Excel forecasts miss demand shifts?",
+        "expected_copilot_behavior": "Tier-1 market signal (RICE 0.6, 1 mentions / 1 videos). Maps to Nexova pain #1. Use tools: get_forecast_accuracy, run_demand_forecast, list_sku_forecasts. Monitor KPIs: ** Service level, Forecast accuracy, lead time. Evidence: If a shipment is delayed, it ETA.",
+        "tags": [
+          "M1",
+          "Demand Forecasting",
+          "pain-1"
+        ],
+        "type": "tier1_cluster"
+      },
+      {
+        "id": "M1-PACK-2",
+        "type": "build_pack",
+        "nexova_pain_id": 2,
+        "question": "How should we handle: No demand sensing \u2014 quick-commerce/channel spikes surprise us?",
+        "expected_copilot_behavior": "Answer from Nexova Demand Forecasting playbook (pain #2). Use get_forecast_accuracy, run_demand_forecast, list_sku_forecasts. Cite KB SOP if uploaded.",
+        "tags": [
+          "M1",
+          "Demand Forecasting",
+          "pain-2"
+        ]
+      },
+      {
+        "id": "M1-PACK-3",
+        "type": "build_pack",
+        "nexova_pain_id": 3,
+        "question": "How should we handle: Intermittent/lumpy demand (spares, reagents) breaks normal models?",
+        "expected_copilot_behavior": "Answer from Nexova Demand Forecasting playbook (pain #3). Use get_forecast_accuracy, run_demand_forecast, list_sku_forecasts. Cite KB SOP if uploaded.",
+        "tags": [
+          "M1",
+          "Demand Forecasting",
+          "pain-3"
+        ]
+      },
+      {
+        "id": "M1-PACK-4",
+        "type": "build_pack",
+        "nexova_pain_id": 4,
+        "question": "How should we handle: New product launches have zero history to forecast from?",
+        "expected_copilot_behavior": "Answer from Nexova Demand Forecasting playbook (pain #4). Use get_forecast_accuracy, run_demand_forecast, list_sku_forecasts. Cite KB SOP if uploaded.",
+        "tags": [
+          "M1",
+          "Demand Forecasting",
+          "pain-4"
+        ]
+      },
+      {
+        "id": "M1-PACK-5",
+        "type": "build_pack",
+        "nexova_pain_id": 5,
+        "question": "How should we handle: Promotions/seasonality distort baseline demand?",
+        "expected_copilot_behavior": "Answer from Nexova Demand Forecasting playbook (pain #5). Use get_forecast_accuracy, run_demand_forecast, list_sku_forecasts. Cite KB SOP if uploaded.",
+        "tags": [
+          "M1",
+          "Demand Forecasting",
+          "pain-5"
+        ]
+      },
+      {
+        "id": "M1-PACK-7",
+        "type": "build_pack",
+        "nexova_pain_id": 7,
+        "question": "How should we handle: No forecast accountability \u2014 nobody measures MAPE by planner?",
+        "expected_copilot_behavior": "Answer from Nexova Demand Forecasting playbook (pain #7). Use get_forecast_accuracy, run_demand_forecast, list_sku_forecasts. Cite KB SOP if uploaded.",
+        "tags": [
+          "M1",
+          "Demand Forecasting",
+          "pain-7"
+        ]
+      }
+    ],
+    "M2": [
+      {
+        "id": "M2-CANON-1",
+        "type": "canonical",
+        "question": "Where do we have stockouts on A-items while C-items are overstocked?",
+        "expected_copilot_behavior": "Join inventory position with ABC class and days-of-supply; rank nodes by service risk and excess capital.",
+        "tags": [
+          "M2",
+          "Inventory Optimization",
+          "canonical"
+        ]
+      },
+      {
+        "id": "M2-CANON-2",
+        "type": "canonical",
+        "question": "Which batches are within 60 days of expiry and need FEFO action?",
+        "expected_copilot_behavior": "List near-expiry lots by node with recommended transfer, markdown, or destruction per policy.",
+        "tags": [
+          "M2",
+          "Inventory Optimization",
+          "canonical"
+        ]
+      },
+      {
+        "id": "M2-CANON-3",
+        "type": "canonical",
+        "question": "Recalculate safety stock for top 20 SKUs using current lead-time variability.",
+        "expected_copilot_behavior": "Call optimizer service for dynamic SS/ROP; show delta vs current policy and working-capital impact.",
+        "tags": [
+          "M2",
+          "Inventory Optimization",
+          "canonical"
+        ]
+      },
+      {
+        "id": "M2-T1-1",
+        "nexova_pain_id": 16,
+        "nexova_pain_label": "Allocation during shortage is political, not rule-based",
+        "tier1_cluster_snippet": "Uh, and there's no shortage of topics.",
+        "rice_score": 2.3695,
+        "frequency": 3,
+        "video_count": 2,
+        "question": "How does Nexova Inventory Optimization address: Allocation during shortage is political, not rule-based?",
+        "expected_copilot_behavior": "Tier-1 market signal (RICE 2.4, 3 mentions / 2 videos). Maps to Nexova pain #16. Use tools: get_safety_stock, list_eo_alerts, get_inventory_position. Monitor KPIs: ** lead time. Evidence: Uh, and there's no shortage of topics.",
+        "tags": [
+          "M2",
+          "Inventory Optimization",
+          "pain-16"
+        ],
+        "type": "tier1_cluster"
+      },
+      {
+        "id": "M2-T1-2",
+        "nexova_pain_id": 16,
+        "nexova_pain_label": "Allocation during shortage is political, not rule-based",
+        "tier1_cluster_snippet": "D365 offers a supply risk assessment workspace that, alongside performance and risk analysis report, can assist in understanding risk of sourcing shortages and delays.",
+        "rice_score": 1.3114,
+        "frequency": 1,
+        "video_count": 1,
+        "question": "How does Nexova Inventory Optimization address: Allocation during shortage is political, not rule-based?",
+        "expected_copilot_behavior": "Tier-1 market signal (RICE 1.3, 1 mentions / 1 videos). Maps to Nexova pain #16. Use tools: get_safety_stock, list_eo_alerts, get_inventory_position. Monitor KPIs: service level, cost. Evidence: D365 offers a supply risk assessment workspace that, alongside performance and risk analysis report, can assist in understanding risk of sourcing shortages and\u2026",
+        "tags": [
+          "M2",
+          "Inventory Optimization",
+          "pain-16"
+        ],
+        "type": "tier1_cluster"
+      },
+      {
+        "id": "M2-T1-3",
+        "nexova_pain_id": 16,
+        "nexova_pain_label": "Allocation during shortage is political, not rule-based",
+        "tier1_cluster_snippet": "Labor shortages specifically on chain.",
+        "rice_score": 1.1823,
+        "frequency": 2,
+        "video_count": 2,
+        "question": "How does Nexova Inventory Optimization address: Allocation during shortage is political, not rule-based?",
+        "expected_copilot_behavior": "Tier-1 market signal (RICE 1.2, 2 mentions / 2 videos). Maps to Nexova pain #16. Use tools: get_safety_stock, list_eo_alerts, get_inventory_position. Monitor KPIs: ** service level, lead time, forecast accuracy. Evidence: Labor shortages specifically on chain.",
+        "tags": [
+          "M2",
+          "Inventory Optimization",
+          "pain-16"
+        ],
+        "type": "tier1_cluster"
+      },
+      {
+        "id": "M2-T1-4",
+        "nexova_pain_id": 9,
+        "nexova_pain_label": "Safety stocks are static, set years ago, never recalculated",
+        "tier1_cluster_snippet": "You know, it's um probably I don't know maybe don't know maybe don't know maybe at least seven or eight years ago while at least seven or eight years ago while at least seven or eight years ago while\u2026",
+        "rice_score": 1.1013,
+        "frequency": 1,
+        "video_count": 1,
+        "question": "How does Nexova Inventory Optimization address: Safety stocks are static, set years ago, never recalculated?",
+        "expected_copilot_behavior": "Tier-1 market signal (RICE 1.1, 1 mentions / 1 videos). Maps to Nexova pain #9. Use tools: get_safety_stock, list_eo_alerts, get_inventory_position. Monitor KPIs: service level, cost. Evidence: You know, it's um probably I don't know maybe don't know maybe don't know maybe at least seven or eight years ago while at least seven or eight years ago while\u2026",
+        "tags": [
+          "M2",
+          "Inventory Optimization",
+          "pain-9"
+        ],
+        "type": "tier1_cluster"
+      },
+      {
+        "id": "M2-T1-5",
+        "nexova_pain_id": 16,
+        "nexova_pain_label": "Allocation during shortage is political, not rule-based",
+        "tier1_cluster_snippet": "If you want to understand inflation, shortages, logistics breakdowns, semiconductor dependence, shipping bottlenecks, and why modern abundance feels more fragile than ever, this video connects the do\u2026",
+        "rice_score": 1.0736,
+        "frequency": 1,
+        "video_count": 1,
+        "question": "How does Nexova Inventory Optimization address: Allocation during shortage is political, not rule-based?",
+        "expected_copilot_behavior": "Tier-1 market signal (RICE 1.1, 1 mentions / 1 videos). Maps to Nexova pain #16. Use tools: get_safety_stock, list_eo_alerts, get_inventory_position. Monitor KPIs: service level, cost. Evidence: If you want to understand inflation, shortages, logistics breakdowns, semiconductor dependence, shipping bottlenecks, and why modern abundance feels more fragi\u2026",
+        "tags": [
+          "M2",
+          "Inventory Optimization",
+          "pain-16"
+        ],
+        "type": "tier1_cluster"
+      },
+      {
+        "id": "M2-PACK-8",
+        "type": "build_pack",
+        "nexova_pain_id": 8,
+        "question": "How should we handle: Stockouts on fast movers while slow movers pile up?",
+        "expected_copilot_behavior": "Answer from Nexova Inventory Optimization playbook (pain #8). Use get_safety_stock, list_eo_alerts, get_inventory_position. Cite KB SOP if uploaded.",
+        "tags": [
+          "M2",
+          "Inventory Optimization",
+          "pain-8"
+        ]
+      },
+      {
+        "id": "M2-PACK-10",
+        "type": "build_pack",
+        "nexova_pain_id": 10,
+        "question": "How should we handle: Excess & obsolete (E&O) inventory quietly eats margin?",
+        "expected_copilot_behavior": "Answer from Nexova Inventory Optimization playbook (pain #10). Use get_safety_stock, list_eo_alerts, get_inventory_position. Cite KB SOP if uploaded.",
+        "tags": [
+          "M2",
+          "Inventory Optimization",
+          "pain-10"
+        ]
+      },
+      {
+        "id": "M2-PACK-11",
+        "type": "build_pack",
+        "nexova_pain_id": 11,
+        "question": "How should we handle: Near-expiry stock discovered too late to liquidate (FEFO failures)?",
+        "expected_copilot_behavior": "Answer from Nexova Inventory Optimization playbook (pain #11). Use get_safety_stock, list_eo_alerts, get_inventory_position. Cite KB SOP if uploaded.",
+        "tags": [
+          "M2",
+          "Inventory Optimization",
+          "pain-11"
+        ]
+      },
+      {
+        "id": "M2-PACK-12",
+        "type": "build_pack",
+        "nexova_pain_id": 12,
+        "question": "How should we handle: No multi-echelon view \u2014 every node buffers independently?",
+        "expected_copilot_behavior": "Answer from Nexova Inventory Optimization playbook (pain #12). Use get_safety_stock, list_eo_alerts, get_inventory_position. Cite KB SOP if uploaded.",
+        "tags": [
+          "M2",
+          "Inventory Optimization",
+          "pain-12"
+        ]
+      },
+      {
+        "id": "M2-PACK-13",
+        "type": "build_pack",
+        "nexova_pain_id": 13,
+        "question": "How should we handle: Working capital locked in wrong SKUs at wrong nodes?",
+        "expected_copilot_behavior": "Answer from Nexova Inventory Optimization playbook (pain #13). Use get_safety_stock, list_eo_alerts, get_inventory_position. Cite KB SOP if uploaded.",
+        "tags": [
+          "M2",
+          "Inventory Optimization",
+          "pain-13"
+        ]
+      }
+    ],
+    "M3": [
+      {
+        "id": "M3-CANON-1",
+        "type": "canonical",
+        "question": "What replenishment proposals are waiting for my approval right now?",
+        "expected_copilot_behavior": "Return open auto-indent queue with SKU, node, qty, reason (ROP breach, forecast uplift, promo), and urgency score.",
+        "tags": [
+          "M3",
+          "Auto-Replenishment",
+          "canonical"
+        ]
+      },
+      {
+        "id": "M3-CANON-2",
+        "type": "canonical",
+        "question": "Why did we miss plan vs actual on replenishment last month?",
+        "expected_copilot_behavior": "Compare proposed vs approved vs received POs/STOs; attribute gaps to forecast error, lead time, or approval delay.",
+        "tags": [
+          "M3",
+          "Auto-Replenishment",
+          "canonical"
+        ]
+      },
+      {
+        "id": "M3-CANON-3",
+        "type": "canonical",
+        "question": "Which exceptions should planners tackle first today?",
+        "expected_copilot_behavior": "Rank replenishment exceptions by revenue at risk and SLA breach probability.",
+        "tags": [
+          "M3",
+          "Auto-Replenishment",
+          "canonical"
+        ]
+      },
+      {
+        "id": "M3-T1-1",
+        "nexova_pain_id": 18,
+        "nexova_pain_label": "No auto-indent \u2014 every PO/STO needs manual triggering",
+        "tier1_cluster_snippet": "Sales order processing involves: a) the receipt of customer purchase orders either manually or via EDI, b) order data verification, and c) the generation of sales orders in the ERP system.",
+        "rice_score": 0.479,
+        "frequency": 1,
+        "video_count": 1,
+        "question": "How does Nexova Auto-Replenishment address: No auto-indent \u2014 every PO/STO needs manual triggering?",
+        "expected_copilot_behavior": "Tier-1 market signal (RICE 0.5, 1 mentions / 1 videos). Maps to Nexova pain #18. Use tools: list_replen_proposals, approve_replenishment, get_plan_vs_actual. Monitor KPIs: service level, cost. Evidence: Sales order processing involves: a) the receipt of customer purchase orders either manually or via EDI, b) order data verification, and c) the generation of sa\u2026",
+        "tags": [
+          "M3",
+          "Auto-Replenishment",
+          "pain-18"
+        ],
+        "type": "tier1_cluster"
+      },
+      {
+        "id": "M3-T1-2",
+        "nexova_pain_id": 20,
+        "nexova_pain_label": "Upstream RM/packaging planning disconnected from FG demand",
+        "tier1_cluster_snippet": "From fragmented data and disconnected workflows to the growing importance of supplier visibility and risk intelligence, the discussion explores what separates companies that react to disruption from \u2026",
+        "rice_score": 0.4698,
+        "frequency": 1,
+        "video_count": 1,
+        "question": "How does Nexova Auto-Replenishment address: Upstream RM/packaging planning disconnected from FG demand?",
+        "expected_copilot_behavior": "Tier-1 market signal (RICE 0.5, 1 mentions / 1 videos). Maps to Nexova pain #20. Use tools: list_replen_proposals, approve_replenishment, get_plan_vs_actual. Monitor KPIs: ** lead time. Evidence: From fragmented data and disconnected workflows to the growing importance of supplier visibility and risk intelligence, the discussion explores what separates \u2026",
+        "tags": [
+          "M3",
+          "Auto-Replenishment",
+          "pain-20"
+        ],
+        "type": "tier1_cluster"
+      },
+      {
+        "id": "M3-T1-3",
+        "nexova_pain_id": 20,
+        "nexova_pain_label": "Upstream RM/packaging planning disconnected from FG demand",
+        "tier1_cluster_snippet": "One of the big problems they've got to solve is that grocery packaging is designed for people, and the interactions between all the objects they deal with can be...",
+        "rice_score": 0.4218,
+        "frequency": 1,
+        "video_count": 1,
+        "question": "How does Nexova Auto-Replenishment address: Upstream RM/packaging planning disconnected from FG demand?",
+        "expected_copilot_behavior": "Tier-1 market signal (RICE 0.4, 1 mentions / 1 videos). Maps to Nexova pain #20. Use tools: list_replen_proposals, approve_replenishment, get_plan_vs_actual. Monitor KPIs: service level, cost. Evidence: One of the big problems they've got to solve is that grocery packaging is designed for people, and the interactions between all the objects they deal with can \u2026",
+        "tags": [
+          "M3",
+          "Auto-Replenishment",
+          "pain-20"
+        ],
+        "type": "tier1_cluster"
+      },
+      {
+        "id": "M3-PACK-17",
+        "type": "build_pack",
+        "nexova_pain_id": 17,
+        "question": "How should we handle: Planners spend 80% of time on routine replenishment math?",
+        "expected_copilot_behavior": "Answer from Nexova Auto-Replenishment playbook (pain #17). Use list_replen_proposals, approve_replenishment, get_plan_vs_actual. Cite KB SOP if uploaded.",
+        "tags": [
+          "M3",
+          "Auto-Replenishment",
+          "pain-17"
+        ]
+      },
+      {
+        "id": "M3-PACK-19",
+        "type": "build_pack",
+        "nexova_pain_id": 19,
+        "question": "How should we handle: Planning cycle too slow (monthly when weekly is needed)?",
+        "expected_copilot_behavior": "Answer from Nexova Auto-Replenishment playbook (pain #19). Use list_replen_proposals, approve_replenishment, get_plan_vs_actual. Cite KB SOP if uploaded.",
+        "tags": [
+          "M3",
+          "Auto-Replenishment",
+          "pain-19"
+        ]
+      },
+      {
+        "id": "M3-PACK-21",
+        "type": "build_pack",
+        "nexova_pain_id": 21,
+        "question": "How should we handle: No exception management \u2014 everything is treated as equally urgent?",
+        "expected_copilot_behavior": "Answer from Nexova Auto-Replenishment playbook (pain #21). Use list_replen_proposals, approve_replenishment, get_plan_vs_actual. Cite KB SOP if uploaded.",
+        "tags": [
+          "M3",
+          "Auto-Replenishment",
+          "pain-21"
+        ]
+      },
+      {
+        "id": "M3-PACK-22",
+        "type": "build_pack",
+        "nexova_pain_id": 22,
+        "question": "How should we handle: Plan vs actual is never tracked, so plans never improve?",
+        "expected_copilot_behavior": "Answer from Nexova Auto-Replenishment playbook (pain #22). Use list_replen_proposals, approve_replenishment, get_plan_vs_actual. Cite KB SOP if uploaded.",
+        "tags": [
+          "M3",
+          "Auto-Replenishment",
+          "pain-22"
+        ]
+      }
+    ],
+    "M4": [
+      {
+        "id": "M4-CANON-1",
+        "type": "canonical",
+        "question": "Build today's dispatch plan with best fill rate and lowest freight cost.",
+        "expected_copilot_behavior": "Run route + load optimization; compare FTL vs LTL options with cost per case and cube utilization.",
+        "tags": [
+          "M4",
+          "Dispatch & Freight",
+          "canonical"
+        ]
+      },
+      {
+        "id": "M4-CANON-2",
+        "type": "canonical",
+        "question": "Audit last month's freight invoices \u2014 where are we likely overbilled?",
+        "expected_copilot_behavior": "Match invoices to rate cards and dispatched loads; flag variances above tolerance.",
+        "tags": [
+          "M4",
+          "Dispatch & Freight",
+          "canonical"
+        ]
+      },
+      {
+        "id": "M4-CANON-3",
+        "type": "canonical",
+        "question": "How did actual dispatch deviate from plan this week?",
+        "expected_copilot_behavior": "Show plan-vs-actual by lane: on-time %, fill rate, cost variance, and root cause tags.",
+        "tags": [
+          "M4",
+          "Dispatch & Freight",
+          "canonical"
+        ]
+      },
+      {
+        "id": "M4-T1-1",
+        "nexova_pain_id": 30,
+        "nexova_pain_label": "No dispatch plan-vs-actual \u2014 deviations compound silently",
+        "tier1_cluster_snippet": "Fleet, dispatch, safety, compliance, carrier relationships, and compliance, carrier relationships, and compliance, carrier relationships, and governance.",
+        "rice_score": 5.8464,
+        "frequency": 3,
+        "video_count": 3,
+        "question": "How does Nexova Dispatch & Freight address: No dispatch plan-vs-actual \u2014 deviations compound silently?",
+        "expected_copilot_behavior": "Tier-1 market signal (RICE 5.8, 3 mentions / 3 videos). Maps to Nexova pain #30. Use tools: optimize_routes, compare_ftl_ltl, audit_freight_invoice. Monitor KPIs: ** OTIF. Evidence: Fleet, dispatch, safety, compliance, carrier relationships, and compliance, carrier relationships, and compliance, carrier relationships, and governance.",
+        "tags": [
+          "M4",
+          "Dispatch & Freight",
+          "pain-30"
+        ],
+        "type": "tier1_cluster"
+      },
+      {
+        "id": "M4-T1-2",
+        "nexova_pain_id": 41,
+        "nexova_pain_label": "Cold-chain excursions found on arrival, not in transit",
+        "tier1_cluster_snippet": "Challenges in the vaccine cold chain in many developing countries cold chain in many developing countries cold chain in many developing countries ultra cold capacity is limited.",
+        "rice_score": 2.8066,
+        "frequency": 5,
+        "video_count": 3,
+        "question": "How does Nexova Dispatch & Freight address: Cold-chain excursions found on arrival, not in transit?",
+        "expected_copilot_behavior": "Tier-1 market signal (RICE 2.8, 5 mentions / 3 videos). Maps to Nexova pain #41. Use tools: optimize_routes, compare_ftl_ltl, audit_freight_invoice. Monitor KPIs: service level, cost. Evidence: Challenges in the vaccine cold chain in many developing countries cold chain in many developing countries cold chain in many developing countries ultra cold ca\u2026",
+        "tags": [
+          "M4",
+          "Dispatch & Freight",
+          "pain-41"
+        ],
+        "type": "tier1_cluster"
+      },
+      {
+        "id": "M4-T1-3",
+        "nexova_pain_id": 26,
+        "nexova_pain_label": "Route selection is habit, not optimization",
+        "tier1_cluster_snippet": "Transportation route optimization solve critical challenges optimization solve critical challenges optimization solve critical challenges related to cost, delivery, speed, related to cost, delivery, \u2026",
+        "rice_score": 0.6872,
+        "frequency": 1,
+        "video_count": 1,
+        "question": "How does Nexova Dispatch & Freight address: Route selection is habit, not optimization?",
+        "expected_copilot_behavior": "Tier-1 market signal (RICE 0.7, 1 mentions / 1 videos). Maps to Nexova pain #26. Use tools: optimize_routes, compare_ftl_ltl, audit_freight_invoice. Monitor KPIs: ** OTIF, service level, perfect order. Evidence: Transportation route optimization solve critical challenges optimization solve critical challenges optimization solve critical challenges related to cost, deli\u2026",
+        "tags": [
+          "M4",
+          "Dispatch & Freight",
+          "pain-26"
+        ],
+        "type": "tier1_cluster"
+      },
+      {
+        "id": "M4-T1-4",
+        "nexova_pain_id": 23,
+        "nexova_pain_label": "Freight cost varies by which planner built the load",
+        "tier1_cluster_snippet": "Here\u2019s what you\u2019ll learn: \ud83c\udf0d How regional conflicts disrupt global trade routes \ud83d\udea2 Why shipping lanes suddenly become high-risk zones \u26fd The impact on fuel prices and freight costs \ud83d\udce6 How cargo delays ri\u2026",
+        "rice_score": 0.4866,
+        "frequency": 1,
+        "video_count": 1,
+        "question": "How does Nexova Dispatch & Freight address: Freight cost varies by which planner built the load?",
+        "expected_copilot_behavior": "Tier-1 market signal (RICE 0.5, 1 mentions / 1 videos). Maps to Nexova pain #23. Use tools: optimize_routes, compare_ftl_ltl, audit_freight_invoice. Monitor KPIs: service level, cost. Evidence: Here\u2019s what you\u2019ll learn: \ud83c\udf0d How regional conflicts disrupt global trade routes \ud83d\udea2 Why shipping lanes suddenly become high-risk zones \u26fd The impact on fuel prices\u2026",
+        "tags": [
+          "M4",
+          "Dispatch & Freight",
+          "pain-23"
+        ],
+        "type": "tier1_cluster"
+      },
+      {
+        "id": "M4-PACK-24",
+        "type": "build_pack",
+        "nexova_pain_id": 24,
+        "question": "How should we handle: Vehicles dispatched underfilled \u2014 poor fill rate?",
+        "expected_copilot_behavior": "Answer from Nexova Dispatch & Freight playbook (pain #24). Use optimize_routes, compare_ftl_ltl, audit_freight_invoice. Cite KB SOP if uploaded.",
+        "tags": [
+          "M4",
+          "Dispatch & Freight",
+          "pain-24"
+        ]
+      },
+      {
+        "id": "M4-PACK-25",
+        "type": "build_pack",
+        "nexova_pain_id": 25,
+        "question": "How should we handle: FTL vs LTL decision never systematically evaluated?",
+        "expected_copilot_behavior": "Answer from Nexova Dispatch & Freight playbook (pain #25). Use optimize_routes, compare_ftl_ltl, audit_freight_invoice. Cite KB SOP if uploaded.",
+        "tags": [
+          "M4",
+          "Dispatch & Freight",
+          "pain-25"
+        ]
+      },
+      {
+        "id": "M4-PACK-27",
+        "type": "build_pack",
+        "nexova_pain_id": 27,
+        "question": "How should we handle: No 3D load building \u2014 cube utilization unknown?",
+        "expected_copilot_behavior": "Answer from Nexova Dispatch & Freight playbook (pain #27). Use optimize_routes, compare_ftl_ltl, audit_freight_invoice. Cite KB SOP if uploaded.",
+        "tags": [
+          "M4",
+          "Dispatch & Freight",
+          "pain-27"
+        ]
+      },
+      {
+        "id": "M4-PACK-28",
+        "type": "build_pack",
+        "nexova_pain_id": 28,
+        "question": "How should we handle: Freight invoices unaudited \u2014 overbilling goes undetected?",
+        "expected_copilot_behavior": "Answer from Nexova Dispatch & Freight playbook (pain #28). Use optimize_routes, compare_ftl_ltl, audit_freight_invoice. Cite KB SOP if uploaded.",
+        "tags": [
+          "M4",
+          "Dispatch & Freight",
+          "pain-28"
+        ]
+      },
+      {
+        "id": "M4-PACK-29",
+        "type": "build_pack",
+        "nexova_pain_id": 29,
+        "question": "How should we handle: Mode choice (air vs ocean vs road) ignores inventory value math?",
+        "expected_copilot_behavior": "Answer from Nexova Dispatch & Freight playbook (pain #29). Use optimize_routes, compare_ftl_ltl, audit_freight_invoice. Cite KB SOP if uploaded.",
+        "tags": [
+          "M4",
+          "Dispatch & Freight",
+          "pain-29"
+        ]
+      }
+    ],
+    "M5": [
+      {
+        "id": "M5-CANON-1",
+        "type": "canonical",
+        "question": "Where is order SO-10482 and when will it arrive?",
+        "expected_copilot_behavior": "Trace order across planning, inventory, and dispatch; cite source systems and last scan.",
+        "tags": [
+          "M5",
+          "Copilot",
+          "canonical"
+        ]
+      },
+      {
+        "id": "M5-CANON-2",
+        "type": "canonical",
+        "question": "What if demand for SKU-4412 increases 15% for the next quarter?",
+        "expected_copilot_behavior": "Run scenario through forecast \u2192 inventory \u2192 replenishment; summarize service level and cash impact (human approval before writes).",
+        "tags": [
+          "M5",
+          "Copilot",
+          "canonical"
+        ]
+      },
+      {
+        "id": "M5-CANON-3",
+        "type": "canonical",
+        "question": "Who approved the last replenishment override and why?",
+        "expected_copilot_behavior": "Pull audit log entry with user, timestamp, before/after values, and linked exception.",
+        "tags": [
+          "M5",
+          "Copilot",
+          "canonical"
+        ]
+      },
+      {
+        "id": "M5-T1-1",
+        "nexova_pain_id": 46,
+        "nexova_pain_label": "Every insight requires asking an analyst and waiting",
+        "tier1_cluster_snippet": "Backlog includes orders waiting for Backlog includes orders waiting for Backlog includes orders waiting for production, orders waiting for production, orders waiting for production, orders waiting fo\u2026",
+        "rice_score": 0.8143,
+        "frequency": 1,
+        "video_count": 1,
+        "question": "How does Nexova Copilot address: Every insight requires asking an analyst and waiting?",
+        "expected_copilot_behavior": "Tier-1 market signal (RICE 0.8, 1 mentions / 1 videos). Maps to Nexova pain #46. Use tools: copilot_chat, run_scenario, get_audit_trail. Monitor KPIs: ** forecast accuracy, service level, S&OP. Evidence: Backlog includes orders waiting for Backlog includes orders waiting for Backlog includes orders waiting for production, orders waiting for production, orders w\u2026",
+        "tags": [
+          "M5",
+          "Copilot",
+          "pain-46"
+        ],
+        "type": "tier1_cluster"
+      },
+      {
+        "id": "M5-T1-2",
+        "nexova_pain_id": 50,
+        "nexova_pain_label": "No audit trail of who decided what, when, and why",
+        "tier1_cluster_snippet": "Whether you\u2019re working in pharma logistics, quality assurance, or regulatory compliance, this quick explainer gives you a clear view of how traceability works in practice and why it matters.",
+        "rice_score": 0.7299,
+        "frequency": 1,
+        "video_count": 1,
+        "question": "How does Nexova Copilot address: No audit trail of who decided what, when, and why?",
+        "expected_copilot_behavior": "Tier-1 market signal (RICE 0.7, 1 mentions / 1 videos). Maps to Nexova pain #50. Use tools: copilot_chat, run_scenario, get_audit_trail. Monitor KPIs: service level, cost. Evidence: Whether you\u2019re working in pharma logistics, quality assurance, or regulatory compliance, this quick explainer gives you a clear view of how traceability works \u2026",
+        "tags": [
+          "M5",
+          "Copilot",
+          "pain-50"
+        ],
+        "type": "tier1_cluster"
+      },
+      {
+        "id": "M5-T1-3",
+        "nexova_pain_id": 46,
+        "nexova_pain_label": "Every insight requires asking an analyst and waiting",
+        "tier1_cluster_snippet": "Whether you're looking to optimize order fulfillment or improve customer satisfaction, this video provides essential insights on using Backorder Processing in SAP (AATP).",
+        "rice_score": 0.5831,
+        "frequency": 1,
+        "video_count": 1,
+        "question": "How does Nexova Copilot address: Every insight requires asking an analyst and waiting?",
+        "expected_copilot_behavior": "Tier-1 market signal (RICE 0.6, 1 mentions / 1 videos). Maps to Nexova pain #46. Use tools: copilot_chat, run_scenario, get_audit_trail. Monitor KPIs: ** ATP. Evidence: Whether you're looking to optimize order fulfillment or improve customer satisfaction, this video provides essential insights on using Backorder Processing in \u2026",
+        "tags": [
+          "M5",
+          "Copilot",
+          "pain-46"
+        ],
+        "type": "tier1_cluster"
+      },
+      {
+        "id": "M5-T1-4",
+        "nexova_pain_id": 46,
+        "nexova_pain_label": "Every insight requires asking an analyst and waiting",
+        "tier1_cluster_snippet": "Brasca shares his perspective on how AI and agentic frameworks will transform the role of supply chain planners, freeing them from manual data analysis and enabling them to focus on strategic decisio\u2026",
+        "rice_score": 0.4708,
+        "frequency": 1,
+        "video_count": 1,
+        "question": "How does Nexova Copilot address: Every insight requires asking an analyst and waiting?",
+        "expected_copilot_behavior": "Tier-1 market signal (RICE 0.5, 1 mentions / 1 videos). Maps to Nexova pain #46. Use tools: copilot_chat, run_scenario, get_audit_trail. Monitor KPIs: service level, cost. Evidence: Brasca shares his perspective on how AI and agentic frameworks will transform the role of supply chain planners, freeing them from manual data analysis and ena\u2026",
+        "tags": [
+          "M5",
+          "Copilot",
+          "pain-46"
+        ],
+        "type": "tier1_cluster"
+      },
+      {
+        "id": "M5-T1-5",
+        "nexova_pain_id": 50,
+        "nexova_pain_label": "No audit trail of who decided what, when, and why",
+        "tier1_cluster_snippet": "And the third one is find a way to have audit third one is find a way to have audit third one is find a way to have audit traceability.",
+        "rice_score": 0.3805,
+        "frequency": 1,
+        "video_count": 1,
+        "question": "How does Nexova Copilot address: No audit trail of who decided what, when, and why?",
+        "expected_copilot_behavior": "Tier-1 market signal (RICE 0.4, 1 mentions / 1 videos). Maps to Nexova pain #50. Use tools: copilot_chat, run_scenario, get_audit_trail. Monitor KPIs: service level, cost. Evidence: And the third one is find a way to have audit third one is find a way to have audit third one is find a way to have audit traceability.",
+        "tags": [
+          "M5",
+          "Copilot",
+          "pain-50"
+        ],
+        "type": "tier1_cluster"
+      },
+      {
+        "id": "M5-PACK-39",
+        "type": "build_pack",
+        "nexova_pain_id": 39,
+        "question": "How should we handle: Leadership asks where's my order and it takes hours to answer?",
+        "expected_copilot_behavior": "Answer from Nexova Copilot playbook (pain #39). Use copilot_chat, run_scenario, get_audit_trail. Cite KB SOP if uploaded.",
+        "tags": [
+          "M5",
+          "Copilot",
+          "pain-39"
+        ]
+      },
+      {
+        "id": "M5-PACK-48",
+        "type": "build_pack",
+        "nexova_pain_id": 48,
+        "question": "How should we handle: Scenario questions (what if demand +10%) take a week to answer?",
+        "expected_copilot_behavior": "Answer from Nexova Copilot playbook (pain #48). Use copilot_chat, run_scenario, get_audit_trail. Cite KB SOP if uploaded.",
+        "tags": [
+          "M5",
+          "Copilot",
+          "pain-48"
+        ]
+      }
+    ],
+    "M6": [
+      {
+        "id": "M6-CANON-1",
+        "type": "canonical",
+        "question": "What needs my attention on the control tower right now?",
+        "expected_copilot_behavior": "Return exception queue sorted by severity: OTIF risk, stockout, near-expiry, freight variance, forecast breach.",
+        "tags": [
+          "M6",
+          "Control Tower",
+          "canonical"
+        ]
+      },
+      {
+        "id": "M6-CANON-2",
+        "type": "canonical",
+        "question": "Show OTIF and fill rate by customer for the last 30 days.",
+        "expected_copilot_behavior": "Aggregate Deliver KPIs with drill-down to late orders and disputed lines.",
+        "tags": [
+          "M6",
+          "Control Tower",
+          "canonical"
+        ]
+      },
+      {
+        "id": "M6-CANON-3",
+        "type": "canonical",
+        "question": "Which KPIs deteriorated vs last month and what changed?",
+        "expected_copilot_behavior": "Compare 20 core KPIs period-over-period with driver decomposition (demand, supply, logistics).",
+        "tags": [
+          "M6",
+          "Control Tower",
+          "canonical"
+        ]
+      },
+      {
+        "id": "M6-T1-1",
+        "nexova_pain_id": 43,
+        "nexova_pain_label": "OTIF disputes with customers \u2014 no shared single truth",
+        "tier1_cluster_snippet": "Implementation of OMP Implementation of OMP Implementation of OMP and providing end-to-end visibility has and providing end-to-end visibility has and providing end-to-end visibility has changed our d\u2026",
+        "rice_score": 5.274,
+        "frequency": 3,
+        "video_count": 3,
+        "question": "How does Nexova Control Tower address: OTIF disputes with customers \u2014 no shared single truth?",
+        "expected_copilot_behavior": "Tier-1 market signal (RICE 5.3, 3 mentions / 3 videos). Maps to Nexova pain #43. Use tools: get_control_tower_kpis, list_exceptions, resolve_exception. Monitor KPIs: ** OTIF, service level. Evidence: Implementation of OMP Implementation of OMP Implementation of OMP and providing end-to-end visibility has and providing end-to-end visibility has and providing\u2026",
+        "tags": [
+          "M6",
+          "Control Tower",
+          "pain-43"
+        ],
+        "type": "tier1_cluster"
+      },
+      {
+        "id": "M6-T1-2",
+        "nexova_pain_id": 38,
+        "nexova_pain_label": "No control tower \u2014 status lives in 14 spreadsheets and 6 systems",
+        "tier1_cluster_snippet": "It'd be great to kind of ask yourselves kind of great to kind of ask yourselves kind of great to kind of ask yourselves kind of how can AI and end to-end visibility how can AI and end to-end visibili\u2026",
+        "rice_score": 0.9678,
+        "frequency": 1,
+        "video_count": 1,
+        "question": "How does Nexova Control Tower address: No control tower \u2014 status lives in 14 spreadsheets and 6 systems?",
+        "expected_copilot_behavior": "Tier-1 market signal (RICE 1.0, 1 mentions / 1 videos). Maps to Nexova pain #38. Use tools: get_control_tower_kpis, list_exceptions, resolve_exception. Monitor KPIs: service level, cost. Evidence: It'd be great to kind of ask yourselves kind of great to kind of ask yourselves kind of great to kind of ask yourselves kind of how can AI and end to-end visib\u2026",
+        "tags": [
+          "M6",
+          "Control Tower",
+          "pain-38"
+        ],
+        "type": "tier1_cluster"
+      },
+      {
+        "id": "M6-T1-3",
+        "nexova_pain_id": 38,
+        "nexova_pain_label": "No control tower \u2014 status lives in 14 spreadsheets and 6 systems",
+        "tier1_cluster_snippet": "Why do number one organizations rely they cling to spreadsheets number rely they cling to spreadsheets number rely they cling to spreadsheets number one, and number two, they often times one, and num\u2026",
+        "rice_score": 0.9415,
+        "frequency": 1,
+        "video_count": 1,
+        "question": "How does Nexova Control Tower address: No control tower \u2014 status lives in 14 spreadsheets and 6 systems?",
+        "expected_copilot_behavior": "Tier-1 market signal (RICE 0.9, 1 mentions / 1 videos). Maps to Nexova pain #38. Use tools: get_control_tower_kpis, list_exceptions, resolve_exception. Monitor KPIs: ** lead time. Evidence: Why do number one organizations rely they cling to spreadsheets number rely they cling to spreadsheets number rely they cling to spreadsheets number one, and n\u2026",
+        "tags": [
+          "M6",
+          "Control Tower",
+          "pain-38"
+        ],
+        "type": "tier1_cluster"
+      },
+      {
+        "id": "M6-T1-4",
+        "nexova_pain_id": 38,
+        "nexova_pain_label": "No control tower \u2014 status lives in 14 spreadsheets and 6 systems",
+        "tier1_cluster_snippet": "Tada Supply Chain Control Tower Demo Video Tada bottles 25 years of experience solving complex supply chain problems to bring you a powerful solution, Supply Chain Control Tower.",
+        "rice_score": 0.8436,
+        "frequency": 1,
+        "video_count": 1,
+        "question": "How does Nexova Control Tower address: No control tower \u2014 status lives in 14 spreadsheets and 6 systems?",
+        "expected_copilot_behavior": "Tier-1 market signal (RICE 0.8, 1 mentions / 1 videos). Maps to Nexova pain #38. Use tools: get_control_tower_kpis, list_exceptions, resolve_exception. Monitor KPIs: service level, cost. Evidence: Tada Supply Chain Control Tower Demo Video Tada bottles 25 years of experience solving complex supply chain problems to bring you a powerful solution, Supply C\u2026",
+        "tags": [
+          "M6",
+          "Control Tower",
+          "pain-38"
+        ],
+        "type": "tier1_cluster"
+      },
+      {
+        "id": "M6-T1-5",
+        "nexova_pain_id": 38,
+        "nexova_pain_label": "No control tower \u2014 status lives in 14 spreadsheets and 6 systems",
+        "tier1_cluster_snippet": "See how Planners, Buyers, Suppliers and Executives can use Tada's Supply Chain Control Tower to gain orchestration, collaboration and end-to-end visibility across their entire supply chain ecosystem.",
+        "rice_score": 0.8436,
+        "frequency": 1,
+        "video_count": 1,
+        "question": "How does Nexova Control Tower address: No control tower \u2014 status lives in 14 spreadsheets and 6 systems?",
+        "expected_copilot_behavior": "Tier-1 market signal (RICE 0.8, 1 mentions / 1 videos). Maps to Nexova pain #38. Use tools: get_control_tower_kpis, list_exceptions, resolve_exception. Monitor KPIs: service level, cost. Evidence: See how Planners, Buyers, Suppliers and Executives can use Tada's Supply Chain Control Tower to gain orchestration, collaboration and end-to-end visibility acr\u2026",
+        "tags": [
+          "M6",
+          "Control Tower",
+          "pain-38"
+        ],
+        "type": "tier1_cluster"
+      },
+      {
+        "id": "M6-PACK-40",
+        "type": "build_pack",
+        "nexova_pain_id": 40,
+        "question": "How should we handle: KPIs assembled manually each month, already stale?",
+        "expected_copilot_behavior": "Answer from Nexova Control Tower playbook (pain #40). Use get_control_tower_kpis, list_exceptions, resolve_exception. Cite KB SOP if uploaded.",
+        "tags": [
+          "M6",
+          "Control Tower",
+          "pain-40"
+        ]
+      },
+      {
+        "id": "M6-PACK-49",
+        "type": "build_pack",
+        "nexova_pain_id": 49,
+        "question": "How should we handle: Reports don't lead to decisions \u2014 dashboards without actions?",
+        "expected_copilot_behavior": "Answer from Nexova Control Tower playbook (pain #49). Use get_control_tower_kpis, list_exceptions, resolve_exception. Cite KB SOP if uploaded.",
+        "tags": [
+          "M6",
+          "Control Tower",
+          "pain-49"
+        ]
+      }
+    ],
+    "M7": [
+      {
+        "id": "M7-CANON-1",
+        "type": "canonical",
+        "question": "What is our SOP for near-expiry inventory in pharma?",
+        "expected_copilot_behavior": "Retrieve top KB chunks from uploaded SOPs; answer with citations and escalation path.",
+        "tags": [
+          "M7",
+          "Knowledge Base",
+          "canonical"
+        ]
+      },
+      {
+        "id": "M7-CANON-2",
+        "type": "canonical",
+        "question": "What policy governs allocation during a shortage?",
+        "expected_copilot_behavior": "Search knowledge base for allocation rules; return ranked customers/SKU rules with doc references.",
+        "tags": [
+          "M7",
+          "Knowledge Base",
+          "canonical"
+        ]
+      },
+      {
+        "id": "M7-CANON-3",
+        "type": "canonical",
+        "question": "Summarize tribal knowledge we captured about lot continuity for key accounts.",
+        "expected_copilot_behavior": "Surface KB articles tagged lot-continuity; list account-specific constraints planners must follow.",
+        "tags": [
+          "M7",
+          "Knowledge Base",
+          "canonical"
+        ]
+      },
+      {
+        "id": "M7-PACK-44",
+        "type": "build_pack",
+        "nexova_pain_id": 44,
+        "question": "How should we handle: Tribal knowledge \u2014 when the senior planner quits, the logic leaves?",
+        "expected_copilot_behavior": "Answer from Nexova Knowledge Base playbook (pain #44). Use search_knowledge_base, upload_document, cite_policy. Cite KB SOP if uploaded.",
+        "tags": [
+          "M7",
+          "Knowledge Base",
+          "pain-44"
+        ]
+      },
+      {
+        "id": "M7-PACK-45",
+        "type": "build_pack",
+        "nexova_pain_id": 45,
+        "question": "How should we handle: SOPs exist but nobody reads them; answers take days?",
+        "expected_copilot_behavior": "Answer from Nexova Knowledge Base playbook (pain #45). Use search_knowledge_base, upload_document, cite_policy. Cite KB SOP if uploaded.",
+        "tags": [
+          "M7",
+          "Knowledge Base",
+          "pain-45"
+        ]
+      }
+    ],
+    "M8": [
+      {
+        "id": "M8-CANON-1",
+        "type": "canonical",
+        "question": "What plan are we on and how many SKUs/users remain in our tier limit?",
+        "expected_copilot_behavior": "Read subscription tier, usage counters, and renewal date from billing service.",
+        "tags": [
+          "M8",
+          "Billing",
+          "canonical"
+        ]
+      },
+      {
+        "id": "M8-CANON-2",
+        "type": "canonical",
+        "question": "Show our last three invoices and payment status.",
+        "expected_copilot_behavior": "List Razorpay invoices with GST breakdown and download links.",
+        "tags": [
+          "M8",
+          "Billing",
+          "canonical"
+        ]
+      },
+      {
+        "id": "M8-CANON-3",
+        "type": "canonical",
+        "question": "Will importing 2,000 more SKUs exceed our Starter plan?",
+        "expected_copilot_behavior": "Check projected SKU count against tier cap; recommend upgrade if blocked.",
+        "tags": [
+          "M8",
+          "Billing",
+          "canonical"
+        ]
+      }
+    ],
+    "M9": [
+      {
+        "id": "M9-CANON-1",
+        "type": "canonical",
+        "question": "Who has Planner access in our org and what did they change this week?",
+        "expected_copilot_behavior": "List members by role with recent audit events tied to their user ID.",
+        "tags": [
+          "M9",
+          "Admin",
+          "canonical"
+        ]
+      },
+      {
+        "id": "M9-CANON-2",
+        "type": "canonical",
+        "question": "Invite a new logistics manager with view-only dispatch access.",
+        "expected_copilot_behavior": "Start invite flow with role=Logistics; confirm email and permissions before send.",
+        "tags": [
+          "M9",
+          "Admin",
+          "canonical"
+        ]
+      },
+      {
+        "id": "M9-CANON-3",
+        "type": "canonical",
+        "question": "Is our tenant data isolated from other organizations?",
+        "expected_copilot_behavior": "Explain RLS policy: all queries scoped by org_id; offer test query proof for admins.",
+        "tags": [
+          "M9",
+          "Admin",
+          "canonical"
+        ]
+      }
+    ]
+  }
+}
