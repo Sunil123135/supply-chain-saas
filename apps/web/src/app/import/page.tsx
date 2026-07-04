@@ -103,10 +103,13 @@ export default function ImportWizardPage() {
   return (
     <main className="mx-auto max-w-4xl px-6 py-12">
       <p className="text-sm font-medium uppercase tracking-widest text-emerald-400">P1 — Data import</p>
-      <h1 className="mt-2 text-3xl font-bold">Import wizard</h1>
+      <h1 className="mt-2 text-3xl font-bold">Import wizard (optional)</h1>
       <p className="mt-2 text-zinc-400">
-        Load MedTech or India CPG starter packs, or upload SAP / Excel / CSV extracts using the same
-        templates.
+        Data is already on the server — see{" "}
+        <Link href="/dashboard" className="text-emerald-400 hover:underline">
+          /dashboard
+        </Link>
+        . Use this page only to replace packs with SAP/Excel extracts.
       </p>
 
       <div className="mt-8 flex gap-2 text-sm">

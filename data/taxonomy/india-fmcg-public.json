@@ -1,0 +1,38 @@
+{
+  "source": "Public industry research (not proprietary SKU catalogs)",
+  "references": [
+    "https://upstox.com/learning-center/share-market/types-of-fmcg-sector-and-top-companies-in-india/article-800/",
+    "https://www.tradologie.com/blogs/top-fmcg-companies/",
+    "https://rateomatic.in/blog/what-are-fmcg-products-complete-list-and-categories"
+  ],
+  "segments": {
+    "household_personal_care": {
+      "share_pct": 50,
+      "subcategories": ["hair_care", "oral_care", "skin_care", "soaps", "detergents", "deodorants", "home_cleaners"]
+    },
+    "healthcare_otc": {
+      "share_pct": 31,
+      "subcategories": ["ayurveda", "otc_health", "hygiene"]
+    },
+    "food_beverages": {
+      "share_pct": 19,
+      "subcategories": ["dairy", "tea_coffee", "biscuits", "snacks", "noodles", "confectionery", "packaged_foods", "beverages"]
+    }
+  },
+  "india_companies_public": [
+    "Hindustan Unilever",
+    "ITC Limited",
+    "Nestlé India",
+    "Britannia Industries",
+    "Dabur India",
+    "Marico",
+    "Godrej Consumer Products",
+    "Tata Consumer Products",
+    "Colgate-Palmolive India",
+    "Parle Products",
+    "Amul",
+    "Patanjali Ayurved",
+    "Emami"
+  ],
+  "distribution_layers": ["manufacturer", "cfa", "super_stockist", "distributor", "retailer", "quick_commerce"]
+}

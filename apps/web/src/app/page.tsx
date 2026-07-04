@@ -24,7 +24,7 @@ export default function HomePage() {
         <p className="mt-2 text-xl text-zinc-400">The Era of Supply Chain Intelligence</p>
         <p className="mt-4 max-w-2xl text-zinc-500">
           MedTech + CPG supply chain SaaS. Frontend on Netlify, API on Railway,
-          Copilot via OpenRouter.
+          Copilot via OpenRouter. Industry data auto-loaded — no CSV upload needed.
         </p>
       </div>
 
@@ -44,6 +44,13 @@ export default function HomePage() {
             P1 import wizard:{" "}
             <Link href="/import" className="text-emerald-400 hover:underline">
               /import
+            </Link>
+            {" "}(optional — data auto-loaded)
+          </li>
+          <li>
+            Control tower:{" "}
+            <Link href="/dashboard" className="text-emerald-400 hover:underline">
+              /dashboard
             </Link>
           </li>
           <li>

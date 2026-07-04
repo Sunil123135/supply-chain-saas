@@ -1,0 +1,14 @@
+{
+  "source": "Public medical device industry taxonomy",
+  "references": [
+    "https://umbrex.com/resources/industry-primers/life-sciences-industry-primers/medical-devices-diagnostics-capital-equipment-disposables-ivd-industry-primer/"
+  ],
+  "categories": {
+    "capital_equipment": ["surgical_robot", "imaging", "patient_monitor", "lab_analyzer", "sterilizer"],
+    "implants": ["orthopedic", "spine", "cardiovascular", "trauma", "dental"],
+    "disposables": ["surgical_instruments", "catheters", "wound_care", "infusion"],
+    "spare_parts_service": ["robot_components", "sensors", "pm_kits"],
+    "diagnostics_ivd": ["reagents", "controls", "cartridges"]
+  },
+  "therapeutic_areas": ["orthopedics", "cardiovascular", "surgical", "critical_care", "diagnostics", "spine"]
+}
