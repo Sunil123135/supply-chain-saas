@@ -1,10 +1,15 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import { SiteNav } from "@/components/SiteNav";
+import { SiteFooter } from "@/components/SiteFooter";
 
 export const metadata: Metadata = {
-  title: "Yugam — Supply Chain Intelligence",
-  description: "The Era of Supply Chain Intelligence. MedTech + CPG planning and Copilot.",
+  title: {
+    default: "Yugam — Intelligence Layer for Supply Chain & Logistics",
+    template: "%s | Yugam",
+  },
+  description:
+    "Sarvam senses, thinks, decides and acts across your supply chain — over ERP, TMS and WMS. Chat or voice.",
 };
 
 export default function RootLayout({
@@ -17,6 +22,7 @@ export default function RootLayout({
       <body className="min-h-screen antialiased">
         <SiteNav />
         {children}
+        <SiteFooter />
       </body>
     </html>
   );

@@ -1,12 +1,13 @@
 "use client";
 
+import Link from "next/link";
 import { useState } from "react";
-
 import { apiUrlSetupHint, getApiUrl, isMisconfiguredApiUrl } from "@/lib/apiUrl";
 
 const API_URL = getApiUrl();
 const API_MISCONFIGURED = isMisconfiguredApiUrl(API_URL);
 
+/** Legacy route — redirects users to Sarvam. */
 export default function CopilotTestPage() {
   const [prompt, setPrompt] = useState(
     "Forecast demand for product SKU-001 based on historical sales trends.",
@@ -29,7 +30,9 @@ export default function CopilotTestPage() {
       const res = await fetch(`${API_URL}/api/copilot`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ prompt }),
+        body: JSON.stringify({
+          prompt: `You are Sarvam, Yugam's supply chain AI. ${prompt}`,
+        }),
       });
       const data = (await res.json()) as {
         response?: string;
@@ -51,12 +54,14 @@ export default function CopilotTestPage() {
 
   return (
     <main className="mx-auto max-w-2xl px-6 py-12">
-      <p className="text-sm font-medium uppercase tracking-widest text-emerald-400">
-        P0 Checkpoint 5
-      </p>
-      <h1 className="mt-2 text-3xl font-bold">Yugam Copilot Test</h1>
-      <p className="mt-2 text-sm text-zinc-400">
-        Netlify → Railway → OpenRouter. API: {API_URL}
+      <p className="section-eyebrow">Sarvam API test</p>
+      <h1 className="mt-2 font-display text-3xl font-bold">Sarvam · API checkpoint</h1>
+      <p className="mt-2 text-sm text-[var(--muted-fg)]">
+        Prefer the full chat UI at{" "}
+        <Link href="/app/sarvam" className="text-[var(--accent)]">
+          /app/sarvam
+        </Link>
+        . API: {API_URL}
       </p>
       {API_MISCONFIGURED && (
         <p className="mt-3 rounded-lg border border-amber-800/50 bg-amber-950/30 p-3 text-sm text-amber-200">
@@ -67,7 +72,7 @@ export default function CopilotTestPage() {
       <textarea
         value={prompt}
         onChange={(e) => setPrompt(e.target.value)}
-        className="mt-6 w-full rounded-lg border border-[var(--border)] bg-[var(--muted)] p-4 text-sm text-zinc-100"
+        className="mt-6 w-full rounded-lg border border-[var(--border)] bg-[var(--muted)] p-4 text-sm"
         rows={5}
       />
 
@@ -75,9 +80,9 @@ export default function CopilotTestPage() {
         type="button"
         onClick={handleTest}
         disabled={loading}
-        className="mt-4 rounded-lg bg-emerald-600 px-6 py-2 text-sm font-medium text-white hover:bg-emerald-500 disabled:opacity-50"
+        className="btn-primary mt-4 disabled:opacity-50"
       >
-        {loading ? "Testing…" : "Test Copilot"}
+        {loading ? "Testing…" : "Test Sarvam API"}
       </button>
 
       {error && (
@@ -87,10 +92,10 @@ export default function CopilotTestPage() {
       )}
 
       {response && (
-        <div className="mt-6 rounded-lg border border-[var(--border)] bg-[var(--muted)] p-4">
-          <h2 className="text-sm font-semibold text-emerald-400">Response</h2>
-          {model && <p className="mt-1 text-xs text-zinc-500">Model: {model}</p>}
-          <pre className="mt-3 whitespace-pre-wrap text-sm text-zinc-200">{response}</pre>
+        <div className="mt-6 card-surface">
+          <h2 className="text-sm font-semibold text-[var(--accent)]">Response</h2>
+          {model && <p className="mt-1 text-xs text-[var(--muted-fg)]">Model: {model}</p>}
+          <pre className="mt-3 whitespace-pre-wrap text-sm">{response}</pre>
         </div>
       )}
     </main>

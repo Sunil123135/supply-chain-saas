@@ -1,7 +1,7 @@
 {
   "mode": "bundled",
   "provenance": "starter_pack_build_time",
-  "loadedAt": "2026-07-04T16:10:56.180Z",
+  "loadedAt": "2026-07-09T09:59:41.274Z",
   "industries": {
     "medtech": {
       "skuCount": 133,
@@ -10,7 +10,7 @@
       "orderCount": 55,
       "shipmentCount": 24,
       "nodeCount": 5,
-      "nearExpiryLots": 6
+      "nearExpiryLots": 8
     },
     "cpg": {
       "skuCount": 124,

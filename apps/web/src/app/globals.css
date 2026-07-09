@@ -1,19 +1,66 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&family=Poppins:wght@600;700;800&display=swap");
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 :root {
+  --background: #f7faf8;
+  --foreground: #1a1f1c;
+  --accent: #2d8c6a;
+  --accent-soft: #e8f5ef;
+  --muted: #eef3f0;
+  --muted-fg: #5c6b63;
+  --border: #d5e0da;
+  --card: #ffffff;
+  --glow: rgba(45, 140, 106, 0.18);
+}
+
+html.dark {
   --background: #0a0f0d;
   --foreground: #e8edea;
-  --accent: #10b981;
-  --muted: #1a2420;
+  --accent: #3db88a;
+  --accent-soft: #12241c;
+  --muted: #141c18;
+  --muted-fg: #9aaba1;
   --border: #243029;
+  --card: #101714;
+  --glow: rgba(61, 184, 138, 0.22);
 }
 
 body {
   color: var(--foreground);
   background: var(--background);
-  font-family: Inter, system-ui, sans-serif;
+  font-family: Manrope, ui-sans-serif, system-ui, sans-serif;
+}
+
+.font-display {
+  font-family: Poppins, ui-sans-serif, system-ui, sans-serif;
+}
+
+.hero-glow {
+  background:
+    radial-gradient(ellipse 80% 50% at 20% 20%, var(--glow), transparent 55%),
+    radial-gradient(ellipse 60% 40% at 90% 10%, rgba(45, 140, 106, 0.12), transparent 50%),
+    var(--background);
+}
+
+.accent-text {
+  color: var(--accent);
+}
+
+.section-eyebrow {
+  @apply text-[11px] font-semibold uppercase tracking-[0.2em] text-[var(--accent)];
+}
+
+.btn-primary {
+  @apply inline-flex items-center justify-center rounded-full bg-[var(--accent)] px-5 py-2.5 text-sm font-semibold text-white transition hover:opacity-90;
+}
+
+.btn-secondary {
+  @apply inline-flex items-center justify-center rounded-full border border-[var(--border)] bg-[var(--card)] px-5 py-2.5 text-sm font-semibold text-[var(--foreground)] transition hover:border-[var(--accent)] hover:text-[var(--accent)];
+}
+
+.card-surface {
+  @apply rounded-2xl border border-[var(--border)] bg-[var(--card)] p-6 shadow-sm;
 }

@@ -1,136 +1,213 @@
 import Link from "next/link";
-import { ApiStatus } from "@/components/ApiStatus";
+import { ComparisonTable, CtaBand, ModuleCard } from "@/components/Marketing";
+import {
+  COMPARISON_ROWS,
+  MODULES,
+  OUTCOMES,
+  PILLARS,
+} from "@/lib/product/catalog";
 
-const FEATURES = [
-  {
-    title: "Control Tower",
-    href: "/dashboard",
-    phase: "P1 — partial",
-    desc: "MedTech + India CPG KPIs, near-expiry alerts from bundled data.",
-  },
-  {
-    title: "Pain Map",
-    href: "/features",
-    phase: "Live",
-    desc: "Which of 50 market pains Yugam addresses today vs roadmap.",
-  },
-  {
-    title: "Copilot",
-    href: "/copilot",
-    phase: "P0 — needs backend",
-    desc: "Ask supply chain questions in plain English (Railway + OpenRouter).",
-  },
-  {
-    title: "Import",
-    href: "/import",
-    phase: "P1",
-    desc: "Optional: replace demo data with SAP/Excel extracts.",
-  },
-];
+const CAPABILITY_CHIPS = MODULES.map((m) => m.name);
 
-const MODULES = [
-  { id: "M1", name: "Demand Forecasting", phase: "P3" },
-  { id: "M2", name: "Inventory Optimization", phase: "P4" },
-  { id: "M3", name: "Auto-Replenishment", phase: "P4" },
-  { id: "M4", name: "Dispatch & Freight", phase: "P5" },
-  { id: "M5", name: "Copilot", phase: "P0" },
-  { id: "M6", name: "Control Tower", phase: "P1" },
-  { id: "M7", name: "Knowledge Base", phase: "P6" },
-  { id: "M8", name: "Billing", phase: "P8" },
-  { id: "M9", name: "Admin", phase: "P1" },
+const ERP_QUESTIONS = [
+  "Which plant should absorb tomorrow's demand spike?",
+  "Which shipment should be delayed?",
+  "Which supplier should receive tomorrow's PO?",
+  "Which inventory should move tonight?",
+  "Which carrier should I award?",
+  "Which invoice shouldn't I pay?",
 ];
 
 export default function HomePage() {
   return (
-    <main className="mx-auto max-w-5xl px-6 py-16">
-      <div className="mb-12">
-        <p className="text-sm font-medium uppercase tracking-widest text-emerald-400">
-          Phase P0 — Yugam Setup
-        </p>
-        <h1 className="mt-2 text-4xl font-bold tracking-tight">Yugam</h1>
-        <p className="mt-2 text-xl text-zinc-400">The Era of Supply Chain Intelligence</p>
-        <p className="mt-4 max-w-2xl text-zinc-500">
-          MedTech + CPG supply chain SaaS. Frontend on Netlify, API on Railway,
-          Copilot via OpenRouter. Industry data auto-loaded — no CSV upload needed.
-        </p>
-      </div>
-
-      <section className="mb-8 rounded-xl border border-[var(--border)] bg-[var(--muted)] p-6">
-        <h2 className="text-lg font-semibold text-emerald-400">Try these features</h2>
-        <div className="mt-4 grid gap-3 sm:grid-cols-2">
-          {FEATURES.map((f) => (
-            <Link
-              key={f.href}
-              href={f.href}
-              className="block rounded-lg border border-emerald-900/40 bg-emerald-950/20 px-4 py-4 transition hover:border-emerald-600 hover:bg-emerald-950/40"
-            >
-              <div className="flex items-center justify-between gap-2">
-                <p className="font-semibold text-zinc-100">{f.title}</p>
-                <span className="text-xs text-emerald-400">{f.phase}</span>
-              </div>
-              <p className="mt-2 text-sm text-zinc-400">{f.desc}</p>
-              <p className="mt-3 text-xs font-medium text-emerald-400">Open →</p>
+    <main>
+      <section className="hero-glow border-b border-[var(--border)]">
+        <div className="mx-auto max-w-6xl px-6 pb-16 pt-16 sm:pt-24">
+          <p className="section-eyebrow">The AI Operating System for Autonomous Supply Chains</p>
+          <h1 className="mt-4 max-w-3xl font-display text-4xl font-extrabold leading-[1.1] tracking-tight sm:text-5xl lg:text-6xl">
+            The broadest AI suite in supply chain.{" "}
+            <span className="text-[var(--accent)]">Every domain. Covered.</span>
+          </h1>
+          <p className="mt-6 max-w-2xl text-lg text-[var(--muted-fg)]">
+            <strong className="text-[var(--foreground)]">Sarvam</strong> senses, thinks, decides and
+            acts across your entire chain — running over your ERP, TMS and WMS. Chat or voice.
+          </p>
+          <div className="mt-8 flex flex-wrap gap-3">
+            <Link href="/contact" className="btn-primary">
+              Book a Demo
             </Link>
-          ))}
+            <Link href="/solutions" className="btn-secondary">
+              What we do for your Supply Chain
+            </Link>
+          </div>
+          <div className="mt-10 flex flex-wrap gap-2">
+            {CAPABILITY_CHIPS.slice(0, 10).map((c) => (
+              <span
+                key={c}
+                className="rounded-full border border-[var(--border)] bg-[var(--card)] px-3 py-1 text-[11px] text-[var(--muted-fg)]"
+              >
+                {c}
+              </span>
+            ))}
+            <span className="rounded-full border border-[var(--accent)]/40 bg-[var(--accent-soft)] px-3 py-1 text-[11px] text-[var(--accent)]">
+              +{CAPABILITY_CHIPS.length - 10} more
+            </span>
+          </div>
         </div>
       </section>
 
-      <section className="mb-8 rounded-xl border border-[var(--border)] bg-[var(--muted)] p-6">
-        <h2 className="text-lg font-semibold text-emerald-400">P0 status</h2>
-        <ul className="mt-4 space-y-2 text-sm text-zinc-300">
-          <li>
-            <ApiStatus />
-          </li>
-          <li>
-            Copilot test:{" "}
-            <Link href="/copilot" className="text-emerald-400 hover:underline">
-              /copilot
-            </Link>
-          </li>
-          <li>
-            P1 import wizard:{" "}
-            <Link href="/import" className="text-emerald-400 hover:underline">
-              /import
-            </Link>
-            {" "}(optional — data auto-loaded)
-          </li>
-          <li>
-            Control tower:{" "}
-            <Link href="/dashboard" className="text-emerald-400 hover:underline">
-              /dashboard
-            </Link>
-          </li>
-          <li>
-            Checklist:{" "}
-            <code className="text-emerald-300">YUGAM_P0_SETUP_CHECKLIST.md</code>
-          </li>
-        </ul>
-      </section>
-
-      <section>
-        <h2 className="mb-4 text-lg font-semibold">Modules (roadmap)</h2>
-        <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
-          {MODULES.map((m) => (
-            <div
-              key={m.id}
-              className="rounded-lg border border-[var(--border)] bg-[var(--muted)] px-4 py-3"
-            >
-              <span className="text-xs font-medium text-emerald-400">{m.id}</span>
-              <p className="font-medium">{m.name}</p>
-              <p className="text-xs text-zinc-500">Build phase {m.phase}</p>
+      <section className="mx-auto max-w-6xl px-6 py-16">
+        <p className="section-eyebrow">Trusted at production scale</p>
+        <h2 className="mt-3 max-w-2xl font-display text-3xl font-bold">
+          Enterprises orchestrate supply chain on Yugam&apos;s intelligence layer.
+        </h2>
+        <p className="mt-3 text-[var(--muted-fg)]">
+          Manufacturing · FMCG · Automotive · Chemicals · Logistics · Energy · MedTech
+        </p>
+        <div className="mt-8 grid grid-cols-3 gap-4 sm:max-w-lg">
+          {[
+            ["100+", "Enterprises ready"],
+            ["15", "Native modules"],
+            ["19", "AI-Workforce agents"],
+          ].map(([n, l]) => (
+            <div key={l} className="card-surface text-center">
+              <p className="font-display text-2xl font-bold text-[var(--accent)]">{n}</p>
+              <p className="mt-1 text-xs text-[var(--muted-fg)]">{l}</p>
             </div>
           ))}
         </div>
       </section>
 
-      <footer className="mt-16 space-y-1 text-sm text-zinc-500">
-        <p>
-          Web health:{" "}
-          <a href="/api/health" className="text-emerald-400 hover:underline">
-            /api/health
-          </a>
-        </p>
-      </footer>
+      <section className="border-y border-[var(--border)] bg-[var(--muted)]/30 py-16">
+        <div className="mx-auto max-w-6xl px-6">
+          <p className="section-eyebrow">The next generation of enterprise software</p>
+          <h2 className="mt-3 font-display text-3xl font-bold">
+            Every decade rebuilt the stack. This one makes it autonomous.
+          </h2>
+          <ol className="mt-10 grid gap-3 sm:grid-cols-5">
+            {[
+              ["1980", "ERP"],
+              ["2005", "Planning Suites"],
+              ["2015", "Control Towers"],
+              ["2025", "AI Copilots"],
+              ["NOW", "Autonomous OS · Yugam"],
+            ].map(([y, t], i) => (
+              <li
+                key={y}
+                className={`card-surface ${i === 4 ? "border-[var(--accent)] ring-1 ring-[var(--accent)]/30" : ""}`}
+              >
+                <p className="text-xs text-[var(--accent)]">{y}</p>
+                <p className="mt-2 text-sm font-semibold">{t}</p>
+              </li>
+            ))}
+          </ol>
+        </div>
+      </section>
+
+      <section className="mx-auto max-w-6xl px-6 py-16">
+        <p className="section-eyebrow">The full picture</p>
+        <h2 className="mt-3 font-display text-3xl font-bold">
+          Transform your supply chain with Sarvam
+        </h2>
+        <ol className="mt-8 flex flex-wrap gap-3 text-sm">
+          {["01 Meet Sarvam", "02 Product Suite", "03 Predict · Plan · Execute", "04 Industry Impact", "05 Pilot Path"].map(
+            (s) => (
+              <li
+                key={s}
+                className="rounded-full border border-[var(--border)] bg-[var(--card)] px-4 py-2"
+              >
+                {s}
+              </li>
+            ),
+          )}
+        </ol>
+        <div className="mt-10 grid gap-4 sm:grid-cols-3">
+          {PILLARS.map((p) => (
+            <div key={p.id} className="card-surface">
+              <p className="text-xs font-bold uppercase tracking-wider text-[var(--accent)]">
+                {p.label}
+              </p>
+              <p className="mt-3 text-sm text-[var(--muted-fg)]">{p.blurb}</p>
+              <Link
+                href={`/solutions#${p.id}`}
+                className="mt-4 inline-block text-xs font-semibold text-[var(--accent)]"
+              >
+                Explore solutions →
+              </Link>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      <section className="border-y border-[var(--border)] py-16">
+        <div className="mx-auto max-w-6xl px-6">
+          <p className="section-eyebrow">Beyond planning software</p>
+          <h2 className="mt-3 font-display text-3xl font-bold">Can your ERP answer these?</h2>
+          <div className="mt-8 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+            {ERP_QUESTIONS.map((q) => (
+              <div key={q} className="card-surface text-sm">
+                {q}
+              </div>
+            ))}
+          </div>
+          <p className="mt-8 font-display text-2xl font-bold text-[var(--accent)]">
+            Sarvam already knows.
+          </p>
+          <p className="mt-2 text-[var(--muted-fg)]">
+            Most enterprise software helps people make decisions. Yugam makes them with you.
+          </p>
+        </div>
+      </section>
+
+      <section className="mx-auto max-w-6xl px-6 py-16">
+        <p className="section-eyebrow">Start where it hurts</p>
+        <h2 className="mt-3 font-display text-3xl font-bold">
+          Start with one module. Scale into the full intelligence layer.
+        </h2>
+        <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+          {MODULES.filter((m) => m.status === "live")
+            .slice(0, 6)
+            .map((m) => (
+              <ModuleCard key={m.slug} module={m} />
+            ))}
+        </div>
+        <Link href="/solutions" className="btn-secondary mt-8">
+          Browse all {MODULES.length} modules
+        </Link>
+      </section>
+
+      <section className="border-y border-[var(--border)] bg-[var(--muted)]/30 py-16">
+        <div className="mx-auto max-w-6xl px-6">
+          <p className="section-eyebrow">Layer, don&apos;t replace</p>
+          <h2 className="mt-3 font-display text-3xl font-bold">
+            An intelligence layer. Not another system.
+          </h2>
+          <p className="mt-4 max-w-2xl text-[var(--muted-fg)]">
+            You&apos;ve invested years in TMS, WMS, and ERP. Yugam engineers an intelligence layer
+            over them so they finally decide and act as one.
+          </p>
+          <div className="mt-10">
+            <ComparisonTable rows={COMPARISON_ROWS} />
+          </div>
+        </div>
+      </section>
+
+      <section className="mx-auto max-w-6xl px-6 py-16">
+        <p className="section-eyebrow">Proven at scale</p>
+        <div className="mt-8 grid gap-4 md:grid-cols-3">
+          {OUTCOMES.map((o) => (
+            <article key={o.sector} className="card-surface">
+              <p className="text-xs text-[var(--muted-fg)]">{o.sector}</p>
+              <p className="mt-4 font-display text-3xl font-bold text-[var(--accent)]">{o.metric}</p>
+              <p className="text-xs text-[var(--muted-fg)]">{o.metricLabel}</p>
+              <h3 className="mt-4 font-display text-xl font-bold">{o.title}</h3>
+              <p className="mt-2 text-sm text-[var(--muted-fg)]">{o.body}</p>
+            </article>
+          ))}
+        </div>
+      </section>
+
+      <CtaBand />
     </main>
   );
 }

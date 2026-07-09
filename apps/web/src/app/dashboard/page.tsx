@@ -38,11 +38,18 @@ export default function DashboardPage() {
 
   return (
     <main className="mx-auto max-w-5xl px-6 py-12">
-      <p className="text-sm font-medium uppercase tracking-widest text-emerald-400">P1 — Control tower</p>
-      <h1 className="mt-2 text-3xl font-bold">Live data (auto-loaded)</h1>
-      <p className="mt-2 text-zinc-400">
-        No upload required. Yugam reads MedTech + India FMCG starter packs from the server on every
-        request.
+      <p className="section-eyebrow">Execute · Control Tower</p>
+      <h1 className="mt-2 font-display text-3xl font-bold">Live data (auto-loaded)</h1>
+      <p className="mt-2 text-[var(--muted-fg)]">
+        No upload required. Sarvam&apos;s visibility layer reads MedTech + India FMCG starter packs
+        from the server on every request.{" "}
+        <Link href="/app/sarvam" className="text-[var(--accent)]">
+          Ask Sarvam
+        </Link>
+        {" · "}
+        <Link href="/app/modules/control-tower" className="text-[var(--accent)]">
+          Module workspace
+        </Link>
       </p>
 
       {error && <p className="mt-6 text-amber-300">{error}</p>}
