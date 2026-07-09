@@ -81,6 +81,9 @@ export function SiteNav() {
           >
             Enter the Experience
           </Link>
+          <Link href="/login" className="hidden text-xs text-[var(--muted-fg)] md:inline">
+            Login
+          </Link>
           <Link
             href="/contact"
             className="rounded-full bg-[var(--accent)] px-3 py-1.5 text-xs font-semibold text-white hover:opacity-90"

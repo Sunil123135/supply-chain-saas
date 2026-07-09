@@ -101,6 +101,29 @@ export async function POST(req: Request) {
       body: JSON.stringify(nodePayload),
     });
 
+    const lots = pack.files.lots_inventory?.rows ?? [];
+    const lotPayload = lots.map((l) => ({
+      org_id: orgId,
+      sku_id: l.sku_id,
+      lot_id: l.lot_id,
+      mfg_date: l.mfg_date || null,
+      expiry_date: l.expiry_date || null,
+      qty: Number(l.qty) || 0,
+      node_id: l.node_id,
+      data_provenance: l.data_provenance ?? "synthetic",
+    }));
+
+    const lotsRes = await fetch(`${url}/rest/v1/lots_inventory`, {
+      method: "POST",
+      headers: {
+        apikey: serviceKey,
+        Authorization: `Bearer ${serviceKey}`,
+        "Content-Type": "application/json",
+        Prefer: "resolution=merge-duplicates",
+      },
+      body: JSON.stringify(lotPayload),
+    });
+
     await fetch(`${url}/rest/v1/import_jobs`, {
       method: "POST",
       headers: {
@@ -120,6 +143,7 @@ export async function POST(req: Request) {
       orgId,
       skusInserted: skuRes.ok ? skuPayload.length : await skuRes.text(),
       nodesInserted: nodePayload.length,
+      lotsInserted: lotsRes.ok ? lotPayload.length : await lotsRes.text(),
       stats: pack.stats,
     };
   }

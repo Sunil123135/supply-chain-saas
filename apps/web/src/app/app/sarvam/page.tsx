@@ -24,7 +24,7 @@ export default function SarvamAppPage() {
     },
   ]);
   const [loading, setLoading] = useState(false);
-  const [useApi, setUseApi] = useState(false);
+  const [useLlm, setUseLlm] = useState(false);
   const bottomRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -40,35 +40,31 @@ export default function SarvamAppPage() {
     setLoading(true);
 
     try {
-      if (useApi && !API_MISCONFIGURED) {
-        const res = await fetch(`${API_URL}/api/copilot`, {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({
-            prompt: `You are Sarvam, Yugam's supply chain AI orchestrator. ${trimmed}`,
-          }),
-        });
-        const data = (await res.json()) as { response?: string; error?: string };
-        if (data.error) throw new Error(data.error);
-        setMessages((m) => [
-          ...m,
-          {
-            role: "sarvam",
-            content: data.response ?? "No response from API.",
-            confidence: 0.8,
-          },
-        ]);
-      } else {
-        await new Promise((r) => setTimeout(r, 400));
-        setMessages((m) => [...m, runSarvamLocal(trimmed)]);
-      }
-    } catch (e) {
+      const res = await fetch("/api/sarvam/chat", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ prompt: trimmed, useLlm }),
+      });
+      const data = (await res.json()) as SarvamMessage & { error?: string };
+      if (data.error) throw new Error(data.error);
       setMessages((m) => [
         ...m,
         {
           role: "sarvam",
-          content: `API unavailable — falling back to local Sarvam.\n\n${runSarvamLocal(trimmed).content}\n\n_(${e instanceof Error ? e.message : "error"})_`,
-          confidence: 0.65,
+          content: data.content,
+          agentId: data.agentId,
+          confidence: data.confidence,
+          actions: data.actions,
+        },
+      ]);
+    } catch (e) {
+      await new Promise((r) => setTimeout(r, 200));
+      const fallback = runSarvamLocal(trimmed);
+      setMessages((m) => [
+        ...m,
+        {
+          ...fallback,
+          content: `${fallback.content}\n\n_(fallback: ${e instanceof Error ? e.message : "error"})_`,
         },
       ]);
     } finally {
@@ -87,16 +83,12 @@ export default function SarvamAppPage() {
           </p>
         </div>
         <label className="flex items-center gap-2 text-xs text-[var(--muted-fg)]">
-          <input
-            type="checkbox"
-            checked={useApi}
-            onChange={(e) => setUseApi(e.target.checked)}
-          />
-          Use Railway OpenRouter API
+          <input type="checkbox" checked={useLlm} onChange={(e) => setUseLlm(e.target.checked)} />
+          LLM narrative (Railway + OpenRouter)
         </label>
       </div>
 
-      {useApi && API_MISCONFIGURED && (
+      {useLlm && API_MISCONFIGURED && (
         <p className="mt-4 rounded-lg border border-amber-800/50 bg-amber-950/30 p-3 text-sm text-amber-200">
           {apiUrlSetupHint()}
         </p>

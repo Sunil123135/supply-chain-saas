@@ -1,4 +1,4 @@
-"""Yugam API — FastAPI backend (Railway). Copilot via OpenRouter; math in P3+."""
+"""Yugam API — FastAPI backend (Railway). Sarvam + supply-chain math."""
 
 from __future__ import annotations
 
@@ -11,9 +11,11 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel, Field
 
+from routers.modules import router as modules_router
+
 load_dotenv(".env.backend")
 
-app = FastAPI(title="Yugam API", version="0.1.0")
+app = FastAPI(title="Yugam API", version="0.2.0")
 
 app.add_middleware(
     CORSMiddleware,
@@ -22,6 +24,8 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
+app.include_router(modules_router)
 
 OPENROUTER_URL = "https://openrouter.ai/api/v1/chat/completions"
 DEFAULT_MODEL = os.getenv("OPENROUTER_MODEL", "openai/gpt-4-turbo")
@@ -39,7 +43,7 @@ class CopilotResponse(BaseModel):
 
 @app.get("/health")
 async def health() -> dict[str, str]:
-    return {"status": "ok", "service": "yugam-api", "phase": "P0"}
+    return {"status": "ok", "service": "yugam-api", "phase": "P2"}
 
 
 @app.post("/api/copilot", response_model=CopilotResponse)
@@ -54,14 +58,14 @@ async def copilot(body: CopilotRequest) -> CopilotResponse:
             {
                 "role": "system",
                 "content": (
-                    "You are Yugam Copilot, a supply chain intelligence assistant for "
-                    "MedTech and CPG planners. Be concise and actionable. Do not invent "
-                    "specific SKU numbers unless the user provided them."
+                    "You are Sarvam, Yugam's supply chain AI orchestrator for MedTech and CPG. "
+                    "You explain results from deterministic tools — never invent SKU numbers. "
+                    "Be concise and actionable."
                 ),
             },
             {"role": "user", "content": body.prompt},
         ],
-        "max_tokens": 500,
+        "max_tokens": 600,
     }
 
     try:
@@ -72,17 +76,14 @@ async def copilot(body: CopilotRequest) -> CopilotResponse:
                     "Authorization": f"Bearer {api_key}",
                     "Content-Type": "application/json",
                     "HTTP-Referer": os.getenv("APP_URL", "https://yugam.app"),
-                    "X-Title": "Yugam Supply Chain",
+                    "X-Title": "Yugam Sarvam",
                 },
                 json=payload,
             )
             res.raise_for_status()
             data = res.json()
             content = data["choices"][0]["message"]["content"]
-            return CopilotResponse(
-                response=content,
-                model=data.get("model", DEFAULT_MODEL),
-            )
+            return CopilotResponse(response=content, model=data.get("model", DEFAULT_MODEL))
     except httpx.HTTPStatusError as exc:
         return CopilotResponse(error=f"OpenRouter HTTP {exc.response.status_code}")
     except Exception as exc:  # noqa: BLE001

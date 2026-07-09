@@ -20,8 +20,14 @@ interface AutoData {
   };
 }
 
+interface LiveOps {
+  medtech?: { fefo?: { summary?: { critical: number; exposureInr: number } }; freight?: { audit?: { recoverableInr: number; leakagePct: number } } };
+  cpg?: { fefo?: { summary?: { critical: number; exposureInr: number } }; freight?: { audit?: { recoverableInr: number; leakagePct: number } } };
+}
+
 export default function DashboardPage() {
   const [data, setData] = useState<AutoData | null>(null);
+  const [live, setLive] = useState<LiveOps>({});
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
@@ -34,6 +40,17 @@ export default function DashboardPage() {
           .then(setData)
           .catch(() => setError("Failed to load industry data")),
       );
+
+    (["medtech", "cpg"] as const).forEach(async (ind) => {
+      const [fefo, freight] = await Promise.all([
+        fetch(`/api/modules/inventory/fefo?industry=${ind}`).then((r) => r.json()),
+        fetch(`/api/modules/freight/audit?industry=${ind}`).then((r) => r.json()),
+      ]);
+      setLive((prev) => ({
+        ...prev,
+        [ind]: { fefo, freight },
+      }));
+    });
   }, []);
 
   return (
@@ -94,13 +111,27 @@ export default function DashboardPage() {
                     <span>Near-expiry lots (60d)</span>
                     <span>{s.nearExpiryLots}</span>
                   </li>
+                  {live[key]?.fefo?.summary && (
+                    <li className="flex justify-between text-[var(--accent)]">
+                      <span>FEFO critical (math)</span>
+                      <span>{live[key].fefo.summary.critical}</span>
+                    </li>
+                  )}
+                  {live[key]?.freight?.audit && (
+                    <li className="flex justify-between text-[var(--accent)]">
+                      <span>Freight recoverable ₹</span>
+                      <span>{live[key].freight.audit.recoverableInr.toLocaleString()}</span>
+                    </li>
+                  )}
                 </ul>
-                <Link
-                  href={`/api/data/auto?industry=${key}`}
-                  className="mt-4 inline-block text-xs text-emerald-400 hover:underline"
-                >
-                  View JSON sample →
-                </Link>
+                <div className="mt-4 flex flex-wrap gap-3 text-xs">
+                  <Link href={`/app/modules/inventory-optimisation`} className="text-[var(--accent)]">
+                    FEFO workspace →
+                  </Link>
+                  <Link href={`/app/modules/freight-settlement`} className="text-[var(--accent)]">
+                    Freight audit →
+                  </Link>
+                </div>
               </section>
             );
           })}

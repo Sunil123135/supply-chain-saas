@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import { ModuleLiveData } from "@/components/ModuleLiveData";
 import { MODULES, getAgent, getModule } from "@/lib/product/catalog";
 
 type Props = { params: { slug: string } };
@@ -19,12 +20,6 @@ export default function AppModulePage({ params }: Props) {
   if (!mod) notFound();
 
   const agents = mod.agentIds.map((id) => getAgent(id)).filter(Boolean);
-  const sampleRows = [
-    ["SKU-1042", "DC-North", "High", "Action: expedite"],
-    ["SKU-2201", "Plant-2", "Medium", "Action: rebalance"],
-    ["SKU-0881", "DC-West", "Low", "Action: monitor"],
-    ["SKU-3310", "3PL-A", "High", "Action: escalate"],
-  ];
 
   return (
     <main className="mx-auto max-w-6xl px-6 py-12">
@@ -46,39 +41,10 @@ export default function AppModulePage({ params }: Props) {
         </div>
       </div>
 
-      <div className="mt-8 grid gap-4 sm:grid-cols-3">
-        {mod.kpis.map((k) => (
-          <div key={k.label} className="card-surface">
-            <p className="text-xs text-[var(--muted-fg)]">{k.label}</p>
-            <p className="mt-2 font-display text-2xl font-bold text-[var(--accent)]">{k.value}</p>
-          </div>
-        ))}
-      </div>
-
-      <section className="mt-10">
-        <h2 className="font-display text-xl font-bold">Workspace queue</h2>
-        <div className="mt-4 overflow-x-auto rounded-2xl border border-[var(--border)]">
-          <table className="min-w-full text-left text-sm">
-            <thead className="bg-[var(--muted)] text-xs uppercase text-[var(--muted-fg)]">
-              <tr>
-                <th className="px-4 py-3">Entity</th>
-                <th className="px-4 py-3">Node</th>
-                <th className="px-4 py-3">Priority</th>
-                <th className="px-4 py-3">Sarvam action</th>
-              </tr>
-            </thead>
-            <tbody>
-              {sampleRows.map((r) => (
-                <tr key={r[0]} className="border-t border-[var(--border)]">
-                  {r.map((c) => (
-                    <td key={c} className="px-4 py-3">
-                      {c}
-                    </td>
-                  ))}
-                </tr>
-              ))}
-            </tbody>
-          </table>
+      <section className="mt-8">
+        <h2 className="font-display text-xl font-bold">Live workspace</h2>
+        <div className="mt-4">
+          <ModuleLiveData slug={mod.slug} fallbackKpis={mod.kpis} />
         </div>
       </section>
 
