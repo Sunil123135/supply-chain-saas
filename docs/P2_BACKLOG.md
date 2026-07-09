@@ -47,6 +47,26 @@ x-vps-secret: <VPS_WEBHOOK_SECRET>
 {"source":"n8n","workflow":"weekly_fefo_scan","agent_id":"ai-inventory-strategist"}
 ```
 
+**Yugam Optimizer (forecasting)** — add a **second Railway service** from the same repo:
+
+| Setting | Value |
+|---------|--------|
+| Root directory | `.` (repo root) |
+| Dockerfile | `services/optimizer/Dockerfile.railway` |
+| `PORT` | `8001` |
+| Public domain | copy to Netlify `OPTIMIZER_URL` |
+
+Netlify env:
+```
+OPTIMIZER_URL=https://YOUR_OPTIMIZER.up.railway.app
+```
+
+**GPU VPS (full neural + Chronos/Moirai):**
+```bash
+bash services/optimizer/deploy-vps.sh
+# builds services/optimizer/Dockerfile (full requirements.txt)
+```
+
 ---
 
 ## Week 1–2 — Foundation (you are here → finish)
@@ -56,6 +76,7 @@ x-vps-secret: <VPS_WEBHOOK_SECRET>
 - [x] Agent execution audit table schema
 - [ ] Run Supabase migrations + seed lots_inventory
 - [ ] Deploy Railway with `backend/` + set `NEXT_PUBLIC_API_URL`
+- [ ] Deploy **optimizer** Railway service (`Dockerfile.railway`) + set `OPTIMIZER_URL` on Netlify
 - [ ] n8n on VPS: weekly cron → VPS webhook → `/api/agents/execute` with `inventory_fefo`
 
 **Exit criteria:** Sarvam answers “which lots expire” and “which invoices to dispute” with real numbers from live site.
@@ -66,7 +87,7 @@ x-vps-secret: <VPS_WEBHOOK_SECRET>
 
 - [ ] Wire import wizard → Supabase `lots_inventory`, `freight_invoices`
 - [ ] Auth middleware on `/app/*` (optional org scoping)
-- [ ] **Demand forecasting** UI with MAPE chart (Prophet in `services/optimizer`)
+- [ ] **Demand forecasting** UI with WAPE dashboard (shipped P3 — wire `OPTIMIZER_URL`)
 - [ ] **Control Tower** exceptions inbox from agent_executions
 - [ ] Dify RAG on pain-map + playbook docs for Sarvam narrative layer
 - [ ] SAP IDoc field mapper (MATNR, WERKS, CHARG → sku, node, lot)
