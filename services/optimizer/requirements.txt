@@ -1,3 +1,22 @@
+# Yugam optimizer — Python 3.12 recommended
+# Windows: run install.ps1 (venv at C:\yugam-opt — avoids OneDrive MAX_PATH with PyTorch)
+
 fastapi>=0.115.0
 uvicorn[standard]>=0.32.0
 pydantic>=2.9.0
+numpy>=1.26.0,<2.2
+pandas>=2.2.0
+statsmodels>=0.14.0
+prophet>=1.1.5
+scikit-learn>=1.4.0
+lightgbm>=4.3.0
+
+# Neural forecasting (PatchTST, N-BEATS, TFT)
+torch>=2.2.0
+pytorch-lightning>=2.2.0
+neuralforecast>=1.7.0
+
+# Foundation models (Chronos, Moirai)
+transformers>=4.40.0
+chronos-forecasting>=1.4.0
+uni2ts>=1.0.0

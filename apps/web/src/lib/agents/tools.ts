@@ -1,8 +1,10 @@
 import type { IndustryPack } from "@/lib/import/config";
 import { loadIndustryPack } from "@/lib/data/loadPack";
+import { fetchOptimizer } from "@/lib/forecast/optimizer";
 import { computeFefoQueue, type LotRow } from "@/lib/math/fefo";
 import { auditFreightInvoices, buildInvoicesFromShipments, type ShipmentRow } from "@/lib/math/freight";
 import { forecastBySku, type DemandRow } from "@/lib/math/forecast";
+import { localWapeDashboard, pickModel, runLocalForecast } from "@/lib/math/forecastRouter";
 import { AGENTS } from "@/lib/product/catalog";
 
 export interface ToolResult {
@@ -78,13 +80,60 @@ export async function runTool(
     }
     case "demand_forecast": {
       const rows = (pack.files.demand_history?.rows ?? []) as DemandRow[];
-      const fc = forecastBySku(rows, 4);
+      const model = (opts.params?.model as string) ?? "auto";
+
+      try {
+        const res = await fetchOptimizer(
+          `/api/forecast/dashboard?industry=${industry}&sku_limit=8&holdout=8`,
+        );
+        if (res.ok) {
+          const dash = await res.json();
+          const best = dash.leaderboard?.find((r: { model: string }) => r.model === "auto");
+          const topSku = dash.rows?.find((r: { model: string }) => r.model === "auto");
+          return {
+            tool,
+            agentId,
+            data: { dashboard: dash, model_picker: "auto", top_sku: topSku },
+            summary: `WAPE dashboard: auto-picker avg ${best?.avg_wape ?? "—"}% across ${best?.sku_count ?? 0} SKUs (${dash.engine ?? "optimizer"})`,
+            confidence: best && best.avg_wape < 20 ? 0.88 : 0.76,
+            requiresApproval: false,
+          };
+        }
+      } catch {
+        /* fallback */
+      }
+
+      const dash = await localWapeDashboard(industry, 8, 8);
+      const bySku = new Map<string, number[]>();
+      for (const r of rows) {
+        const list = bySku.get(r.sku_id) ?? [];
+        list.push(Number(r.qty) || 0);
+        bySku.set(r.sku_id, list);
+      }
+      const topEntry = Array.from(bySku.entries()).sort((a, b) => {
+        const ta = a[1].reduce((s, v) => s + v, 0);
+        const tb = b[1].reduce((s, v) => s + v, 0);
+        return tb - ta;
+      })[0];
+      const topSkuId = topEntry?.[0];
+      const topValues = topEntry?.[1] ?? [];
+      const selected = pickModel(topValues);
+      const fc = topSkuId
+        ? runLocalForecast(topValues, model === "auto" ? selected : (model as Parameters<typeof runLocalForecast>[1]), 4)
+        : null;
+      const legacy = forecastBySku(rows, 4);
+      const autoLb = dash.leaderboard.find((r) => r.model === "auto");
+
       return {
         tool,
         agentId,
-        data: fc,
-        summary: `MAPE ${fc.mape}% on holdout weeks; ${fc.forecasts.length} forecast points generated`,
-        confidence: fc.mape < 15 ? 0.85 : 0.72,
+        data: {
+          dashboard: dash,
+          top_sku_forecast: topSkuId ? { sku_id: topSkuId, ...fc } : null,
+          legacy_forecasts: legacy.forecasts.slice(0, 20),
+        },
+        summary: `Auto-picker WAPE ${autoLb?.avg_wape ?? legacy.mape}% · top SKU ${topSkuId ?? "—"} → ${fc?.model ?? selected} (TS fallback)`,
+        confidence: (autoLb?.avg_wape ?? legacy.mape) < 20 ? 0.82 : 0.7,
         requiresApproval: false,
       };
     }

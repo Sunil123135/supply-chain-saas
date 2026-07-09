@@ -10,7 +10,8 @@
     "dev": "npm run dev --workspace=apps/web",
     "build": "npm run build --workspace=apps/web",
     "lint": "npm run lint --workspace=apps/web",
-    "backend:dev": "cd backend && uvicorn main:app --reload --port 8000"
+    "backend:dev": "cd backend && uvicorn main:app --reload --port 8000",
+    "optimizer:dev": "powershell -ExecutionPolicy Bypass -File services/optimizer/run-dev.ps1"
   },
   "engines": {
     "node": ">=20"

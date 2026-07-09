@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import { ForecastWapeDashboard } from "@/components/ForecastWapeDashboard";
 import { ModuleLiveData } from "@/components/ModuleLiveData";
 import { MODULES, getAgent, getModule } from "@/lib/product/catalog";
 
@@ -44,7 +45,11 @@ export default function AppModulePage({ params }: Props) {
       <section className="mt-8">
         <h2 className="font-display text-xl font-bold">Live workspace</h2>
         <div className="mt-4">
-          <ModuleLiveData slug={mod.slug} fallbackKpis={mod.kpis} />
+          {mod.slug === "demand-forecasting" ? (
+            <ForecastWapeDashboard />
+          ) : (
+            <ModuleLiveData slug={mod.slug} fallbackKpis={mod.kpis} />
+          )}
         </div>
       </section>
 

@@ -1,0 +1,12 @@
+# Core forecasting — fits Railway memory/CPU (stats + LightGBM)
+# Neural + foundation models: use requirements.txt on GPU VPS
+
+fastapi>=0.115.0
+uvicorn[standard]>=0.32.0
+pydantic>=2.9.0
+numpy>=1.26.0,<2.2
+pandas>=2.2.0
+statsmodels>=0.14.0
+prophet>=1.1.5
+scikit-learn>=1.4.0
+lightgbm>=4.3.0

@@ -11,7 +11,7 @@ export interface PainItem {
 
 /** Yugam V1 pains — honest build status as of P1 scaffold */
 export const PAIN_MAP: PainItem[] = [
-  { id: 1, module: "M1", pain: "Forecast accuracy poor; Excel misses demand shifts", status: "planned", how: "Prophet + WAPE dashboard (P3)", phase: "P3" },
+  { id: 1, module: "M1", pain: "Forecast accuracy poor; Excel misses demand shifts", status: "partial", how: "ETS/Prophet/Croston + WAPE dashboard + auto picker (P3 live)", phase: "P3" },
   { id: 6, module: "M1", pain: "Forecast in silos — sales, finance, SC disagree", status: "planned", how: "Single forecast workspace + version compare", phase: "P3" },
   { id: 7, module: "M1", pain: "No MAPE accountability by planner", status: "planned", how: "MAPE leaderboard by SKU/planner", phase: "P3" },
   { id: 8, module: "M2", pain: "Stockouts on fast movers, slow movers pile up", status: "data_only", how: "ABC classes in starter data; optimizer P4", phase: "P4" },
