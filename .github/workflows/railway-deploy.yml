@@ -1,0 +1,54 @@
+# Yugam — deploy backend + optimizer to Railway on push to main
+# Requires GitHub secret: RAILWAY_TOKEN (project token from Railway dashboard)
+# See docs/RAILWAY_DEPLOY.md for one-time setup
+
+name: Railway Deploy
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "backend/**"
+      - "services/optimizer/**"
+      - "data/**"
+      - ".github/workflows/railway-deploy.yml"
+  workflow_dispatch:
+    inputs:
+      service:
+        description: "Service to deploy (backend, optimizer, or all)"
+        required: true
+        default: "all"
+        type: choice
+        options:
+          - all
+          - backend
+          - optimizer
+
+jobs:
+  deploy-backend:
+    if: github.event_name == 'workflow_dispatch' && (inputs.service == 'all' || inputs.service == 'backend') || github.event_name == 'push'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Deploy Yugam API to Railway
+        uses: bervProject/railway-deploy@0.1.2-beta
+        env:
+          RAILWAY_TOKEN: ${{ secrets.RAILWAY_TOKEN }}
+        with:
+          service: backend
+          detach: true
+
+  deploy-optimizer:
+    if: github.event_name == 'workflow_dispatch' && (inputs.service == 'all' || inputs.service == 'optimizer') || github.event_name == 'push'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Deploy Yugam Optimizer to Railway
+        uses: bervProject/railway-deploy@0.1.2-beta
+        env:
+          RAILWAY_TOKEN: ${{ secrets.RAILWAY_TOKEN }}
+        with:
+          service: optimizer
+          detach: true
