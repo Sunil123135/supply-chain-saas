@@ -1,31 +1,21 @@
 # Post-deploy wiring — finish in 20 minutes
 
-After Railway deploy succeeds, complete these steps. You only need **two URLs** from Railway.
+## Live Railway URLs (set 2026-07-11)
 
-## A. Copy Railway domains (2 min)
+| Service | Public URL | Health |
+|---------|------------|--------|
+| **backend** | https://backend-production-1305.up.railway.app | `/health` → ok |
+| **optimizer** | https://optimizer-production-c520.up.railway.app | `/health` → ok · 11 forecast models |
+| nexova-web (optional mirror) | https://nexova-web-production.up.railway.app | Next.js frontend only |
 
-1. Open [Railway project](https://railway.com/project/8ef86391-3e25-4bb0-828e-737b38f058ae)
-2. For service **`backend`** → Settings → Networking → **Generate domain** (if missing) → copy  
-   → e.g. `https://backend-production-xxxx.up.railway.app`
-3. For service **`optimizer`** → same → copy  
-   → e.g. `https://optimizer-production-xxxx.up.railway.app`
-
-Verify in a browser:
-
-```
-https://YOUR_BACKEND.up.railway.app/health
-https://YOUR_OPTIMIZER.up.railway.app/health
-https://YOUR_OPTIMIZER.up.railway.app/api/forecast/models
-```
-
-## B. Netlify env vars (5 min)
+## A. Netlify env vars (required — do this now)
 
 [Netlify](https://app.netlify.com) → **sctransformation** → Site configuration → Environment variables
 
 | Key | Value |
 |-----|--------|
-| `NEXT_PUBLIC_API_URL` | `https://YOUR_BACKEND.up.railway.app` |
-| `OPTIMIZER_URL` | `https://YOUR_OPTIMIZER.up.railway.app` |
+| `NEXT_PUBLIC_API_URL` | `https://backend-production-1305.up.railway.app` |
+| `OPTIMIZER_URL` | `https://optimizer-production-c520.up.railway.app` |
 | `NEXT_PUBLIC_SUPABASE_URL` | from Supabase → Settings → API |
 | `NEXT_PUBLIC_SUPABASE_ANON_KEY` | from Supabase → Settings → API |
 | `SUPABASE_URL` | same as `NEXT_PUBLIC_SUPABASE_URL` |
@@ -35,53 +25,43 @@ https://YOUR_OPTIMIZER.up.railway.app/api/forecast/models
 | `INTEGRATION_SECRET` | any long random string |
 | `NEXT_PUBLIC_APP_NAME` | `Yugam` |
 
-**Critical:** Do **not** use `https://railway.com/project/...` as `NEXT_PUBLIC_API_URL`.
+**Critical:** Do **not** use `https://railway.com/project/...` or the Supabase REST URL as `NEXT_PUBLIC_API_URL`.
 
 Then: **Deploys → Trigger deploy → Clear cache and deploy site**
 
-## C. Supabase SQL (5 min)
+## B. Supabase SQL (5 min)
 
 1. [Supabase](https://supabase.com/dashboard) → your project → **SQL Editor**
 2. Paste entire file: `apps/web/supabase/migrations/COMBINED_p0_p1_p2.sql`
 3. Click **Run**
 
-## D. Seed data (2 min)
+## C. Seed data (2 min)
 
 ```powershell
 curl -X POST "https://sctransformation.netlify.app/api/seed/supabase?industry=all" `
   -H "x-seed-secret: YOUR_SEED_SECRET"
 ```
 
-## E. Verify (3 min)
+## D. Verify (3 min)
 
 ```
 https://sctransformation.netlify.app/api/health/wiring
+https://backend-production-1305.up.railway.app/health
+https://optimizer-production-c520.up.railway.app/api/forecast/models
 ```
 
-Expect `"status":"ready"` and both probes `ok: true`.
+Expect wiring `"status":"ready"` and forecast page `engine: yugam-optimizer`.
 
-Then open:
+## E. Redeploying backend/optimizer
 
-- `/app/modules/demand-forecasting` → `engine: yugam-optimizer`
-- `/app/sarvam` → ask about forecast WAPE
-- `/copilot` → should no longer show the dashboard URL warning
+GitHub auto-builds may use Railpack incorrectly. Prefer CLI from repo root:
+
+```powershell
+C:\yugam-opt\bin\railway.exe up --service backend --detach --yes
+C:\yugam-opt\bin\railway.exe up --service optimizer --detach --yes
+```
 
 ## F. Optional — n8n weekly jobs
 
 SSH tunnel: `ssh -N -L 5678:localhost:5678 root@13.140.181.82`  
-Import workflow from `docs/n8n-weekly-fefo.json` (if present) or create HTTP POST to:
-
-```
-POST https://sctransformation.netlify.app/api/integrations/vps/webhook
-Header: x-vps-secret: <VPS_WEBHOOK_SECRET>
-Body: {"source":"n8n","workflow":"weekly_fefo_scan","agent_id":"ai-inventory-strategist","tool":"inventory_fefo"}
-```
-
-## Paste back here
-
-```
-BACKEND=https://....up.railway.app
-OPTIMIZER=https://....up.railway.app
-```
-
-I will verify health endpoints and confirm wiring.
+Import `docs/n8n-weekly-fefo.json`.
