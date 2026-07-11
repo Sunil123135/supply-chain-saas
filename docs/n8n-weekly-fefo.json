@@ -1,0 +1,68 @@
+{
+  "name": "Yugam weekly FEFO + forecast",
+  "nodes": [
+    {
+      "parameters": {
+        "rule": {
+          "interval": [{ "field": "cronExpression", "expression": "0 6 * * 1" }]
+        }
+      },
+      "name": "Monday 06:00 IST",
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.2,
+      "position": [0, 0]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://sctransformation.netlify.app/api/integrations/vps/webhook",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "x-vps-secret",
+              "value": "={{ $env.VPS_WEBHOOK_SECRET }}"
+            },
+            { "name": "Content-Type", "value": "application/json" }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "{\n  \"source\": \"n8n\",\n  \"workflow\": \"weekly_fefo_scan\",\n  \"agent_id\": \"ai-inventory-strategist\",\n  \"tool\": \"inventory_fefo\"\n}"
+      },
+      "name": "FEFO scan",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [260, -80]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://sctransformation.netlify.app/api/integrations/vps/webhook",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "x-vps-secret",
+              "value": "={{ $env.VPS_WEBHOOK_SECRET }}"
+            },
+            { "name": "Content-Type", "value": "application/json" }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "{\n  \"source\": \"n8n\",\n  \"workflow\": \"weekly_forecast\",\n  \"agent_id\": \"ai-demand-analyst\",\n  \"tool\": \"demand_forecast\"\n}"
+      },
+      "name": "Forecast WAPE",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [260, 120]
+    }
+  ],
+  "connections": {
+    "Monday 06:00 IST": {
+      "main": [[{ "node": "FEFO scan", "type": "main", "index": 0 }, { "node": "Forecast WAPE", "type": "main", "index": 0 }]]
+    }
+  },
+  "settings": { "executionOrder": "v1" }
+}
