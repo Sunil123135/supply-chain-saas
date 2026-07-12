@@ -34,6 +34,20 @@ export function isDifyLocalhostUrl(url: string): boolean {
   }
 }
 
+/** Strip model chain-of-thought wrappers some Dify models emit. */
+export function cleanDifyAnswer(raw: string): string {
+  return raw
+    .replace(/<think>[\s\S]*?<\/think>/gi, "")
+    .replace(/<\/?think>/gi, "")
+    .trim();
+}
+
+/**
+ * Netlify serverless budgets are tight; keep Dify under this so Sarvam can
+ * fall back to deterministic narrative instead of gateway 504s.
+ */
+const DIFY_NARRATE_TIMEOUT_MS = Number(process.env.DIFY_TIMEOUT_MS ?? 14000);
+
 export async function narrateWithDify(args: DifyNarrateArgs): Promise<string | null> {
   if (!isDifyConfigured()) return null;
 
@@ -57,7 +71,7 @@ export async function narrateWithDify(args: DifyNarrateArgs): Promise<string | n
     `Data preview: ${args.dataPreview}`,
     `Relevant pain-map context:\n${args.painContext}`,
     "",
-    "Write a concise Sarvam narrative for a supply-chain planner. Cite the math summary. Suggest next action.",
+    "Write a concise Sarvam narrative for a supply-chain planner. Cite the math summary. Suggest next action. Do not include chain-of-thought or <think> tags.",
   ].join("\n");
 
   try {
@@ -77,6 +91,7 @@ export async function narrateWithDify(args: DifyNarrateArgs): Promise<string | n
         user,
         conversation_id: "",
       }),
+      signal: AbortSignal.timeout(DIFY_NARRATE_TIMEOUT_MS),
     });
 
     if (!res.ok) {
@@ -85,7 +100,7 @@ export async function narrateWithDify(args: DifyNarrateArgs): Promise<string | n
     }
 
     const data = (await res.json()) as { answer?: string; message?: string };
-    const answer = data.answer?.trim() || data.message?.trim();
+    const answer = cleanDifyAnswer(data.answer ?? data.message ?? "");
     return answer || null;
   } catch (err) {
     console.error("Dify narrate failed", err);

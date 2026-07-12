@@ -41,13 +41,15 @@ export async function GET() {
         headers: {
           Authorization: `Bearer ${process.env.DIFY_API_KEY}`,
         },
-        signal: AbortSignal.timeout(8000),
+        signal: AbortSignal.timeout(15000),
         next: { revalidate: 0 },
       });
+      const text = res.ok ? "reachable" : (await res.text()).slice(0, 120);
+      // 200 = published; 400 often still means API/auth reachable (app config messages).
       difyProbe = {
         ok: res.ok || res.status === 401 || res.status === 400,
         status: res.status,
-        body: res.ok ? "reachable" : (await res.text()).slice(0, 120),
+        body: text,
       };
     } catch (e) {
       difyProbe = {
@@ -160,7 +162,7 @@ export async function GET() {
       ? [
           "Open /app/modules/demand-forecasting — expect engine: yugam-optimizer",
           "Run Supabase COMBINED_p0_p1_p2.sql if not done",
-          "Dify: publish app + docs/DIFY_VPS_SETUP.md — set DIFY_* on Netlify",
+          "Sarvam with LLM: POST /api/sarvam/chat { useLlm: true } — Dify narrates when reachable",
         ]
       : missing,
   });

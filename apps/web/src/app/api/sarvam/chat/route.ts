@@ -3,6 +3,9 @@ import { NextResponse } from "next/server";
 import { runSarvamChat } from "@/lib/sarvam/chatCore";
 import type { IndustryPack } from "@/lib/import/config";
 
+/** Allow Dify narrate + tool math within Netlify Pro serverless budget. */
+export const maxDuration = 26;
+
 export async function POST(req: Request) {
   const body = (await req.json()) as {
     prompt: string;
