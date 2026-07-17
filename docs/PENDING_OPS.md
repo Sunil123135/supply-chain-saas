@@ -1,47 +1,33 @@
-# Ops checklist — still needs your credentials
+# Ops checklist — remaining steps
 
-Code for these is ready; they cannot finish from this machine alone.
+## Done from this machine (2026-07-17)
 
-## 1. Supabase — run migration `0004`
+- [x] Pushed P4 + Temporal + ERP sync code to GitHub `main` (`89d70fc`, `51c4cec`)
+- [x] Netlify env: `BOT_OPEN_DEMO`, `INTEGRATION_SECRET`, `VPS_WEBHOOK_SECRET` aligned
+- [x] **Railway `nexova-web` deployed** with autonomy APIs live  
+  → https://nexova-web-production.up.railway.app/api/autonomy/run
+- [x] Local Temporal cluster up (gateway `:8090`, `erp_sync_hourly` schedule)
+- [x] Temporal worker pointed at Railway web (`YUGAM_URL`)
 
-Open Supabase SQL Editor → paste `apps/web/supabase/migrations/0004_p4_enterprise.sql` → Run.
+## Blocked / needs you
 
-Creates: `demo_leads`, `audit_events`, `agent_schedules`.
+### 1. Supabase migration `0004` (tables still missing)
 
-## 2. Netlify env + redeploy
+[SQL Editor](https://supabase.com/dashboard/project/mtokwiodxducksyrixle/sql) → paste  
+`apps/web/supabase/migrations/0004_p4_enterprise.sql` → **Run**
 
-Set (Site settings → Environment variables), then **Trigger deploy**:
+Without this: audit / schedules / demo leads / `executionId` persistence stay empty.
 
-```
-TEMPORAL_GATEWAY_URL=https://YOUR-TEMPORAL-GATEWAY   # or http://VPS:8090
-VPS_WEBHOOK_SECRET=<same as docs/temporal/.env>
-SLACK_SIGNING_SECRET=...
-INTEGRATION_SECRET=...
-ERP_WEBHOOK_URL=...          # optional — live SAP middleware
-ERP_FEED_URL=...             # optional — inbound IDoc JSON feed
-CRM_WEBHOOK_URL=...          # optional
-YUGAM_REQUIRE_AUTH=true      # optional harden
-```
+### 2. Netlify credits exhausted
 
-Without redeploy, Temporal worker gets **404** on `/api/autonomy/run`.
+Deploys skipped: **account credit usage exceeded**.  
+`sctransformation.netlify.app` is still on old build (autonomy 404).  
+Add credits **or** use Railway web as primary frontend until Netlify is topped up.
 
-## 3. Temporal on VPS
+### 3. Temporal on VPS (optional)
 
-SSH (key required — last probe: `Permission denied`):
+SSH key needed for `root@13.140.181.82`. Local Docker already works.
 
-```bash
-scp -r docs/temporal root@13.140.181.82:/opt/yugam/temporal
-ssh root@13.140.181.82 'cd /opt/yugam/temporal && ./install.sh'
-```
+### 4. Live SAP + formal SOC2
 
-Local Docker already works: `docs/temporal/install.ps1` (Docker Desktop must be running).
-
-## 4. Live SAP partner
-
-Mapper + write-back queue + continuous sync are in code.  
-Point `ERP_WEBHOOK_URL` / `ERP_FEED_URL` at your middleware (CPI / Boomi / custom).  
-True RFC/IDoc partner login is outside this repo.
-
-## 5. Formal compliance (not software)
-
-SOC2 / pen-test / ISO — see `docs/SECURITY_SOC2.md` checklist (process + vendors).
+Partner URLs / process — unchanged.
