@@ -2,6 +2,7 @@ import { existsSync } from "fs";
 import { readFile } from "fs/promises";
 import path from "path";
 
+import { hydratePackFromSupabase } from "@/lib/data/orgWorkspace";
 import { IMPORT_FILES, PACK_PATHS, type IndustryPack } from "@/lib/import/config";
 import { parseCsv } from "@/lib/import/parseCsv";
 
@@ -9,6 +10,9 @@ export interface LoadedPack {
   industry: IndustryPack;
   packPath: string;
   loadedAt: string;
+  /** Where inventory/SKU/node/freight rows came from after hydrate. */
+  dataSource: "supabase" | "csv";
+  orgId: string | null;
   files: Record<string, { headers: string[]; rows: Record<string, string>[] }>;
   stats: {
     skuCount: number;
@@ -20,6 +24,11 @@ export interface LoadedPack {
     nearExpiryLots: number;
   };
 }
+
+export type LoadPackOptions = {
+  /** When false, skip Supabase overlay (used by seed). Default true. */
+  preferSupabase?: boolean;
+};
 
 function dataRoot(): string {
   const candidates = [
@@ -35,7 +44,11 @@ function dataRoot(): string {
   return candidates[0]!;
 }
 
-export async function loadIndustryPack(industry: IndustryPack): Promise<LoadedPack> {
+export async function loadIndustryPack(
+  industry: IndustryPack,
+  opts: LoadPackOptions = {},
+): Promise<LoadedPack> {
+  const preferSupabase = opts.preferSupabase !== false;
   const packDir = path.join(dataRoot(), PACK_PATHS[industry]);
   const files: LoadedPack["files"] = {};
 
@@ -56,29 +69,51 @@ export async function loadIndustryPack(industry: IndustryPack): Promise<LoadedPa
     const exp = lot.expiry_date;
     if (!exp) return false;
     const d = new Date(exp);
-    const days = (d.getTime() - today.getTime()) / (86400000);
+    const days = (d.getTime() - today.getTime()) / 86400000;
     return days >= 0 && days <= 60;
   }).length;
+
+  const csvStats = {
+    skuCount: skus.length,
+    lotCount: lots.length,
+    demandRows: files.demand_history?.rows.length ?? 0,
+    orderCount: files.open_orders?.rows.length ?? 0,
+    shipmentCount: files.shipments?.rows.length ?? 0,
+    nodeCount: files.nodes?.rows.length ?? 0,
+    nearExpiryLots,
+  };
+
+  if (!preferSupabase) {
+    return {
+      industry,
+      packPath: PACK_PATHS[industry],
+      loadedAt: new Date().toISOString(),
+      dataSource: "csv",
+      orgId: null,
+      files,
+      stats: csvStats,
+    };
+  }
+
+  const hydrated = await hydratePackFromSupabase(industry, files, csvStats);
 
   return {
     industry,
     packPath: PACK_PATHS[industry],
     loadedAt: new Date().toISOString(),
-    files,
-    stats: {
-      skuCount: skus.length,
-      lotCount: lots.length,
-      demandRows: files.demand_history?.rows.length ?? 0,
-      orderCount: files.open_orders?.rows.length ?? 0,
-      shipmentCount: files.shipments?.rows.length ?? 0,
-      nodeCount: files.nodes?.rows.length ?? 0,
-      nearExpiryLots,
-    },
+    dataSource: hydrated.source,
+    orgId: hydrated.orgId,
+    files: hydrated.files,
+    stats: hydrated.stats,
   };
 }
 
-export async function loadAllPacks(): Promise<Record<IndustryPack, LoadedPack>> {
+export async function loadAllPacks(
+  opts: LoadPackOptions = {},
+): Promise<Record<IndustryPack, LoadedPack>> {
   const industries: IndustryPack[] = ["medtech", "cpg"];
-  const entries = await Promise.all(industries.map(async (i) => [i, await loadIndustryPack(i)] as const));
+  const entries = await Promise.all(
+    industries.map(async (i) => [i, await loadIndustryPack(i, opts)] as const),
+  );
   return Object.fromEntries(entries) as Record<IndustryPack, LoadedPack>;
 }

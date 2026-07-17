@@ -17,6 +17,7 @@ export interface FefoItem {
   expiry_date: string | null;
   days_to_expiry: number | null;
   priority: "critical" | "high" | "medium" | "low" | "none";
+  abc_class: "A" | "B" | "C" | null;
   action: string;
   exposure_inr: number;
 }
@@ -30,9 +31,31 @@ function daysBetween(from: Date, to: Date): number {
   return Math.floor((to.getTime() - from.getTime()) / 86400000);
 }
 
+function normalizeAbc(v: string | undefined): FefoItem["abc_class"] {
+  const c = (v ?? "").trim().toUpperCase();
+  if (c === "A" || c === "B" || c === "C") return c;
+  return null;
+}
+
+/** Promote priority one notch for A-class SKUs (inventory-manager ABC control). */
+function boostForAbc(
+  priority: FefoItem["priority"],
+  abc: FefoItem["abc_class"],
+): FefoItem["priority"] {
+  if (abc !== "A" || priority === "none" || priority === "critical") return priority;
+  if (priority === "low") return "medium";
+  if (priority === "medium") return "high";
+  if (priority === "high") return "critical";
+  return priority;
+}
+
 export function computeFefoQueue(
   lots: LotRow[],
-  opts: { horizonDays?: number; unitCostBySku?: Record<string, number> } = {},
+  opts: {
+    horizonDays?: number;
+    unitCostBySku?: Record<string, number>;
+    abcClassBySku?: Record<string, string>;
+  } = {},
 ): {
   queue: FefoItem[];
   summary: {
@@ -41,11 +64,13 @@ export function computeFefoQueue(
     high: number;
     exposureInr: number;
     horizonDays: number;
+    abcBoosted: number;
   };
 } {
   const horizon = opts.horizonDays ?? 60;
   const today = new Date();
   today.setHours(0, 0, 0, 0);
+  let abcBoosted = 0;
 
   const queue: FefoItem[] = lots
     .map((lot) => {
@@ -54,6 +79,7 @@ export function computeFefoQueue(
       let days: number | null = null;
       let priority: FefoItem["priority"] = "none";
       let action = "Monitor — no expiry tracked";
+      const abc = normalizeAbc(opts.abcClassBySku?.[lot.sku_id]);
 
       if (exp) {
         const d = new Date(exp);
@@ -76,6 +102,13 @@ export function computeFefoQueue(
         }
       }
 
+      const before = priority;
+      priority = boostForAbc(priority, abc);
+      if (before !== priority) {
+        abcBoosted += 1;
+        action = `${action} · A-class tight control`;
+      }
+
       const unitCost = num(lot.unit_cost_inr) || num(opts.unitCostBySku?.[lot.sku_id]) || 100;
       return {
         sku_id: lot.sku_id,
@@ -85,6 +118,7 @@ export function computeFefoQueue(
         expiry_date: exp || null,
         days_to_expiry: days,
         priority,
+        abc_class: abc,
         action,
         exposure_inr: Math.round(qty * unitCost),
       };
@@ -94,6 +128,11 @@ export function computeFefoQueue(
       const order = { critical: 0, high: 1, medium: 2, low: 3, none: 4 };
       const pd = order[a.priority] - order[b.priority];
       if (pd !== 0) return pd;
+      // A before B before C within same priority
+      const abcOrder = { A: 0, B: 1, C: 2 };
+      const aa = a.abc_class ? abcOrder[a.abc_class] : 3;
+      const bb = b.abc_class ? abcOrder[b.abc_class] : 3;
+      if (aa !== bb) return aa - bb;
       return (a.days_to_expiry ?? 9999) - (b.days_to_expiry ?? 9999);
     });
 
@@ -107,6 +146,7 @@ export function computeFefoQueue(
       high: queue.filter((q) => q.priority === "high").length,
       exposureInr,
       horizonDays: horizon,
+      abcBoosted,
     },
   };
 }

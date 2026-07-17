@@ -4,9 +4,11 @@ import { MODULES, PILLARS } from "@/lib/product/catalog";
 const QUICK = [
   { href: "/app/sarvam", label: "Talk to Sarvam", desc: "Chat / voice orchestrator" },
   { href: "/dashboard", label: "Control Tower", desc: "Live MedTech + CPG KPIs" },
+  { href: "/approvals", label: "Approvals", desc: "Human-in-the-loop inbox" },
+  { href: "/autonomy", label: "Autonomy", desc: "Hermes / Temporal workflows" },
   { href: "/app/modules/freight-settlement", label: "Freight Settlement", desc: "Invoice leakage recovery" },
   { href: "/app/modules/demand-forecasting", label: "Demand Forecasting", desc: "SKU demand signals" },
-  { href: "/import", label: "Import data", desc: "CSV / starter packs" },
+  { href: "/import", label: "Import data", desc: "CSV / save to workspace" },
   { href: "/features", label: "Pain Map", desc: "Market pains vs roadmap" },
 ];
 

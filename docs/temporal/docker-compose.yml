@@ -1,0 +1,102 @@
+# Yugam Temporal cluster + worker + HTTP gateway
+#
+# Local:
+#   cd docs/temporal
+#   copy .env.example .env   # fill VPS_WEBHOOK_SECRET
+#   docker compose up -d --build
+#   curl http://localhost:8090/health
+#
+# VPS:
+#   scp -r docs/temporal root@VPS:/opt/yugam/temporal
+#   cd /opt/yugam/temporal && docker compose up -d --build
+
+services:
+  postgresql:
+    image: postgres:15
+    environment:
+      POSTGRES_PASSWORD: temporal
+      POSTGRES_USER: temporal
+    volumes:
+      - temporal_pg:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U temporal"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+    restart: unless-stopped
+
+  temporal:
+    image: temporalio/auto-setup:1.25.2
+    depends_on:
+      postgresql:
+        condition: service_healthy
+    environment:
+      - DB=postgres12
+      - DB_PORT=5432
+      - POSTGRES_USER=temporal
+      - POSTGRES_PWD=temporal
+      - POSTGRES_SEEDS=postgresql
+    ports:
+      - "7233:7233"
+    restart: unless-stopped
+
+  temporal-ui:
+    image: temporalio/ui:2.31.2
+    depends_on:
+      - temporal
+    environment:
+      - TEMPORAL_ADDRESS=temporal:7233
+      - TEMPORAL_CORS_ORIGINS=http://localhost:3000,https://sctransformation.netlify.app
+    ports:
+      - "8088:8080"
+    restart: unless-stopped
+
+  worker:
+    build: .
+    command: ["python", "worker.py"]
+    depends_on:
+      - temporal
+    environment:
+      TEMPORAL_HOST: temporal:7233
+      TEMPORAL_NAMESPACE: ${TEMPORAL_NAMESPACE:-default}
+      TEMPORAL_TASK_QUEUE: ${TEMPORAL_TASK_QUEUE:-yugam-autonomy}
+      YUGAM_URL: ${YUGAM_URL:-https://sctransformation.netlify.app}
+      VPS_WEBHOOK_SECRET: ${VPS_WEBHOOK_SECRET:-}
+      BOT_OPEN_DEMO: ${BOT_OPEN_DEMO:-false}
+      YUGAM_SSL_VERIFY: ${YUGAM_SSL_VERIFY:-true}
+    restart: unless-stopped
+
+  gateway:
+    build: .
+    command: ["python", "gateway.py"]
+    depends_on:
+      - temporal
+      - worker
+    environment:
+      TEMPORAL_HOST: temporal:7233
+      TEMPORAL_NAMESPACE: ${TEMPORAL_NAMESPACE:-default}
+      TEMPORAL_TASK_QUEUE: ${TEMPORAL_TASK_QUEUE:-yugam-autonomy}
+      TEMPORAL_GATEWAY_PORT: "8090"
+      YUGAM_URL: ${YUGAM_URL:-https://sctransformation.netlify.app}
+      VPS_WEBHOOK_SECRET: ${VPS_WEBHOOK_SECRET:-}
+      BOT_OPEN_DEMO: ${BOT_OPEN_DEMO:-true}
+      YUGAM_INDUSTRY: ${YUGAM_INDUSTRY:-medtech}
+    ports:
+      - "8090:8090"
+    restart: unless-stopped
+
+  schedules:
+    build: .
+    profiles: ["setup"]
+    command: ["python", "schedules.py", "--industry", "${YUGAM_INDUSTRY:-medtech}"]
+    depends_on:
+      - temporal
+      - worker
+    environment:
+      TEMPORAL_HOST: temporal:7233
+      TEMPORAL_NAMESPACE: ${TEMPORAL_NAMESPACE:-default}
+      TEMPORAL_TASK_QUEUE: ${TEMPORAL_TASK_QUEUE:-yugam-autonomy}
+      YUGAM_INDUSTRY: ${YUGAM_INDUSTRY:-medtech}
+
+volumes:
+  temporal_pg:

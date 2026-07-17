@@ -65,3 +65,5 @@ C:\yugam-opt\bin\railway.exe up --service optimizer --detach --yes
 
 SSH tunnel: `ssh -N -L 5678:localhost:5678 root@13.140.181.82`  
 Import `docs/n8n-weekly-fefo.json`.
+
+Full VPS linking guide: **[VPS_LINKING.md](./VPS_LINKING.md)** — what URLs/secrets to share, webhook contract, all 15 tools.

@@ -51,3 +51,36 @@ export async function logAgentExecution(entry: {
   if (error) return null;
   return data?.id as string;
 }
+
+/** SOC2-oriented audit trail (migration 0004 audit_events). */
+export async function logAuditEvent(entry: {
+  org_id?: string | null;
+  actor_id?: string;
+  actor_role?: string;
+  action: string;
+  resource_type?: string;
+  resource_id?: string | null;
+  confidence?: number;
+  auto_executed?: boolean;
+  payload?: unknown;
+}) {
+  const sb = getSupabaseAdmin();
+  if (!sb) return null;
+  const { data, error } = await sb
+    .from("audit_events")
+    .insert({
+      org_id: entry.org_id ?? null,
+      actor_id: entry.actor_id ?? null,
+      actor_role: entry.actor_role ?? null,
+      action: entry.action,
+      resource_type: entry.resource_type ?? null,
+      resource_id: entry.resource_id ?? null,
+      confidence: entry.confidence ?? null,
+      auto_executed: entry.auto_executed ?? false,
+      payload: entry.payload ?? {},
+    })
+    .select("id")
+    .single();
+  if (error) return null;
+  return data?.id as string;
+}

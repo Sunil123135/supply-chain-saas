@@ -120,7 +120,7 @@ export const MODULES: ProductModule[] = [
       "Capacity vs demand heatmaps",
       "What-if plant load balancing",
     ],
-    status: "beta",
+    status: "live",
     kpis: [
       { label: "Bottlenecks", value: "4" },
       { label: "Utilisation", value: "86%" },
@@ -140,7 +140,7 @@ export const MODULES: ProductModule[] = [
       "Changeover minimisation",
       "OEM OTIF alignment",
     ],
-    status: "beta",
+    status: "live",
     kpis: [
       { label: "Machine util.", value: "92%" },
       { label: "OTIF", value: "97%" },
@@ -160,7 +160,7 @@ export const MODULES: ProductModule[] = [
       "Inbound/outbound dock scheduling",
       "Real-time inventory reconciliation",
     ],
-    status: "demo",
+    status: "live",
     kpis: [
       { label: "Dock turns", value: "+18%" },
       { label: "Pick path ↓", value: "12%" },
@@ -200,7 +200,7 @@ export const MODULES: ProductModule[] = [
       "Weight & balance optimisation",
       "Unloading sequence compliance",
     ],
-    status: "demo",
+    status: "live",
     kpis: [
       { label: "Cube util.", value: "94%" },
       { label: "Weight util.", value: "91%" },
@@ -220,7 +220,7 @@ export const MODULES: ProductModule[] = [
       "Vehicle type allocation",
       "Utilisation rate maximisation",
     ],
-    status: "demo",
+    status: "live",
     kpis: [
       { label: "Utilisation", value: "95%" },
       { label: "Idle assets", value: "3" },
@@ -240,7 +240,7 @@ export const MODULES: ProductModule[] = [
       "Multi-criteria carrier scoring",
       "Digital contract awarding",
     ],
-    status: "demo",
+    status: "live",
     kpis: [
       { label: "Open RFQs", value: "7" },
       { label: "Avg savings", value: "6.2%" },
@@ -280,7 +280,7 @@ export const MODULES: ProductModule[] = [
       "AI-powered ETA prediction",
       "Automated status notifications",
     ],
-    status: "beta",
+    status: "live",
     kpis: [
       { label: "ETA accuracy", value: "97%" },
       { label: "Late risk", value: "5" },
@@ -300,7 +300,7 @@ export const MODULES: ProductModule[] = [
       "Multi-factor risk scoring",
       "Automated mitigation workflows",
     ],
-    status: "beta",
+    status: "live",
     kpis: [
       { label: "Active risks", value: "9" },
       { label: "Response ↑", value: "55%" },
@@ -320,7 +320,7 @@ export const MODULES: ProductModule[] = [
       "Photo & condition documentation",
       "Real-time delivery confirmation",
     ],
-    status: "demo",
+    status: "live",
     kpis: [
       { label: "Digital POD", value: "100%" },
       { label: "Pending sign-off", value: "4" },

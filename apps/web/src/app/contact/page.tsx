@@ -6,10 +6,39 @@ import { INDUSTRIES, OUTCOMES } from "@/lib/product/catalog";
 
 export default function ContactPage() {
   const [sent, setSent] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+  const [submitting, setSubmitting] = useState(false);
 
-  function onSubmit(e: FormEvent<HTMLFormElement>) {
+  async function onSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    setSent(true);
+    setError(null);
+    setSubmitting(true);
+    const fd = new FormData(e.currentTarget);
+    try {
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          first: fd.get("first"),
+          last: fd.get("last"),
+          company: fd.get("company"),
+          email: fd.get("email"),
+          phone: fd.get("phone"),
+          industry: fd.get("industry"),
+          message: fd.get("challenge"),
+        }),
+      });
+      const data = (await res.json()) as { ok?: boolean; error?: string };
+      if (!res.ok || !data.ok) {
+        setError(data.error ?? "Could not submit — try again");
+        return;
+      }
+      setSent(true);
+    } catch {
+      setError("Network error — try again");
+    } finally {
+      setSubmitting(false);
+    }
   }
 
   return (
@@ -119,8 +148,9 @@ export default function ContactPage() {
                   <input required type="checkbox" className="mt-0.5" />
                   I agree to the Privacy Policy and Terms of Use.
                 </label>
-                <button type="submit" className="btn-primary w-full">
-                  Request Your Demo
+                {error ? <p className="text-xs text-red-600">{error}</p> : null}
+                <button type="submit" className="btn-primary w-full" disabled={submitting}>
+                  {submitting ? "Sending…" : "Request Your Demo"}
                 </button>
               </form>
             )}

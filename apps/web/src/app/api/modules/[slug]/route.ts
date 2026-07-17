@@ -1,17 +1,25 @@
 import { NextResponse } from "next/server";
 
-import { runTool } from "@/lib/agents/tools";
+import { isToolName, runTool, type ToolName } from "@/lib/agents/tools";
 import { getModule } from "@/lib/product/catalog";
 import type { IndustryPack } from "@/lib/import/config";
 
-const MODULE_TOOLS: Record<string, string> = {
-  "inventory-optimisation": "inventory_fefo",
+const MODULE_TOOLS: Record<string, ToolName> = {
+  "inventory-optimisation": "meio_optimize",
   "freight-settlement": "freight_audit",
-  "demand-forecasting": "demand_forecast",
+  "demand-forecasting": "forecast_compare",
   "control-tower": "control_tower",
   "dispatch-planning": "dispatch_analysis",
-  "risk-management": "risk_scan",
-  "scenario-modelling": "scenario_baseline",
+  "risk-management": "cold_chain",
+  "scenario-modelling": "plan_vs_actual",
+  "rough-cut-capacity": "rccp",
+  "production-planning": "production_plan",
+  "warehouse-planning": "warehouse_plan",
+  "3d-load-building": "load_build",
+  "fleet-sizing": "fleet_size",
+  "rfq-bidding": "rfq_score",
+  "eta-prediction": "track_trace",
+  epod: "epod_validate",
 };
 
 type Params = { params: { slug: string } };
@@ -22,10 +30,14 @@ export async function GET(req: Request, { params }: Params) {
 
   const { searchParams } = new URL(req.url);
   const industry = (searchParams.get("industry") as IndustryPack) ?? "medtech";
-  const tool = MODULE_TOOLS[params.slug];
+  const toolOverride = searchParams.get("tool");
+  const tool =
+    toolOverride && isToolName(toolOverride)
+      ? toolOverride
+      : MODULE_TOOLS[params.slug];
 
   if (tool) {
-    const result = await runTool(tool as Parameters<typeof runTool>[0], { industry });
+    const result = await runTool(tool, { industry });
     return NextResponse.json({ module: mod.slug, ...result, engine: "yugam-math" });
   }
 

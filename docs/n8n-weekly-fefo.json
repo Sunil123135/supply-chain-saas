@@ -2,11 +2,20 @@
   "name": "Yugam weekly FEFO + forecast",
   "nodes": [
     {
+      "parameters": {},
+      "id": "manual-trigger",
+      "name": "Manual test",
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [0, 200]
+    },
+    {
       "parameters": {
         "rule": {
           "interval": [{ "field": "cronExpression", "expression": "0 6 * * 1" }]
         }
       },
+      "id": "cron-monday",
       "name": "Monday 06:00 IST",
       "type": "n8n-nodes-base.scheduleTrigger",
       "typeVersion": 1.2,
@@ -21,19 +30,20 @@
           "parameters": [
             {
               "name": "x-vps-secret",
-              "value": "={{ $env.VPS_WEBHOOK_SECRET }}"
+              "value": "yugam-vps-2026-n4r7t1wz"
             },
             { "name": "Content-Type", "value": "application/json" }
           ]
         },
         "sendBody": true,
         "specifyBody": "json",
-        "jsonBody": "{\n  \"source\": \"n8n\",\n  \"workflow\": \"weekly_fefo_scan\",\n  \"agent_id\": \"ai-inventory-strategist\",\n  \"tool\": \"inventory_fefo\"\n}"
+        "jsonBody": "={\n  \"source\": \"n8n\",\n  \"workflow\": \"weekly_fefo_scan\",\n  \"agent_id\": \"ai-inventory-strategist\",\n  \"tool\": \"inventory_fefo\",\n  \"industry\": \"medtech\",\n  \"params\": { \"horizonDays\": 60 }\n}"
       },
+      "id": "http-fefo",
       "name": "FEFO scan",
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.2,
-      "position": [260, -80]
+      "position": [320, -40]
     },
     {
       "parameters": {
@@ -44,25 +54,63 @@
           "parameters": [
             {
               "name": "x-vps-secret",
-              "value": "={{ $env.VPS_WEBHOOK_SECRET }}"
+              "value": "yugam-vps-2026-n4r7t1wz"
             },
             { "name": "Content-Type", "value": "application/json" }
           ]
         },
         "sendBody": true,
         "specifyBody": "json",
-        "jsonBody": "{\n  \"source\": \"n8n\",\n  \"workflow\": \"weekly_forecast\",\n  \"agent_id\": \"ai-demand-analyst\",\n  \"tool\": \"demand_forecast\"\n}"
+        "jsonBody": "={\n  \"source\": \"n8n\",\n  \"workflow\": \"weekly_forecast\",\n  \"agent_id\": \"ai-demand-analyst\",\n  \"tool\": \"demand_forecast\",\n  \"industry\": \"medtech\"\n}"
       },
+      "id": "http-forecast",
       "name": "Forecast WAPE",
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.2,
-      "position": [260, 120]
+      "position": [320, 160]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://sctransformation.netlify.app/api/agents/execute",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            { "name": "Content-Type", "value": "application/json" }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"tool\": \"control_tower\",\n  \"industry\": \"medtech\",\n  \"agent_id\": \"ai-visibility-controller\"\n}"
+      },
+      "id": "http-ct",
+      "name": "Control Tower (fallback)",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [560, 200]
     }
   ],
   "connections": {
     "Monday 06:00 IST": {
-      "main": [[{ "node": "FEFO scan", "type": "main", "index": 0 }, { "node": "Forecast WAPE", "type": "main", "index": 0 }]]
+      "main": [
+        [
+          { "node": "FEFO scan", "type": "main", "index": 0 },
+          { "node": "Forecast WAPE", "type": "main", "index": 0 }
+        ]
+      ]
+    },
+    "Manual test": {
+      "main": [
+        [
+          { "node": "FEFO scan", "type": "main", "index": 0 },
+          { "node": "Forecast WAPE", "type": "main", "index": 0 },
+          { "node": "Control Tower (fallback)", "type": "main", "index": 0 }
+        ]
+      ]
     }
   },
-  "settings": { "executionOrder": "v1" }
+  "settings": { "executionOrder": "v1" },
+  "meta": {
+    "templateCredsSetupCompleted": true
+  }
 }

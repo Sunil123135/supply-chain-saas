@@ -51,8 +51,26 @@ curl -X POST https://sctransformation.netlify.app/api/integrations/vps/webhook \
   -d '{"workflowId":"fefo_weekly","source":"temporal","industry":"medtech"}'
 ```
 
-Temporal worker stub: `docs/temporal/worker_stub.py`  
-Hermes role map: workflows in `apps/web/src/lib/autonomy/workflows.ts`
+### Temporal (full cluster)
+
+```powershell
+cd docs/temporal
+.\install.ps1
+```
+
+Set `TEMPORAL_GATEWAY_URL=http://localhost:8090` (or public VPS URL).
+
+```bash
+# health
+curl http://localhost:8090/health
+# queue via SaaS
+curl -X POST http://localhost:3000/api/autonomy/run \
+  -H "content-type: application/json" \
+  -d '{"workflowId":"control_tower_daily","industry":"medtech","via":"temporal"}'
+```
+
+Cron-only fallback: `docs/temporal/worker_stub.py`  
+Hermes role map: `apps/web/src/lib/autonomy/workflows.ts`
 
 ## VRP / 3D packing
 

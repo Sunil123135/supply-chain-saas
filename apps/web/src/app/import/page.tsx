@@ -100,6 +100,27 @@ export default function ImportWizardPage() {
 
   const requiredDone = IMPORT_FILES.filter((f) => f.required).every((f) => fileStates[f.key].ok);
 
+  const persistToWorkspace = async () => {
+    setLoading(true);
+    setMessage(null);
+    try {
+      const res = await fetch("/api/import/persist", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ industry, mode: "starter" }),
+      });
+      const data = await res.json();
+      if (!res.ok) throw new Error(data.error ?? "Persist failed");
+      setMessage(
+        `Saved to workspace: ${data.skus} SKUs, ${data.lots} lots (org ${String(data.orgId).slice(0, 8)}…).`,
+      );
+    } catch (e) {
+      setMessage(e instanceof Error ? e.message : "Failed to save workspace");
+    } finally {
+      setLoading(false);
+    }
+  };
+
   return (
     <main className="mx-auto max-w-4xl px-6 py-12">
       <p className="text-sm font-medium uppercase tracking-widest text-emerald-400">P1 — Data import</p>
@@ -230,15 +251,26 @@ export default function ImportWizardPage() {
             ))}
           </ul>
           <p className="mt-6 text-sm text-zinc-400">
-            Data is stored in browser session for P1. Supabase persistence ships with P1.2 auth + org
-            tables.
+            Save this pack into your Supabase workspace so FEFO, Control Tower, and Sarvam read live
+            lots — not only browser localStorage.
           </p>
-          <div className="mt-6 flex gap-3">
-            <Link href="/copilot" className="text-emerald-400 hover:underline">
-              Test Copilot →
+          <div className="mt-6 flex flex-wrap gap-3">
+            <button
+              type="button"
+              disabled={loading || !fileStates.sku_master.ok}
+              onClick={() => void persistToWorkspace()}
+              className="rounded-lg bg-emerald-600 px-4 py-2 text-sm font-medium hover:bg-emerald-500 disabled:opacity-50"
+            >
+              {loading ? "Saving…" : "Save to workspace"}
+            </button>
+            <Link href="/dashboard" className="rounded-lg border border-zinc-600 px-4 py-2 text-sm">
+              Open Control Tower
             </Link>
-            <Link href="/" className="text-zinc-400 hover:underline">
-              Home
+            <Link href="/approvals" className="text-emerald-400 hover:underline self-center text-sm">
+              Approvals inbox →
+            </Link>
+            <Link href="/app/sarvam" className="text-zinc-400 hover:underline self-center text-sm">
+              Sarvam
             </Link>
           </div>
         </section>

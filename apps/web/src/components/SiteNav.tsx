@@ -17,6 +17,9 @@ const NAV = [
 const APP_LINKS = [
   { href: "/app", label: "App" },
   { href: "/dashboard", label: "Control Tower" },
+  { href: "/approvals", label: "Approvals" },
+  { href: "/autonomy", label: "Autonomy" },
+  { href: "/audit", label: "Audit" },
   { href: "/features", label: "Pain Map" },
   { href: "/import", label: "Import" },
 ] as const;

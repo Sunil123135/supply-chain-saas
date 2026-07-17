@@ -1,4 +1,4 @@
-# Railway / CPU deploy — stats + LightGBM (no torch; neural models fall back to ETS)
+# Railway / CPU deploy — stats + LightGBM + OR layer (no torch)
 FROM python:3.12-slim
 
 WORKDIR /app
@@ -12,6 +12,10 @@ RUN pip install --no-cache-dir -r requirements.txt
 
 COPY services/optimizer/main.py ./main.py
 COPY services/optimizer/forecast/ ./forecast/
+COPY services/optimizer/routing/ ./routing/
+COPY services/optimizer/inventory/ ./inventory/
+COPY services/optimizer/network/ ./network/
+COPY services/optimizer/planning/ ./planning/
 COPY data/ /app/data/
 
 ENV PORT=8001

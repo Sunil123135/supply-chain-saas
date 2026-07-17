@@ -74,10 +74,17 @@ bash services/optimizer/deploy-vps.sh
 - [x] Sarvam tool-calling on Netlify (no Railway required for math)
 - [x] FEFO + freight settlement real logic
 - [x] Agent execution audit table schema
-- [ ] Run Supabase migrations + seed lots_inventory
-- [ ] Deploy Railway with `backend/` + set `NEXT_PUBLIC_API_URL`
-- [ ] Deploy **optimizer** Railway service (`Dockerfile.railway`) + set `OPTIMIZER_URL` on Netlify
-- [ ] n8n on VPS: weekly cron → VPS webhook → `/api/agents/execute` with `inventory_fefo`
+- [x] Dual-source loader (Supabase lots/SKUs/nodes/freight → CSV fallback)
+- [x] Import wizard **Save to workspace** (`POST /api/import/persist`)
+- [x] Approvals inbox UI + API (`/approvals`, approve/reject)
+- [x] Control Tower merges math exceptions + `agent_executions` (taxonomy)
+- [x] FEFO ABC-class priority boost (inventory-manager)
+- [x] Thin auth middleware (`YUGAM_REQUIRE_AUTH` + demo cookie)
+- [x] Run Supabase migrations + seed lots_inventory
+- [x] Deploy Railway with `backend/` + set `NEXT_PUBLIC_API_URL`
+- [x] Deploy **optimizer** Railway service (`Dockerfile.railway`) + set `OPTIMIZER_URL` on Netlify
+- [x] n8n on VPS: weekly cron → VPS webhook → tool execute
+
 
 **Exit criteria:** Sarvam answers “which lots expire” and “which invoices to dispute” with real numbers from live site.
 
@@ -85,12 +92,12 @@ bash services/optimizer/deploy-vps.sh
 
 ## Week 3–4 — Persistence + 2 more modules
 
-- [ ] Wire import wizard → Supabase `lots_inventory`, `freight_invoices`
-- [ ] Auth middleware on `/app/*` (optional org scoping)
-- [ ] **Demand forecasting** UI with WAPE dashboard (shipped P3 — wire `OPTIMIZER_URL`)
-- [ ] **Control Tower** exceptions inbox from agent_executions
-- [ ] Dify RAG on pain-map + playbook docs for Sarvam narrative layer
-- [ ] SAP IDoc field mapper (MATNR, WERKS, CHARG → sku, node, lot)
+- [x] Wire import wizard → Supabase `lots_inventory`, `freight_invoices`
+- [x] Auth middleware on `/app/*` (optional via `YUGAM_REQUIRE_AUTH=true` + demo cookie)
+- [x] **Demand forecasting** UI with WAPE dashboard (shipped P3 — wire `OPTIMIZER_URL`)
+- [x] **Control Tower** exceptions inbox from agent_executions + taxonomy
+- [x] Dify RAG on pain-map + playbook docs for Sarvam narrative layer
+- [x] SAP IDoc field mapper (MATNR, WERKS, CHARG → sku, node, lot) — `lib/integrations/sapIdoc.ts`
 
 **Exit criteria:** One paying pilot can upload ERP CSV and see FEFO + freight recovery in dashboard.
 
@@ -100,19 +107,30 @@ bash services/optimizer/deploy-vps.sh
 
 | Module | Math / agent | VPS role |
 |--------|----------------|----------|
-| Dispatch planning | OR-Tools VRP stub | Temporal long-running routes |
+| Dispatch planning | OR-Tools VRP | Temporal long-running routes |
 | 3D load building | 3D bin packing | Optimizer microservice |
 | RFQ & bidding | Multi-criteria score | n8n carrier email loop |
-| ETA prediction | Moving average + delay rules | Scraper for port delays |
-| Risk management | Rules + external feeds | Bright Data / yt-dlp |
+| ETA / track-trace | Multimodal milestones | Carrier/EDI feeds |
+| Risk / cold-chain | GDP excursion rules | Sensor feeds later |
 | ePOD | File upload + validation | Mobile webhook |
 | Warehouse planning | Dock slot heuristic | WMS CSV connector |
-| Production planning | Capacity LP stub | ERP production order export |
+| Production planning | Capacity LP | ERP production order export |
+| ATP / lot mortgage / E&O | Product-depth engines | Scheduled MedTech compliance |
 
-- [ ] Human approval queue UI (agent_executions `requires_approval`)
-- [ ] Temporal workflows: `fefo_weekly`, `freight_audit_monthly`
-- [ ] Hermes as single orchestrator calling Netlify APIs + Dify
-- [ ] Slack / Teams bot → `/api/sarvam/chat`
+- [x] Temporal workflows: `fefo_weekly`, `freight_audit_monthly` (+ more via `/api/autonomy/run`)
+- [x] Hermes as single orchestrator calling Netlify APIs (+ Dify narrative)
+- [x] Slack / Teams bot → `/api/sarvam/chat` (+ WhatsApp)
+- [x] Deeper CVRP + 3D packing (TS local + optimizer OR-Tools)
+- [x] Dify RAG narrative layer (`docs/rag/pain-playbook.md`)
+- [x] Product depth: ATP, lot mortgage, E&O, cold-chain, track-trace, PVA, forecast compare
+- [x] Slack HMAC (`SLACK_SIGNING_SECRET`) + confidence gates + `/audit` UX
+- [x] Contact → CRM webhook (`CRM_WEBHOOK_URL`) + `demo_leads` table
+- [x] Temporal docker-compose + `docs/temporal/worker.py`
+- [x] Temporal gateway + schedules + SaaS `TEMPORAL_GATEWAY_URL` client (`/api/temporal/status`)
+- [x] Install scripts (`docs/temporal/install.ps1` / `install.sh`) — run on host/VPS
+- [x] ERP write-back queue + continuous sync API (`/api/integrations/erp/sync`, Temporal `erp_sync_hourly`)
+- [ ] Live SAP middleware credentials (`ERP_WEBHOOK_URL` / `ERP_FEED_URL`) — ops/partner
+
 
 **Exit criteria:** 7+ modules return real API data; 3+ run on VPS schedule without manual clicks.
 
@@ -122,21 +140,33 @@ bash services/optimizer/deploy-vps.sh
 
 | Module | Math | API | DB | Autonomous |
 |--------|------|-----|-----|------------|
-| Demand Forecasting | ✅ ES | ✅ | ⬜ | ⬜ |
-| Scenario Modelling | ✅ baseline | ✅ | ⬜ | ⬜ |
-| Inventory / FEFO | ✅ | ✅ | schema | ⬜ |
-| Rough Cut Capacity | ⬜ | scaffold | ⬜ | ⬜ |
-| Production Planning | ⬜ | scaffold | ⬜ | ⬜ |
-| Warehouse Planning | ⬜ | scaffold | ⬜ | ⬜ |
-| Dispatch Planning | ✅ fill | ✅ | ⬜ | ⬜ |
-| 3D Load Building | ⬜ | scaffold | ⬜ | ⬜ |
-| Fleet Sizing | ⬜ | scaffold | ⬜ | ⬜ |
-| RFQ & Bidding | ⬜ | scaffold | ⬜ | ⬜ |
-| Control Tower | ✅ stats | ✅ | ⬜ | ⬜ |
-| ETA Prediction | ⬜ | scaffold | ⬜ | ⬜ |
-| Risk Management | ✅ rules | ✅ | ⬜ | ⬜ |
-| ePOD | ⬜ | scaffold | ⬜ | ⬜ |
+| Demand Forecasting | ✅ optimizer + local | ✅ | ⬜ | n8n ready |
+| Forecast compare / MAPE | ✅ | ✅ tool | ⬜ | weekly PVA wf |
+| Demand Sensing | ✅ OR layer | ✅ tool | ⬜ | ⬜ |
+| Scenario / Network MIP | ✅ PuLP/OR-Tools | ✅ | ⬜ | ⬜ |
+| Plan-vs-actual | ✅ | ✅ tool | ⬜ | weekly wf |
+| Inventory / FEFO | ✅ | ✅ | schema | n8n ready |
+| MEIO / Safety stock | ✅ OR layer | ✅ | ⬜ | weekly wf |
+| Auto-indent (ROP) | ✅ OR layer | ✅ | ⬜ | ⬜ |
+| ATP allocation | ✅ | ✅ tool | ⬜ | MedTech daily |
+| Lot mortgage | ✅ | ✅ tool | ⬜ | MedTech daily |
+| E&O / aging | ✅ | ✅ tool | ⬜ | FEFO weekly |
+| Cold-chain GDP | ✅ | ✅ tool | ⬜ | MedTech daily |
+| Track-and-trace | ✅ | ✅ tool | ⬜ | tower daily |
+| Rough Cut Capacity | ✅ | ✅ | ⬜ | ⬜ |
+| Production Planning | ✅ + LP | ✅ | ⬜ | ⬜ |
+| Warehouse Planning | ✅ | ✅ | ⬜ | ⬜ |
+| Dispatch Planning | ✅ OR-Tools CVRP | ✅ | ⬜ | ⬜ |
+| 3D Load Building | ✅ | ✅ | ⬜ | ⬜ |
+| Fleet Sizing | ✅ | ✅ | ⬜ | ⬜ |
+| RFQ & Bidding | ✅ | ✅ | ⬜ | ⬜ |
+| Control Tower | ✅ exceptions | ✅ | ⬜ | daily |
+| ETA Prediction | ✅ | ✅ | ⬜ | ⬜ |
+| Risk Management | ✅ | ✅ | ⬜ | ⬜ |
+| ePOD | ✅ | ✅ | ⬜ | ⬜ |
 | Freight Settlement | ✅ | ✅ | schema | ⬜ |
+
+VPS webhook now **executes** `tool` when provided (see `docs/VPS_LINKING.md`).
 
 ---
 

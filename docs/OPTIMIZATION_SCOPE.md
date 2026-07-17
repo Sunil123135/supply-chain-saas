@@ -24,10 +24,25 @@ Yugam is **not** forecast-only. The product solves the **top supply chain pain s
 | **P2** | Capacitated VRP, vehicle type from cube/weight | #23–26, #30, #31 |
 | **P3** | **DC rationalization MIP** (fixed charge facility location) | #12, #13, network |
 | **P3** | Warehouse slotting heuristic | fill rate, pick productivity |
-| **P4** | Multi-echelon inventory approximation | #8–10, #12 |
+| **P4** | Multi-echelon inventory (MEIO) + newsvendor + auto-indent + demand sensing | #8–10, #12, #18 |
+| **P4** | Production LP (PuLP/CBC) | RCCP / MRP |
 | **P5** | 3D load building, FTL/LTL compare | #24–25, #27 |
 | **P6** | **Quantile / pinball forecast** (asymmetric loss) | promo spikes, quick commerce |
 | **P6** | Invoice audit, freight benchmark | #28 |
+
+### OR API surface (optimizer service)
+
+| Endpoint | Engine |
+|----------|--------|
+| `POST /api/inventory/meio` | Square-root MEIO + newsvendor |
+| `POST /api/inventory/sense` | Demand sensing blend |
+| `POST /api/inventory/indent` | ROP auto-indent |
+| `POST /api/network/optimize` | PuLP CBC facility MIP → OR-Tools CP-SAT → greedy |
+| `POST /api/production/plan` | Production LP |
+| `POST /api/vrp/solve` | OR-Tools CVRP → Clarke–Wright |
+| `POST /api/pack/3d` | Extreme-point 3D packing |
+
+Netlify Sarvam tools call these with **TS heuristic fallbacks** when `OPTIMIZER_URL` is down.
 
 ---
 

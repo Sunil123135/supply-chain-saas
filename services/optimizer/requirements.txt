@@ -20,3 +20,7 @@ neuralforecast>=1.7.0
 transformers>=4.40.0
 chronos-forecasting>=1.4.0
 uni2ts>=1.0.0
+
+# OR layer (VRP, facility MIP, production LP)
+ortools>=9.10.4067
+pulp>=2.8.0

@@ -37,7 +37,7 @@ export async function POST(req: Request) {
   const results: Record<string, unknown> = {};
 
   for (const industry of industries) {
-    const pack = await loadIndustryPack(industry);
+    const pack = await loadIndustryPack(industry, { preferSupabase: false });
     const orgRes = await fetch(`${url}/rest/v1/organizations`, {
       method: "POST",
       headers: {
