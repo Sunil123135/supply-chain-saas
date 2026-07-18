@@ -20,9 +20,17 @@ interface TemporalInfo {
   taskQueue?: string;
 }
 
+interface HermesInfo {
+  configured?: boolean;
+  baseUrl?: string | null;
+  saasBase?: string;
+  roles?: number;
+}
+
 export default function AutonomyPage() {
   const [workflows, setWorkflows] = useState<WorkflowRow[]>([]);
   const [temporal, setTemporal] = useState<TemporalInfo | null>(null);
+  const [hermes, setHermes] = useState<HermesInfo | null>(null);
   const [running, setRunning] = useState<string | null>(null);
   const [message, setMessage] = useState<string | null>(null);
   const [industry, setIndustry] = useState<"medtech" | "cpg">("medtech");
@@ -35,12 +43,46 @@ export default function AutonomyPage() {
         setTemporal(d.temporal ?? null);
       })
       .catch(() => setMessage("Failed to load workflows"));
+
+    fetch("/api/integrations/hermes")
+      .then((r) => r.json())
+      .then((d) => {
+        setHermes({
+          configured: Boolean(d.hermes?.configured),
+          baseUrl: d.hermes?.baseUrl ?? null,
+          saasBase: d.saas?.baseUrl,
+          roles: Array.isArray(d.roles) ? d.roles.length : 0,
+        });
+      })
+      .catch(() => {
+        /* optional */
+      });
   }, []);
 
-  async function run(id: string, via: "inline" | "temporal") {
+  async function run(id: string, via: "inline" | "temporal" | "hermes") {
     setRunning(`${via}:${id}`);
     setMessage(null);
     try {
+      if (via === "hermes") {
+        const res = await fetch("/api/integrations/hermes", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            action: "run_workflow",
+            workflowId: id,
+            industry,
+            notify: true,
+          }),
+        });
+        const data = await res.json();
+        if (!res.ok) {
+          setMessage(data.error ?? "Hermes run failed");
+          return;
+        }
+        setMessage(`Hermes → ${data.hermesRole}: ${data.summary}`);
+        return;
+      }
+
       const res = await fetch("/api/autonomy/run", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -73,12 +115,39 @@ export default function AutonomyPage() {
       <p className="section-eyebrow">Hermes · Temporal · n8n</p>
       <h1 className="mt-2 font-display text-3xl font-bold">Autonomy workflows</h1>
       <p className="mt-2 text-sm text-[var(--muted-fg)]">
-        Named multi-tool runs for VPS orchestrators. Same APIs power Slack/Teams/WhatsApp via
-        Sarvam. Docs: <code className="text-[var(--accent)]">docs/temporal/README.md</code>
+        Named multi-tool runs for Hermes and other VPS orchestrators. Docs:{" "}
+        <code className="text-[var(--accent)]">docs/hermes/README.md</code>
       </p>
 
       <div
         className={`mt-4 rounded-lg border px-3 py-2 text-xs ${
+          hermes
+            ? "border-sky-700/50 bg-sky-950/40 text-sky-100"
+            : "border-zinc-700 bg-zinc-900/50 text-zinc-400"
+        }`}
+      >
+        {hermes ? (
+          <>
+            Hermes ingress live · {hermes.roles ?? 0} roles · SaaS {hermes.saasBase}{" "}
+            {hermes.configured ? (
+              <>· outbound {hermes.baseUrl}</>
+            ) : (
+              <>
+                · set <code>HERMES_URL</code> for completion callbacks
+              </>
+            )}
+          </>
+        ) : (
+          <>Loading Hermes agent card…</>
+        )}
+        {" · "}
+        <Link href="/api/integrations/hermes" className="text-[var(--accent)]">
+          agent card
+        </Link>
+      </div>
+
+      <div
+        className={`mt-2 rounded-lg border px-3 py-2 text-xs ${
           temporalReady
             ? "border-emerald-700/50 bg-emerald-950/40 text-emerald-200"
             : "border-zinc-700 bg-zinc-900/50 text-zinc-400"
@@ -144,6 +213,14 @@ export default function AutonomyPage() {
                   className="rounded-lg bg-emerald-600 px-3 py-1.5 text-xs font-medium text-white disabled:opacity-50"
                 >
                   {running === `inline:${w.id}` ? "Running…" : "Run now"}
+                </button>
+                <button
+                  type="button"
+                  disabled={running === `hermes:${w.id}`}
+                  onClick={() => void run(w.id, "hermes")}
+                  className="rounded-lg bg-sky-700 px-3 py-1.5 text-xs font-medium text-white disabled:opacity-50"
+                >
+                  {running === `hermes:${w.id}` ? "Hermes…" : "Run via Hermes"}
                 </button>
                 <button
                   type="button"

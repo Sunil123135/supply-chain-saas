@@ -7,6 +7,7 @@ import {
   type AutonomyWorkflowId,
 } from "@/lib/autonomy/workflows";
 import type { IndustryPack } from "@/lib/import/config";
+import { hermesConfigured, hermesBaseUrl, saasPublicBase } from "@/lib/hermes/manifest";
 import {
   fetchTemporalHealth,
   isTemporalConfigured,
@@ -20,6 +21,13 @@ export async function GET() {
   return NextResponse.json({
     service: "yugam-autonomy",
     orchestrators: ["hermes", "temporal", "n8n"],
+    hermes: {
+      ingress: "/api/integrations/hermes",
+      configured: hermesConfigured(),
+      baseUrl: hermesBaseUrl(),
+      saasBase: saasPublicBase(),
+      docs: "docs/hermes/README.md",
+    },
     temporal: {
       configured: isTemporalConfigured(),
       ...temporal,

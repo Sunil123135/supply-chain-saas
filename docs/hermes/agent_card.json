@@ -1,0 +1,18 @@
+{
+  "id": "yugam-hermes",
+  "name": "Yugam Hermes Orchestrator",
+  "version": "1.1.0",
+  "saasBaseUrl": "https://nexova-web-production.up.railway.app",
+  "discovery": "GET /api/integrations/hermes",
+  "auth": {
+    "header": "x-vps-secret",
+    "env": "VPS_WEBHOOK_SECRET"
+  },
+  "actions": [
+    { "action": "run_role", "body": { "role": "orchestrator", "industry": "medtech" } },
+    { "action": "run_workflow", "body": { "workflowId": "sensing_indent_daily", "industry": "medtech" } },
+    { "action": "run_tool", "body": { "tool": "inventory_fefo", "industry": "medtech" } },
+    { "action": "chat", "body": { "prompt": "Which lots expire soon?" } }
+  ],
+  "bridge": "docs/hermes/yugam_hermes_agent.py"
+}

@@ -109,7 +109,13 @@ export async function GET() {
     auth: "x-vps-secret header",
     execute: "POST { tool | workflowId, industry?, params?, agent_id?, source? }",
     saas_base:
-      process.env.URL || process.env.DEPLOY_PRIME_URL || "https://sctransformation.netlify.app",
+      process.env.APP_URL ||
+      process.env.NEXT_PUBLIC_APP_URL ||
+      process.env.URL ||
+      process.env.DEPLOY_PRIME_URL ||
+      "https://nexova-web-production.up.railway.app",
+    hermes: "/api/integrations/hermes",
     vps_public_url: process.env.VPS_PUBLIC_URL || null,
+    hermes_url: process.env.HERMES_URL || process.env.VPS_HERMES_URL || null,
   });
 }

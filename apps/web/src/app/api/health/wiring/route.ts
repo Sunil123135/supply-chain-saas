@@ -7,6 +7,7 @@ import {
   normalizeDifyBaseUrl,
 } from "@/lib/dify/client";
 import { getOptimizerUrl } from "@/lib/forecast/optimizer";
+import { hermesConfigured, hermesBaseUrl } from "@/lib/hermes/manifest";
 import { isOpenRouterConfigured } from "@/lib/rag/localPlaybook";
 
 /**
@@ -117,6 +118,8 @@ export async function GET() {
     dify_reachable: difyProbe.ok,
     openrouter_rag: isOpenRouterConfigured(),
     voice_excel_channels: true,
+    hermes_url_set: hermesConfigured(),
+    hermes_ingress: true,
   };
 
   const missing: string[] = [];
@@ -153,6 +156,8 @@ export async function GET() {
       api: apiMisconfigured ? "(misconfigured — railway.com dashboard URL)" : apiUrl,
       optimizer: optimizerIsLocal ? "(default localhost — set OPTIMIZER_URL)" : optimizerUrl,
       vps: process.env.VPS_PUBLIC_URL || null,
+      hermes: hermesBaseUrl(),
+      hermes_api: "/api/integrations/hermes",
       dify: difyBase
         ? difyIsLocal
           ? "(localhost — local tunnel only)"
@@ -168,6 +173,7 @@ export async function GET() {
           "Sarvam LLM: Dify if set, else OpenRouter RAG on Railway",
           "Voice: POST /api/integrations/voice { transcript }",
           "Excel: POST /api/integrations/excel multipart file",
+          "Hermes: GET/POST /api/integrations/hermes — docs/hermes/README.md",
         ]
       : missing,
   });
