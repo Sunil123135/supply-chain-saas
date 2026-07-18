@@ -7,7 +7,7 @@ export interface SarvamChatInput {
   prompt: string;
   industry?: IndustryPack;
   useLlm?: boolean;
-  channel?: "web" | "slack" | "teams" | "whatsapp" | "hermes" | "temporal";
+  channel?: "web" | "slack" | "teams" | "whatsapp" | "voice" | "excel" | "hermes" | "temporal";
   externalUserId?: string;
 }
 

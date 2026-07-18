@@ -13,7 +13,7 @@ export function botAuthorized(req: Request): boolean {
 
 export async function handleBotMessage(opts: {
   req: Request;
-  channel: "slack" | "teams" | "whatsapp";
+  channel: "slack" | "teams" | "whatsapp" | "voice" | "excel";
   text: string;
   userId?: string;
   industry?: IndustryPack;

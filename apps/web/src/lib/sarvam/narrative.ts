@@ -1,5 +1,6 @@
 import { getApiUrl, isMisconfiguredApiUrl } from "@/lib/apiUrl";
 import { narrateWithDify } from "@/lib/dify/client";
+import { narrateWithLocalRag } from "@/lib/rag/localPlaybook";
 import { agentName } from "@/lib/agents/tools";
 import { PAIN_MAP } from "@/lib/painMap";
 
@@ -39,20 +40,30 @@ function painContext(): string {
     .join("\n");
 }
 
-/** Prefer Dify RAG → Railway narrate → deterministic. */
+/** Prefer Dify → Railway OpenRouter RAG → backend narrate → deterministic. */
 export async function buildSarvamNarrative(input: NarrativeInput): Promise<string> {
   const fallback = deterministicNarrative(input);
 
   if (input.useLlm === false) return fallback;
+
+  const dataPreview = JSON.stringify(input.data).slice(0, 1200);
 
   const dify = await narrateWithDify({
     prompt: input.prompt,
     tool: input.tool,
     summary: input.summary,
     painContext: painContext(),
-    dataPreview: JSON.stringify(input.data).slice(0, 1200),
+    dataPreview,
   });
   if (dify) return dify;
+
+  const localRag = await narrateWithLocalRag({
+    prompt: input.prompt,
+    tool: input.tool,
+    summary: input.summary,
+    dataPreview,
+  });
+  if (localRag) return localRag;
 
   const apiUrl = getApiUrl();
   if (!isMisconfiguredApiUrl(apiUrl)) {

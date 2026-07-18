@@ -348,9 +348,184 @@ export const MODULES: ProductModule[] = [
     ],
     agentIds: ["ai-settlement-auditor"],
   },
+  {
+    slug: "airline-cargo",
+    name: "Airline Cargo Yield",
+    pillar: "plan",
+    tagline: "Belly capacity, priced by yield",
+    description:
+      "Allocate passenger-belly cargo under weight/volume after bags — maximize $/kg with all-or-nothing rules.",
+    bullets: ["Yield-ranked booking accept", "Pharma / express premiums", "ULD mix hints"],
+    status: "beta",
+    kpis: [
+      { label: "Weight util", value: "88%" },
+      { label: "Yield $/kg", value: "$3.80" },
+      { label: "Rejected", value: "Yield-gated" },
+    ],
+    agentIds: ["ai-cargo-yield"],
+  },
+  {
+    slug: "timeseries-forecasting",
+    name: "Time-Series Forecasting",
+    pillar: "predict",
+    tagline: "Backtested horizons, not vibes",
+    description:
+      "Seasonal-naive vs moving-average with MAPE/MASE on temporal holdouts — leakage-safe baselines before ML.",
+    bullets: ["Horizon-wise MAPE", "MASE vs naïve scale", "SKU leaderboard"],
+    status: "live",
+    kpis: [
+      { label: "Avg MAPE", value: "Horizon" },
+      { label: "Validation", value: "Rolling" },
+      { label: "Baseline", value: "Seasonal naïve" },
+    ],
+    agentIds: ["ai-demand-analyst"],
+  },
+  {
+    slug: "cruise-provisioning",
+    name: "Cruise Provisioning",
+    pillar: "plan",
+    tagline: "Right port. Right cold room.",
+    description:
+      "Multi-port buy plan under dry/cold/frozen caps with par-level hints for sea days.",
+    bullets: ["Port cost trade-offs", "Storage utilization", "Par stock suggestions"],
+    status: "beta",
+    kpis: [
+      { label: "Voyage cost", value: "Optimized" },
+      { label: "Cold util", value: "Tracked" },
+      { label: "Waste risk", value: "↓" },
+    ],
+    agentIds: ["ai-cruise-provisioner"],
+  },
+  {
+    slug: "automotive-jit",
+    name: "Automotive JIT",
+    pillar: "execute",
+    tagline: "Call-offs that match the takt",
+    description:
+      "Sequenced supplier call-offs from the build schedule plus PPM scorecards for Tier-1 quality.",
+    bullets: ["JIT delivery windows", "Dock door assignment", "Supplier PPM"],
+    status: "beta",
+    kpis: [
+      { label: "OTD target", value: "99%" },
+      { label: "PPM target", value: "<50" },
+      { label: "Turns target", value: "15+" },
+    ],
+    agentIds: ["ai-automotive-jit"],
+  },
+  {
+    slug: "food-beverage",
+    name: "Food & Beverage Freshness",
+    pillar: "execute",
+    tagline: "FEFO with waste actions",
+    description:
+      "Remaining shelf life, FEFO pick queue, and markdown/redistribute actions for perishable SKUs.",
+    bullets: ["FEFO queue", "Channel min RSL", "Waste action codes"],
+    status: "live",
+    kpis: [
+      { label: "FEFO target", value: "98%" },
+      { label: "Near-expiry", value: "Flagged" },
+      { label: "Waste", value: "Actioned" },
+    ],
+    agentIds: ["ai-fnb-freshness"],
+  },
+  {
+    slug: "demand-supply-matching",
+    name: "Demand-Supply Matching",
+    pillar: "plan",
+    tagline: "Allocate under constraint",
+    description:
+      "Priority ATP allocation with shortfall reporting and a multi-week ATP horizon.",
+    bullets: ["Tier-priority fill", "Shortage report", "ATP horizon"],
+    status: "live",
+    kpis: [
+      { label: "Fill", value: "Priority" },
+      { label: "Shortfall", value: "Visible" },
+      { label: "Method", value: "Priority" },
+    ],
+    agentIds: ["ai-inventory-strategist"],
+  },
+  {
+    slug: "capacity-planning",
+    name: "Capacity Planning",
+    pillar: "plan",
+    tagline: "Bottleneck sets the drum",
+    description:
+      "TOC bottleneck identification plus aggregate hire/OT/subcontract plan across the horizon.",
+    bullets: ["Bottleneck / OEE", "Aggregate LP heuristic", "Workforce balance"],
+    status: "live",
+    kpis: [
+      { label: "Peak util", value: "Tracked" },
+      { label: "Bottleneck", value: "Named" },
+      { label: "Plan cost", value: "₹" },
+    ],
+    agentIds: ["ai-capacity-planner"],
+  },
+  {
+    slug: "atp-allocation",
+    name: "ATP Allocation",
+    pillar: "plan",
+    tagline: "Promise only what you can ship",
+    description: "Customer-tier ATP against lots and allocation rules.",
+    bullets: ["Tier rules", "Breach flags", "Approval gates"],
+    status: "live",
+    kpis: [
+      { label: "Fulfilled", value: "Live" },
+      { label: "Breaches", value: "Gated" },
+    ],
+    agentIds: ["ai-inventory-strategist"],
+  },
+  {
+    slug: "demand-sensing",
+    name: "Demand Sensing",
+    pillar: "predict",
+    tagline: "Near-term offtake signals",
+    description: "Sense near-term demand shifts for fast movers before the consensus forecast moves.",
+    bullets: ["Offtake signals", "OR layer sense", "SKU alerts"],
+    status: "live",
+    kpis: [
+      { label: "Horizon", value: "Near-term" },
+      { label: "Engine", value: "OR layer" },
+    ],
+    agentIds: ["ai-demand-analyst"],
+  },
 ];
 
 export const AGENTS: WorkforceAgent[] = [
+  {
+    id: "ai-cargo-yield",
+    name: "AI-Cargo Yield",
+    domain: "transport",
+    role: "Airline belly & ULD yield",
+    description: "Ranks cargo bookings by $/kg under belly weight/volume after passenger bags.",
+    samplePrompts: [
+      "Optimize airline belly cargo for today's flight",
+      "Which air freight bookings should we reject on yield?",
+    ],
+  },
+  {
+    id: "ai-cruise-provisioner",
+    name: "AI-Cruise Provisioner",
+    domain: "procurement",
+    role: "Multi-port provisioning",
+    description: "Plans galley buys across ports under dry/cold/frozen storage limits.",
+    samplePrompts: ["Build cruise provisioning schedule for this voyage"],
+  },
+  {
+    id: "ai-automotive-jit",
+    name: "AI-Automotive JIT",
+    domain: "warehouse",
+    role: "JIT call-offs & PPM",
+    description: "Generates sequenced supplier call-offs and tracks PPM quality.",
+    samplePrompts: ["Generate automotive JIT call-offs for today's build"],
+  },
+  {
+    id: "ai-fnb-freshness",
+    name: "AI-F&B Freshness",
+    domain: "warehouse",
+    role: "Shelf-life & waste",
+    description: "FEFO queues and markdown actions for perishable food & beverage.",
+    samplePrompts: ["Show F&B shelf-life waste risks"],
+  },
   {
     id: "ai-demand-analyst",
     name: "AI-Demand Analyst",
@@ -360,6 +535,7 @@ export const AGENTS: WorkforceAgent[] = [
     samplePrompts: [
       "Show stockout risks for next month for top 50 SKUs",
       "Which MedTech SKUs have rising forecast error?",
+      "Run time-series backtest with MASE",
     ],
   },
   {

@@ -20,6 +20,15 @@ const MODULE_TOOLS: Record<string, ToolName> = {
   "rfq-bidding": "rfq_score",
   "eta-prediction": "track_trace",
   epod: "epod_validate",
+  "airline-cargo": "airline_cargo",
+  "timeseries-forecasting": "timeseries_forecast",
+  "cruise-provisioning": "cruise_provisioning",
+  "automotive-jit": "automotive_jit",
+  "food-beverage": "fnb_shelf_life",
+  "demand-supply-matching": "demand_supply_match",
+  "capacity-planning": "capacity_plan_agg",
+  "atp-allocation": "atp_allocate",
+  "demand-sensing": "demand_sensing",
 };
 
 type Params = { params: { slug: string } };

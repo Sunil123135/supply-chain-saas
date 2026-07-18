@@ -38,6 +38,15 @@ import {
   computeMeio,
   computeNetworkMip,
 } from "@/lib/math/orLayer";
+import {
+  computeAirlineCargo,
+  computeAutomotiveJit,
+  computeCapacityPlan,
+  computeCruiseProvisioning,
+  computeDemandSupplyMatch,
+  computeFoodBeverageShelf,
+  computeTimeseriesForecast,
+} from "@/lib/math/verticalSkills";
 import { boxesFromOrders, pack3dIntoVehicles } from "@/lib/math/pack3d";
 import { vrpFromShipments } from "@/lib/math/vrp";
 import { runContinuousSync } from "@/lib/integrations/erpSync";
@@ -82,7 +91,14 @@ export type ToolName =
   | "track_trace"
   | "plan_vs_actual"
   | "forecast_compare"
-  | "erp_continuous_sync";
+  | "erp_continuous_sync"
+  | "airline_cargo"
+  | "timeseries_forecast"
+  | "cruise_provisioning"
+  | "automotive_jit"
+  | "fnb_shelf_life"
+  | "demand_supply_match"
+  | "capacity_plan_agg";
 
 export const ALL_TOOLS: ToolName[] = [
   "inventory_fefo",
@@ -112,6 +128,13 @@ export const ALL_TOOLS: ToolName[] = [
   "plan_vs_actual",
   "forecast_compare",
   "erp_continuous_sync",
+  "airline_cargo",
+  "timeseries_forecast",
+  "cruise_provisioning",
+  "automotive_jit",
+  "fnb_shelf_life",
+  "demand_supply_match",
+  "capacity_plan_agg",
 ];
 
 const TOOL_AGENT: Record<ToolName, string> = {
@@ -142,6 +165,13 @@ const TOOL_AGENT: Record<ToolName, string> = {
   plan_vs_actual: "ai-scenario-planner",
   erp_continuous_sync: "ai-visibility-controller",
   forecast_compare: "ai-demand-analyst",
+  airline_cargo: "ai-cargo-yield",
+  timeseries_forecast: "ai-demand-analyst",
+  cruise_provisioning: "ai-cruise-provisioner",
+  automotive_jit: "ai-automotive-jit",
+  fnb_shelf_life: "ai-fnb-freshness",
+  demand_supply_match: "ai-inventory-strategist",
+  capacity_plan_agg: "ai-capacity-planner",
 };
 
 function pickIndustry(prompt: string): IndustryPack {
@@ -860,6 +890,83 @@ export async function runTool(
         requiresApproval: false,
       };
     }
+    case "airline_cargo": {
+      const data = computeAirlineCargo({ shipments, skus });
+      return {
+        tool,
+        agentId,
+        data: { ...data, queue: data.accepted },
+        summary: `Air cargo: ${data.summary.accepted}/${data.summary.bookings} accepted · $${data.summary.revenueUsd} · yield $${data.summary.avgYield}/kg · util ${data.summary.weightUtilPct}%`,
+        confidence: 0.87,
+        requiresApproval: data.summary.rejected > 0,
+      };
+    }
+    case "timeseries_forecast": {
+      const data = computeTimeseriesForecast({ demand, skus });
+      return {
+        tool,
+        agentId,
+        data: { ...data, queue: data.leaderboard },
+        summary: `TS backtest: ${data.summary.skus} SKUs · avg best MAPE ${data.summary.avgBestMape}% · horizon ${data.summary.horizon}`,
+        confidence: 0.86,
+        requiresApproval: (data.summary.avgBestMape ?? 0) > 25,
+      };
+    }
+    case "cruise_provisioning": {
+      const data = computeCruiseProvisioning({ demand, nodes, skus });
+      return {
+        tool,
+        agentId,
+        data: { ...data, queue: data.schedule },
+        summary: `Cruise provisioning: ${data.summary.portsUsed} ports · $${data.summary.totalCostUsd} · voyage ${data.summary.voyageDays}d`,
+        confidence: 0.84,
+        requiresApproval: true,
+      };
+    }
+    case "automotive_jit": {
+      const data = computeAutomotiveJit({ orders, skus, customers });
+      return {
+        tool,
+        agentId,
+        data: { ...data, queue: data.call_offs },
+        summary: `Automotive JIT: ${data.summary.callOffs} call-offs · ${data.summary.criticalPpm} critical PPM suppliers`,
+        confidence: 0.85,
+        requiresApproval: data.summary.criticalPpm > 0,
+      };
+    }
+    case "fnb_shelf_life": {
+      const data = computeFoodBeverageShelf({ lots: lotsRows, skus, demand });
+      return {
+        tool,
+        agentId,
+        data: { ...data, queue: data.at_risk },
+        summary: `F&B shelf: ${data.summary.atRisk} at-risk · ${data.summary.nearExpiry} near-expiry · ${data.summary.expired} expired`,
+        confidence: 0.88,
+        requiresApproval: data.summary.atRisk > 0,
+      };
+    }
+    case "demand_supply_match": {
+      const data = computeDemandSupplyMatch({ orders, lots: lotsRows, customers, skus });
+      return {
+        tool,
+        agentId,
+        data: { ...data, queue: data.shortages },
+        summary: `DSM: ${data.summary.fulfilled}/${data.summary.orders} fulfilled · shortfall ${data.summary.shortfallUnits} · ${data.summary.method}`,
+        confidence: 0.9,
+        requiresApproval: data.summary.shortfallUnits > 0,
+      };
+    }
+    case "capacity_plan_agg": {
+      const data = computeCapacityPlan({ demand, nodes, skus });
+      return {
+        tool,
+        agentId,
+        data: { ...data, queue: data.plan },
+        summary: `Capacity: bottleneck ${data.summary.bottleneck} · peak util ${data.summary.peakUtil}% · cost ₹${Number(data.summary.totalCostInr).toLocaleString()}`,
+        confidence: 0.86,
+        requiresApproval: (data.summary.peakUtil ?? 0) > 100,
+      };
+    }
     default: {
       const _exhaustive: never = tool;
       return {
@@ -879,6 +986,13 @@ function numFill(s: ShipmentRow): number {
 }
 
 const PROMPT_RULES: { pattern: RegExp; tool: ToolName }[] = [
+  { pattern: /airline|belly cargo|air freight|uld|cargo yield|freighter/i, tool: "airline_cargo" },
+  { pattern: /timeseries|time.?series|backtest|mase|seasonal naive|lightgbm forecast/i, tool: "timeseries_forecast" },
+  { pattern: /cruise|provisioning|galley|par stock|port load/i, tool: "cruise_provisioning" },
+  { pattern: /automotive|jit|sequenced part|ppm|oem|call.?off|takt/i, tool: "automotive_jit" },
+  { pattern: /food.?beverage|f&b|shelf.?life|waste|haccp|perishable retail/i, tool: "fnb_shelf_life" },
+  { pattern: /demand.?supply|match(ing)? demand|allocation optim|supply shortage match/i, tool: "demand_supply_match" },
+  { pattern: /aggregate plan|capacity invest|bottleneck|oee|workforce plan/i, tool: "capacity_plan_agg" },
   { pattern: /invoice|settle|freight|leakage|shouldn.?t i pay/i, tool: "freight_audit" },
   { pattern: /fefo|expir|near.?expir|lot(?! mortgage)/i, tool: "inventory_fefo" },
   { pattern: /lot mortgage|lot continuity|reserve lots/i, tool: "lot_mortgage" },

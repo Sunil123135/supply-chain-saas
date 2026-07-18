@@ -7,6 +7,7 @@ import {
   normalizeDifyBaseUrl,
 } from "@/lib/dify/client";
 import { getOptimizerUrl } from "@/lib/forecast/optimizer";
+import { isOpenRouterConfigured } from "@/lib/rag/localPlaybook";
 
 /**
  * Stack wiring status — no secrets returned.
@@ -114,6 +115,8 @@ export async function GET() {
     dify_configured: difyConfigured,
     dify_not_localhost: difyConfigured && !difyIsLocal,
     dify_reachable: difyProbe.ok,
+    openrouter_rag: isOpenRouterConfigured(),
+    voice_excel_channels: true,
   };
 
   const missing: string[] = [];
@@ -128,11 +131,11 @@ export async function GET() {
   if (!checks.supabase_public) missing.push("Set NEXT_PUBLIC_SUPABASE_URL + ANON_KEY");
   if (!checks.supabase_service_role) missing.push("Set SUPABASE_SERVICE_ROLE_KEY (for seed)");
   if (!checks.seed_secret) missing.push("Set SEED_SECRET");
-  if (!checks.dify_configured)
-    missing.push("Optional: set DIFY_API_URL + DIFY_API_KEY for RAG narrative");
-  else if (!checks.dify_not_localhost)
+  if (!checks.dify_configured && !checks.openrouter_rag)
+    missing.push("Set OPENROUTER_API_KEY (Railway RAG) or DIFY_API_URL + DIFY_API_KEY");
+  else if (checks.dify_configured && !checks.dify_not_localhost)
     missing.push(
-      "Dify is localhost — for Netlify, expose via Dokploy HTTPS (see docs/DIFY_VPS_SETUP.md)",
+      "Dify is localhost — expose via Dokploy HTTPS or rely on OpenRouter RAG (docs/DIFY_RAILWAY.md)",
     );
 
   const ready =
@@ -162,7 +165,9 @@ export async function GET() {
       ? [
           "Open /app/modules/demand-forecasting — expect engine: yugam-optimizer",
           "Run Supabase COMBINED_p0_p1_p2.sql if not done",
-          "Sarvam with LLM: POST /api/sarvam/chat { useLlm: true } — Dify narrates when reachable",
+          "Sarvam LLM: Dify if set, else OpenRouter RAG on Railway",
+          "Voice: POST /api/integrations/voice { transcript }",
+          "Excel: POST /api/integrations/excel multipart file",
         ]
       : missing,
   });

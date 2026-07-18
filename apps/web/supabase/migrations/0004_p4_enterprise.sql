@@ -55,3 +55,8 @@ CREATE UNIQUE INDEX IF NOT EXISTS agent_schedules_org_wf
 
 -- Extend user_profiles roles documentation
 COMMENT ON COLUMN user_profiles.role IS 'admin | planner | operator | viewer';
+
+-- Service role bypasses RLS; anon reads blocked until policies added
+ALTER TABLE demo_leads ENABLE ROW LEVEL SECURITY;
+ALTER TABLE audit_events ENABLE ROW LEVEL SECURITY;
+ALTER TABLE agent_schedules ENABLE ROW LEVEL SECURITY;

@@ -1,33 +1,27 @@
 # Ops checklist — remaining steps
 
-## Done from this machine (2026-07-17)
+## Done (2026-07-18)
 
-- [x] Pushed P4 + Temporal + ERP sync code to GitHub `main` (`89d70fc`, `51c4cec`)
-- [x] Netlify env: `BOT_OPEN_DEMO`, `INTEGRATION_SECRET`, `VPS_WEBHOOK_SECRET` aligned
-- [x] **Railway `nexova-web` deployed** with autonomy APIs live  
-  → https://nexova-web-production.up.railway.app/api/autonomy/run
-- [x] Local Temporal cluster up (gateway `:8090`, `erp_sync_hourly` schedule)
-- [x] Temporal worker pointed at Railway web (`YUGAM_URL`)
+- [x] Supabase `0004` tables + RLS
+- [x] Railway secrets + redeploy (`supabase_service_role`, `seed_secret`, `integration_secret`)
+- [x] **OpenRouter RAG on Railway** (`lib/rag/localPlaybook.ts`) — works without VPS Dify
+- [x] Voice + Excel channels (`/api/integrations/voice`, `/api/integrations/excel`, `/app/channels`)
+- [x] Vertical skill modules: airline cargo, TS forecast, cruise, automotive JIT, F&B, DSM, capacity
 
-## Blocked / needs you
+## Still needs you
 
-### 1. Supabase migration `0004` (tables still missing)
+### 1. Netlify credits
 
-[SQL Editor](https://supabase.com/dashboard/project/mtokwiodxducksyrixle/sql) → paste  
-`apps/web/supabase/migrations/0004_p4_enterprise.sql` → **Run**
+`sctransformation.netlify.app` old build. Primary: https://nexova-web-production.up.railway.app
 
-Without this: audit / schedules / demo leads / `executionId` persistence stay empty.
+### 2. Public Dify (optional)
 
-### 2. Netlify credits exhausted
+OpenRouter RAG is live. For full Dify KB: Dokploy HTTPS + `DIFY_*` — see `docs/DIFY_RAILWAY.md`.
 
-Deploys skipped: **account credit usage exceeded**.  
-`sctransformation.netlify.app` is still on old build (autonomy 404).  
-Add credits **or** use Railway web as primary frontend until Netlify is topped up.
+### 3. Temporal on VPS
 
-### 3. Temporal on VPS (optional)
-
-SSH key needed for `root@13.140.181.82`. Local Docker already works.
+SSH key for `root@13.140.181.82`. Local Temporal OK.
 
 ### 4. Live SAP + formal SOC2
 
-Partner URLs / process — unchanged.
+`ERP_WEBHOOK_URL` / `ERP_FEED_URL` + audit process.

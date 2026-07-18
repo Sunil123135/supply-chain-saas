@@ -12,7 +12,8 @@ export type AutonomyWorkflowId =
   | "full_morning_brief"
   | "medtech_compliance_daily"
   | "planning_pva_weekly"
-  | "erp_sync_hourly";
+  | "erp_sync_hourly"
+  | "vertical_skills_weekly";
 
 export interface WorkflowStep {
   tool: ToolName;
@@ -143,6 +144,24 @@ export const AUTONOMY_WORKFLOWS: WorkflowDef[] = [
       { id: "feed_pull", label: "Inbound feed", target: "hourly when configured" },
     ],
     steps: [{ tool: "erp_continuous_sync" }],
+  },
+  {
+    id: "vertical_skills_weekly",
+    name: "Vertical skills weekly",
+    description: "TS forecast + DSM + capacity + F&B freshness snapshot",
+    scheduleHint: "Wed 09:00 IST",
+    hermesRole: "vertical_orchestrator",
+    ownerAgentId: "ai-demand-analyst",
+    kpis: [
+      { id: "mape", label: "Avg best MAPE", target: "< 20%" },
+      { id: "shortfall", label: "DSM shortfall", target: "↓ week-over-week" },
+    ],
+    steps: [
+      { tool: "timeseries_forecast" },
+      { tool: "demand_supply_match" },
+      { tool: "capacity_plan_agg" },
+      { tool: "fnb_shelf_life" },
+    ],
   },
 ];
 
