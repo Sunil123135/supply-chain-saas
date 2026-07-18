@@ -140,31 +140,31 @@ bash services/optimizer/deploy-vps.sh
 
 | Module | Math | API | DB | Autonomous |
 |--------|------|-----|-----|------------|
-| Demand Forecasting | ✅ optimizer + local | ✅ | ⬜ | n8n ready |
-| Forecast compare / MAPE | ✅ | ✅ tool | ⬜ | weekly PVA wf |
-| Demand Sensing | ✅ OR layer | ✅ tool | ⬜ | ⬜ |
-| Scenario / Network MIP | ✅ PuLP/OR-Tools | ✅ | ⬜ | ⬜ |
-| Plan-vs-actual | ✅ | ✅ tool | ⬜ | weekly wf |
-| Inventory / FEFO | ✅ | ✅ | schema | n8n ready |
-| MEIO / Safety stock | ✅ OR layer | ✅ | ⬜ | weekly wf |
-| Auto-indent (ROP) | ✅ OR layer | ✅ | ⬜ | ⬜ |
+| Demand Forecasting | ✅ optimizer + local | ✅ | ⬜ | PVA weekly |
+| Forecast compare / MAPE | ✅ | ✅ tool | ⬜ | PVA weekly |
+| Demand Sensing | ✅ OR layer | ✅ tool | ⬜ | sensing_indent_daily |
+| Scenario / Network MIP | ✅ PuLP/OR-Tools | ✅ | ⬜ | network_mip_weekly |
+| Plan-vs-actual | ✅ | ✅ tool | ⬜ | PVA weekly |
+| Inventory / FEFO | ✅ | ✅ | schema | FEFO weekly |
+| MEIO / Safety stock | ✅ OR layer | ✅ | ⬜ | PVA weekly |
+| Auto-indent (ROP) | ✅ OR layer | ✅ | ⬜ | sensing_indent_daily |
 | ATP allocation | ✅ | ✅ tool | ⬜ | MedTech daily |
 | Lot mortgage | ✅ | ✅ tool | ⬜ | MedTech daily |
 | E&O / aging | ✅ | ✅ tool | ⬜ | FEFO weekly |
 | Cold-chain GDP | ✅ | ✅ tool | ⬜ | MedTech daily |
 | Track-and-trace | ✅ | ✅ tool | ⬜ | tower daily |
-| Rough Cut Capacity | ✅ | ✅ | ⬜ | ⬜ |
-| Production Planning | ✅ + LP | ✅ | ⬜ | ⬜ |
-| Warehouse Planning | ✅ | ✅ | ⬜ | ⬜ |
-| Dispatch Planning | ✅ OR-Tools CVRP | ✅ | ⬜ | ⬜ |
-| 3D Load Building | ✅ | ✅ | ⬜ | ⬜ |
-| Fleet Sizing | ✅ | ✅ | ⬜ | ⬜ |
-| RFQ & Bidding | ✅ | ✅ | ⬜ | ⬜ |
+| Rough Cut Capacity | ✅ | ✅ | ⬜ | plant_ops_daily |
+| Production Planning | ✅ + LP | ✅ | ⬜ | plant_ops_daily |
+| Warehouse Planning | ✅ | ✅ | ⬜ | plant_ops_daily |
+| Dispatch Planning | ✅ OR-Tools CVRP | ✅ | ⬜ | dispatch_vrp weekdays |
+| 3D Load Building | ✅ | ✅ | ⬜ | load_build_3d weekdays |
+| Fleet Sizing | ✅ | ✅ | ⬜ | dispatch_vrp |
+| RFQ & Bidding | ✅ | ✅ | ⬜ | rfq_weekly |
 | Control Tower | ✅ exceptions | ✅ | ⬜ | daily |
-| ETA Prediction | ✅ | ✅ | ⬜ | ⬜ |
-| Risk Management | ✅ | ✅ | ⬜ | ⬜ |
-| ePOD | ✅ | ✅ | ⬜ | ⬜ |
-| Freight Settlement | ✅ | ✅ | schema | ⬜ |
+| ETA Prediction | ✅ | ✅ | ⬜ | execution_daily |
+| Risk Management | ✅ | ✅ | ⬜ | tower + execution_daily |
+| ePOD | ✅ | ✅ | ⬜ | execution_daily |
+| Freight Settlement | ✅ | ✅ | schema | freight_weekly + monthly |
 
 VPS webhook now **executes** `tool` when provided (see `docs/VPS_LINKING.md`).
 

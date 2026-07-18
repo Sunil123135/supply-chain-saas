@@ -6,6 +6,7 @@ import { logAgentExecution } from "@/lib/supabase/server";
 export type AutonomyWorkflowId =
   | "fefo_weekly"
   | "freight_monthly"
+  | "freight_weekly"
   | "control_tower_daily"
   | "dispatch_vrp"
   | "load_build_3d"
@@ -13,7 +14,12 @@ export type AutonomyWorkflowId =
   | "medtech_compliance_daily"
   | "planning_pva_weekly"
   | "erp_sync_hourly"
-  | "vertical_skills_weekly";
+  | "vertical_skills_weekly"
+  | "sensing_indent_daily"
+  | "network_mip_weekly"
+  | "plant_ops_daily"
+  | "execution_daily"
+  | "rfq_weekly";
 
 export interface WorkflowStep {
   tool: ToolName;
@@ -48,11 +54,21 @@ export const AUTONOMY_WORKFLOWS: WorkflowDef[] = [
   {
     id: "freight_monthly",
     name: "Monthly freight audit",
-    description: "Invoice leakage recovery candidates",
+    description: "Full-month invoice leakage recovery candidates",
     scheduleHint: "1st of month 07:00 IST",
     hermesRole: "settlement_auditor",
     ownerAgentId: "ai-settlement-auditor",
     kpis: [{ id: "recoverable_inr", label: "Recoverable freight", target: "> ₹0 disputed" }],
+    steps: [{ tool: "freight_audit" }],
+  },
+  {
+    id: "freight_weekly",
+    name: "Weekly freight settlement",
+    description: "Mid-cycle freight audit so disputes do not wait for month-end",
+    scheduleHint: "Wed 07:00 IST",
+    hermesRole: "settlement_auditor",
+    ownerAgentId: "ai-settlement-auditor",
+    kpis: [{ id: "open_disputes", label: "Open disputes", target: "cleared same week" }],
     steps: [{ tool: "freight_audit" }],
   },
   {
@@ -85,7 +101,7 @@ export const AUTONOMY_WORKFLOWS: WorkflowDef[] = [
     id: "load_build_3d",
     name: "3D load building",
     description: "Extreme-point 3D packing into vehicle containers",
-    scheduleHint: "On demand / before dispatch wave",
+    scheduleHint: "Weekdays 05:45 IST (pre-dispatch)",
     hermesRole: "load_builder",
     ownerAgentId: "ai-load-builder",
     kpis: [{ id: "cube_util", label: "Cube utilization", target: "≥ 75%" }],
@@ -162,6 +178,70 @@ export const AUTONOMY_WORKFLOWS: WorkflowDef[] = [
       { tool: "capacity_plan_agg" },
       { tool: "fnb_shelf_life" },
     ],
+  },
+  {
+    id: "sensing_indent_daily",
+    name: "Demand sensing + ROP indent",
+    description: "Near-term offtake sense then auto-indent proposals for ROP breaches",
+    scheduleHint: "Daily 06:00 IST",
+    hermesRole: "replenishment_controller",
+    ownerAgentId: "ai-replenishment-planner",
+    kpis: [
+      { id: "sense_alerts", label: "Demand sense alerts", target: "reviewed daily" },
+      { id: "indent_breaches", label: "ROP breaches queued", target: "same-day proposals" },
+    ],
+    steps: [{ tool: "demand_sensing" }, { tool: "auto_indent" }],
+  },
+  {
+    id: "network_mip_weekly",
+    name: "Weekly network MIP",
+    description: "Facility open/close + flow rebalance candidates",
+    scheduleHint: "Tue 10:00 IST",
+    hermesRole: "network_planner",
+    ownerAgentId: "ai-scenario-planner",
+    kpis: [
+      { id: "sites_open", label: "Open sites", target: "cost-optimal" },
+      { id: "unmet_demand", label: "Unmet demand", target: "0" },
+    ],
+    steps: [{ tool: "network_optimize" }, { tool: "scenario_baseline" }],
+  },
+  {
+    id: "plant_ops_daily",
+    name: "Plant ops daily",
+    description: "RCCP overload check + production plan + warehouse dock/slotting",
+    scheduleHint: "Weekdays 04:45 IST",
+    hermesRole: "plant_controller",
+    ownerAgentId: "ai-capacity-planner",
+    kpis: [
+      { id: "rccp_overloads", label: "RCCP overloads", target: "0 critical" },
+      { id: "prod_commit", label: "Production commit", target: "within capacity" },
+      { id: "dock_util", label: "Dock util", target: "60–85%" },
+    ],
+    steps: [{ tool: "rccp" }, { tool: "production_plan" }, { tool: "warehouse_plan" }],
+  },
+  {
+    id: "execution_daily",
+    name: "Execution daily",
+    description: "ETA prediction + risk scan + ePOD validation wave",
+    scheduleHint: "Daily 09:00 IST",
+    hermesRole: "execution_controller",
+    ownerAgentId: "ai-visibility-controller",
+    kpis: [
+      { id: "late_eta", label: "Late ETA risk", target: "↓ day-over-day" },
+      { id: "high_risks", label: "High risks", target: "< 3" },
+      { id: "epod_pending", label: "ePOD pending", target: "same-day clear" },
+    ],
+    steps: [{ tool: "eta_predict" }, { tool: "risk_scan" }, { tool: "epod_validate" }],
+  },
+  {
+    id: "rfq_weekly",
+    name: "Weekly RFQ scoring",
+    description: "Multi-criteria carrier/vendor bid score for open RFQs",
+    scheduleHint: "Thu 11:00 IST",
+    hermesRole: "sourcing_controller",
+    ownerAgentId: "ai-sourcing-strategist",
+    kpis: [{ id: "rfqs_scored", label: "RFQs scored", target: "all open" }],
+    steps: [{ tool: "rfq_score" }],
   },
 ];
 
